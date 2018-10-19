@@ -122,9 +122,14 @@
     }
     if (json[@"selectionStyle"]) {
         NSString *style = json[@"selectionStyle"];
+        self.selectedTextColor
         if ([@"None" isEqualToString:style]) {
             self.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+    }
+    if (json[@"indentationWidth"]) {
+        self.indentationLevel = 1;
+        self.indentationWidth = [json[@"indentationWidth"] floatValue];
     }
 }
 

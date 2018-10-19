@@ -35,7 +35,8 @@
 #import <objc/runtime.h>
 static void *s_json = &s_json;
 static void *s_controller = &s_controller;
-
+@implementation HeroView
+@end
 @implementation UIView (Hero)
 @dynamic json;
 

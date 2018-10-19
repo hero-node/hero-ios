@@ -48,3 +48,5 @@
 -(UIView*) findFocusView;
 
 @end
+@interface HeroView : UIView
+@end
