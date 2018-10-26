@@ -45,6 +45,8 @@
 {
     NSMutableDictionary *_headerViews; //复用headviews始终不行才自己缓存
     NSInteger refeshTimes;
+    UIColor *backgroundColor;
+    UIColor *titleColor;
 }
 - (instancetype)init
 {
@@ -84,6 +86,12 @@
     }
     if (json[@"dataIndex"]) {
         self.dataIndex = json[@"dataIndex"];
+    }
+    if (json[@"backgroundColor"]) {
+        backgroundColor = UIColorFromStr(json[@"backgroundColor"]);
+    }
+    if (json[@"titleColor"]) {
+        titleColor = UIColorFromStr(json[@"titleColor"]);
     }
     if (json[@"data"]) {
         self.data = json[@"data"];
@@ -303,6 +311,10 @@
             [cell on:cellItem];
         }
     }
+    if (backgroundColor && titleColor) {
+        cell.backgroundColor = backgroundColor;
+        cell.textLabel.textColor = titleColor;
+    }
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -338,6 +350,9 @@
         view.json = sectionView;
         
         [_headerViews setObject:view forKey:reuseIdentifer];
+        if (backgroundColor) {
+            view.backgroundColor = backgroundColor;
+        }
         return view;
     }
     return nil;

@@ -34,6 +34,7 @@
 
 #import "HeroViewController.h"
 #import "UIView+Hero.h"
+#import "UIImage+alpha.h"
 #import "UIColor+Reverse.h"
 #import "UIImage+alpha.h"
 #import "UIView+Addition.h"
@@ -173,26 +174,15 @@ static bool customUserAgentHasSet = false;
         }
         if (ui[@"backgroundColor"]) {
             self.view.backgroundColor = UIColorFromStr(ui[@"backgroundColor"]);
+            self.navigationController.view.backgroundColor = UIColorFromStr(ui[@"backgroundColor"]);
+            self.tabBarController.view.backgroundColor = UIColorFromStr(ui[@"backgroundColor"]);
+            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromStr(ui[@"backgroundColor"])] forBarMetrics:UIBarMetricsDefault];
+            [self.tabBarController.tabBar setBackgroundImage:[UIImage imageWithColor:UIColorFromStr(ui[@"backgroundColor"])] ];
         }
         if (ui[@"tintColor"]) {
-            if (ui[@"backgroundColor"]) {
-                UIColor *titleColor = UIColorFromStr(ui[@"backgroundColor"]);
-                [self.navigationController.navigationBar setTintColor:titleColor];
-            }
-            if (self.navigationController.navigationBar.translucent) {
-                [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forBarMetrics:UIBarMetricsDefault];
-                UIView *bar = [[UIView alloc]init];
-                if (@available(iOS 11.0, *)) {
-                    float safeTop = [self.view safeAreaInsets].top;
-                    [bar on: [NSMutableDictionary dictionaryWithDictionary: @{@"class":@"UIView",@"name":@"scroll_fix_header",@"frame":@{@"y":[NSString stringWithFormat:@"-%f",safeTop],@"w":@"1x",@"h":[NSString stringWithFormat:@"%f",safeTop]},@"backgroundColor":ui[@"tintColor"]}]];
-                }else{
-                    [bar on: [NSMutableDictionary dictionaryWithDictionary: @{@"class":@"UIView",@"name":@"scroll_fix_header",@"frame":@{@"y":@"-64",@"w":@"1x",@"h":@"64"},@"backgroundColor":ui[@"tintColor"]}]];
-                }
-                [self.view addSubview:bar];
-            }else{
-                [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
-                [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromStr(ui[@"tintColor"])] forBarMetrics:UIBarMetricsDefault];
-            }
+            self.view.tintColor = UIColorFromStr(ui[@"tintColor"]);
+            self.navigationController.view.tintColor = UIColorFromStr(ui[@"tintColor"]);
+            self.tabBarController.view.tintColor = UIColorFromStr(ui[@"tintColor"]);
         }
         if (ui[@"nav"]) {
             [self on:@{@"appearance":ui[@"nav"]}];
@@ -289,29 +279,7 @@ static bool customUserAgentHasSet = false;
         }
         if (appearance[@"navigationBarHidden"]) {
             _isNavBarHidden = [appearance[@"navigationBarHidden"] boolValue];
-            [self.navigationController setNavigationBarHidden:_isNavBarHidden];
-            if (_isNavBarHidden) {
-                ((UIScrollView*)self.view).contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-            }else{
-                if ( self.navigationController.navigationBar.translucent) {
-                    if (@available(iOS 11.0, *)) {
-                        float safeTop = [self.view safeAreaInsets].top;
-                        ((UIScrollView*)self.view).contentInset = UIEdgeInsetsMake(safeTop, 0, 0, 0);
-                    }else{
-                        ((UIScrollView*)self.view).contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-                    }
-                }
-            }
-        }
-        if (appearance[@"navigationBarTranslucent"]) {
-            _isNavBarTranslucent = [appearance[@"navigationBarTranslucent"] boolValue];
-            [self.navigationController.navigationBar setTranslucent:_isNavBarTranslucent];
-        }
-        if (appearance[@"navigationBarColor"]) {
-            _navigationBarColor = UIColorFromStr(appearance[@"navigationBarColor"]);
-            [self.navigationController.navigationBar setTranslucent:YES];
-            [self.navigationController.navigationBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
-            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:_navigationBarColor] forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController setNavigationBarHidden:_isNavBarHidden animated:YES];
         }
         if (appearance[@"titleColor"]) {
             [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromStr(appearance[@"titleColor"])}];

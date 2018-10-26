@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4ADA692F21798D5C00CF7187 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA692E21798D5C00CF7187 /* Assets.xcassets */; };
+		4ADA69312179AA2100CF7187 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA69302179AA2100CF7187 /* LaunchScreen.storyboard */; };
+		4ADA6992218163AB00CF7187 /* home.html in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6987218163AB00CF7187 /* home.html */; };
+		4ADA6996218163AB00CF7187 /* herohelper.js in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA698C218163AB00CF7187 /* herohelper.js */; };
+		4ADA6997218163AB00CF7187 /* i18n.js in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA698D218163AB00CF7187 /* i18n.js */; };
+		4ADA6998218163AB00CF7187 /* menu.html in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA698E218163AB00CF7187 /* menu.html */; };
+		4ADA6999218163AB00CF7187 /* hero.js in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA698F218163AB00CF7187 /* hero.js */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -14,7 +21,6 @@
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* HeroAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* HeroAppDelegate.m */; };
 		6003F5A7195388D20070C39A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* ViewController.m */; };
-		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -36,6 +42,13 @@
 
 /* Begin PBXFileReference section */
 		1AACF230C2F104058DB4788C /* Pods-hero-ios_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hero-ios_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hero-ios_Example/Pods-hero-ios_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		4ADA692E21798D5C00CF7187 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4ADA69302179AA2100CF7187 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4ADA6987218163AB00CF7187 /* home.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = home.html; sourceTree = "<group>"; };
+		4ADA698C218163AB00CF7187 /* herohelper.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = herohelper.js; sourceTree = "<group>"; };
+		4ADA698D218163AB00CF7187 /* i18n.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = i18n.js; sourceTree = "<group>"; };
+		4ADA698E218163AB00CF7187 /* menu.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = menu.html; sourceTree = "<group>"; };
+		4ADA698F218163AB00CF7187 /* hero.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hero.js; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* hero-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hero-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,7 +61,6 @@
 		6003F59D195388D20070C39A /* HeroAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroAppDelegate.m; sourceTree = "<group>"; };
 		6003F5A5195388D20070C39A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* hero-ios_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hero-ios_Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
@@ -98,6 +110,41 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4ADA6981218163AB00CF7187 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				4ADA6984218163AB00CF7187 /* example */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		4ADA6984218163AB00CF7187 /* example */ = {
+			isa = PBXGroup;
+			children = (
+				4ADA6985218163AB00CF7187 /* hero-home */,
+			);
+			path = example;
+			sourceTree = "<group>";
+		};
+		4ADA6985218163AB00CF7187 /* hero-home */ = {
+			isa = PBXGroup;
+			children = (
+				4ADA6987218163AB00CF7187 /* home.html */,
+				4ADA698F218163AB00CF7187 /* hero.js */,
+				4ADA698C218163AB00CF7187 /* herohelper.js */,
+				4ADA698D218163AB00CF7187 /* i18n.js */,
+				4ADA698E218163AB00CF7187 /* menu.html */,
+			);
+			path = "hero-home";
+			sourceTree = "<group>";
+		};
+		4ADA699A2182B54E00CF7187 /* home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = home;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -138,9 +185,12 @@
 				6003F59C195388D20070C39A /* HeroAppDelegate.h */,
 				6003F59D195388D20070C39A /* HeroAppDelegate.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
+				4ADA69302179AA2100CF7187 /* LaunchScreen.storyboard */,
 				6003F5A5195388D20070C39A /* ViewController.h */,
 				6003F5A6195388D20070C39A /* ViewController.m */,
-				6003F5A8195388D20070C39A /* Images.xcassets */,
+				4ADA699A2182B54E00CF7187 /* home */,
+				4ADA692E21798D5C00CF7187 /* Assets.xcassets */,
+				4ADA6981218163AB00CF7187 /* home */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			name = "Example for hero-ios";
@@ -273,8 +323,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ADA6992218163AB00CF7187 /* home.html in Resources */,
+				4ADA6996218163AB00CF7187 /* herohelper.js in Resources */,
+				4ADA6998218163AB00CF7187 /* menu.html in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
-				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				4ADA6999218163AB00CF7187 /* hero.js in Resources */,
+				4ADA69312179AA2100CF7187 /* LaunchScreen.storyboard in Resources */,
+				4ADA6997218163AB00CF7187 /* i18n.js in Resources */,
+				4ADA692F21798D5C00CF7187 /* Assets.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,12 +565,11 @@
 			baseConfigurationReference = 1AACF230C2F104058DB4788C /* Pods-hero-ios_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 33W22ZS5YK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "hero-ios/hero-ios-Prefix.pch";
 				INFOPLIST_FILE = "hero-ios/hero-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -528,12 +583,11 @@
 			baseConfigurationReference = 734F6C723B0642217EC86FFC /* Pods-hero-ios_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 33W22ZS5YK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "hero-ios/hero-ios-Prefix.pch";
 				INFOPLIST_FILE = "hero-ios/hero-ios-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

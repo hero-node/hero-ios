@@ -46,7 +46,6 @@
 @end
 @implementation HeroApp
 {
-    BOOL _translucent;
     UIColor *_tintColor;
     UITabBarController *tabCon;
     UINavigationController *nav;
@@ -71,9 +70,6 @@
     return self;
 }
 -(void)on:(NSDictionary *)json{
-    if (json[@"translucent"]) {
-        _translucent = [json[@"translucent"] boolValue];
-    }
     if (json[@"tintColor"]) {
         _tintColor = UIColorFromStr(json[@"tintColor"]);
     }
@@ -107,7 +103,6 @@
         }];
         if (arr.count > 1) {
             tabCon = [[UITabBarController alloc]init];
-            tabCon.tabBar.translucent = _translucent;
             tabCon.automaticallyAdjustsScrollViewInsets = NO;
             tabCon.delegate = self;
             for (int i =0;i<arr.count;i++) {
@@ -126,7 +121,6 @@
                 }
             }
             nav = [[UINavigationController alloc]initWithRootViewController:tabCon];
-            nav.navigationBar.translucent = _translucent;
             [nav setNavigationBarHidden:NO];
             if (self.window) {
                 self.window.rootViewController = nav;

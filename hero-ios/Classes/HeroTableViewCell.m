@@ -122,7 +122,6 @@
     }
     if (json[@"selectionStyle"]) {
         NSString *style = json[@"selectionStyle"];
-        self.selectedTextColor
         if ([@"None" isEqualToString:style]) {
             self.selectionStyle = UITableViewCellSelectionStyleNone;
         }

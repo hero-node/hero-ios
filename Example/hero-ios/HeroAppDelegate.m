@@ -28,14 +28,25 @@
     NSString *home = @"__PATH";
     NSString *urlPath = [NSString stringWithFormat:@"%@%@",urlHost,[home hasPrefix:@"__"]?@"":home];
     [self.app on:@{
+                   @"tintColor":@"ff0000",
                    @"tabs":
                        @[@{
-                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/home.html"],
+                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-apollo/trade.html"],
+                             @"title":@"消息",
+                             @"class":@"ViewController",
+                             },
+                         @{
+                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-apollo/otc.html"],
+                             @"title":@"联系人",
+                             @"class":@"ViewController",
+                             },
+                         @{
+                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-chat/me.html"],
+                             @"title":@"我",
                              @"class":@"ViewController",
                              }
                          ]
                    }];
-    return YES;
     return YES;
 }
 
