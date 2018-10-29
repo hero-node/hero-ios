@@ -83,7 +83,7 @@
         self.accessoryView = valueElement;
     }
     else if (imageValue) {
-        UIImageView *valueElement = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.height)];
+        UIImageView *valueElement = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.height*2/3, self.bounds.size.height*2/3)];
         [UILazyImageView registerForName:imageValue block:^(NSData *data) {
             valueElement.image = [UIImage imageWithData:data scale:[UIScreen mainScreen].scale];
         }];
@@ -92,8 +92,7 @@
     else if (textValue) {
         self.detailTextLabel.text = [NSString stringWithFormat:@"%@",textValue ];
     }
-    else
-    {
+    if (detail) {
         self.detailTextLabel.numberOfLines = 10;
         self.detailTextLabel.text = detail;
     }

@@ -66,6 +66,8 @@
 		4A36E1A91F984383009EA762 /* HeroActionSheetView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A36E1A71F984383009EA762 /* HeroActionSheetView.h */; };
 		4A36E1AC1F984F09009EA762 /* HeroPaperTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A36E1AA1F984F09009EA762 /* HeroPaperTextField.h */; };
 		4A36E1AD1F984F09009EA762 /* HeroPaperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A36E1AB1F984F09009EA762 /* HeroPaperTextField.m */; };
+		4ADA699D218305A700CF7187 /* HeroSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ADA699B218305A600CF7187 /* HeroSignature.h */; };
+		4ADA699E218305A700CF7187 /* HeroSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA699C218305A600CF7187 /* HeroSignature.m */; };
 		4AFBD5ADEF674C2A74E34E59DA4D591F /* HeroViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 592A777B93401F7826003C8DC1906F8E /* HeroViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E06A3ECAF208BAE046AEDFCE1474E5D /* HeroUploadFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E368D1F8F33DF40EB1404CCEC12EA29E /* HeroUploadFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E3C2ACB0C12A706E043641F445D6B03 /* DACircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 99DABEF6A8FB8F725C3BC50CC7B7383F /* DACircularProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -272,6 +274,8 @@
 		4A36E1AA1F984F09009EA762 /* HeroPaperTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeroPaperTextField.h; sourceTree = "<group>"; };
 		4A36E1AB1F984F09009EA762 /* HeroPaperTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeroPaperTextField.m; sourceTree = "<group>"; };
 		4ACBCE2DCE380583066E4D23C556B404 /* HeroTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HeroTextView.h; sourceTree = "<group>"; };
+		4ADA699B218305A600CF7187 /* HeroSignature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeroSignature.h; sourceTree = "<group>"; };
+		4ADA699C218305A600CF7187 /* HeroSignature.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroSignature.m; sourceTree = "<group>"; };
 		4BEF1D53EB0943C3AC7715B273B3EA8E /* MJRefreshComponent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshComponent.m; path = MJRefresh/Base/MJRefreshComponent.m; sourceTree = "<group>"; };
 		4F70ECE62E1DC957C540FCB1C569FD19 /* NSBundle+MJRefresh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+MJRefresh.h"; path = "MJRefresh/NSBundle+MJRefresh.h"; sourceTree = "<group>"; };
 		4FB9919F1CBD922D4A96D7AAA5FA092E /* NSURL+HeroUrlEqual.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSURL+HeroUrlEqual.m"; sourceTree = "<group>"; };
@@ -507,6 +511,8 @@
 				CB03E6D23C47B58CA6541900CC8AC7AD /* hero.h */,
 				FCCE726356792A25ADA0CF2759EEEBE2 /* HeroAddCell.h */,
 				2B96F7C5673DE08802A5507C86CE1327 /* HeroAddCell.m */,
+				4ADA699B218305A600CF7187 /* HeroSignature.h */,
+				4ADA699C218305A600CF7187 /* HeroSignature.m */,
 				987331F451E632C87A6EF43F11C4311F /* HeroApp.h */,
 				8DB2071B3455B34015C274512C144154 /* HeroApp.m */,
 				A8420207A908B5B2FCEEE23A846F96F9 /* HeroBadgeLabel.h */,
@@ -808,6 +814,7 @@
 				7D591F3F4C445E8EAB753FA7E5C9579D /* UIImage+alpha.h in Headers */,
 				D49764B472D3CF6D6782DFAC8E817F1E /* UILazyImageView.h in Headers */,
 				BD1A2899929BAE82EB30B837773C5DFF /* UINavigationController+webViewBack.h in Headers */,
+				4ADA699D218305A700CF7187 /* HeroSignature.h in Headers */,
 				0E9A9EB75777292E18BF8E948D8E4768 /* UIView+Addition.h in Headers */,
 				CCB647E8ACBBB9E38A6F7C10B378021C /* UIView+Frame.h in Headers */,
 				018B895C8A2C499D8C273DA6348ADAB2 /* UIView+Genie.h in Headers */,
@@ -908,6 +915,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 1000;
+				TargetAttributes = {
+					E07CD679433BAD52598DBAE4D31B3797 = {
+						LastSwiftMigration = 1000;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -955,6 +967,7 @@
 				73D612DE132A4620282AAABFA1A78710 /* HeroImageUploadView.m in Sources */,
 				72271F4A56BC8856368FEA345848B65F /* HeroImageView.m in Sources */,
 				17D856521F20E4601EE8986DB2B7B743 /* HeroIndicator.m in Sources */,
+				4ADA699E218305A700CF7187 /* HeroSignature.m in Sources */,
 				4A36E1AD1F984F09009EA762 /* HeroPaperTextField.m in Sources */,
 				B152ADF043229616071E4EAC1DEB7E74 /* HeroLabel.m in Sources */,
 				3A73BC7F7E2941A9AFF90ACF78A99CED /* HeroLocationView.m in Sources */,
@@ -1064,12 +1077,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA531D5514F3DB87AE4D2FD7E6FA9A39 /* hero-ios.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/hero-ios/hero-ios-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -1078,6 +1093,8 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "../../hero-ios/Classes/hero-ios-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1085,12 +1102,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA531D5514F3DB87AE4D2FD7E6FA9A39 /* hero-ios.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/hero-ios/hero-ios-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -1099,6 +1118,9 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "../../hero-ios/Classes/hero-ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
