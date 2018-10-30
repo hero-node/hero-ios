@@ -31,7 +31,7 @@
                    @"tintColor":@"ff0000",
                    @"tabs":
                        @[@{
-                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-chat/message.html"],
+                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-store/home.html"],
                              @"title":@"消息",
                              @"class":@"ViewController",
                              },

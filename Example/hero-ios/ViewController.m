@@ -17,7 +17,7 @@
 -(void)loadView{
     [super loadView];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    ((UIScrollView*)self.view).contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    ((UIScrollView*)self.view).contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 - (void)viewDidLoad

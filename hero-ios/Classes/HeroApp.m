@@ -122,6 +122,8 @@
             }
             nav = [[UINavigationController alloc]initWithRootViewController:tabCon];
             [nav setNavigationBarHidden:NO];
+            [nav.navigationBar setTranslucent:YES];
+            [tabCon.tabBar setTranslucent:YES];
             if (self.window) {
                 self.window.rootViewController = nav;
                 [self.window makeKeyAndVisible];
@@ -137,6 +139,8 @@
             UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:dic[@"title"] image:[UIImage imageNamed: dic[@"image"]] tag:0];
             [vc setTabBarItem:item];
             UINavigationController *nav1 = [[UINavigationController alloc]initWithRootViewController:vc];
+            [nav setNavigationBarHidden:NO];
+            [nav.navigationBar setTranslucent:YES];
             if (self.window) {
                 self.window.rootViewController = nav1;
                 [self.window makeKeyAndVisible];

@@ -62,6 +62,7 @@ static bool customUserAgentHasSet = false;
     UIView *_leftMenuView;
     UIView *_shadowView;
     BOOL _enableMenu;
+    BOOL _isMessageReceiver;
 }
 +(void)heroUseragent{
     if (customUserAgentHasSet) {
@@ -87,6 +88,7 @@ static bool customUserAgentHasSet = false;
 - (void)loadView {
     HeroScrollView *scrollView = [[HeroScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
     [scrollView on:@{@"name":@"contentView", @"class": @"HeroScrollView"}];
+    scrollView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     self.view = scrollView;
 }
 -(instancetype)initWithJson:(NSDictionary*)json{
@@ -98,6 +100,9 @@ static bool customUserAgentHasSet = false;
     return self;
 }
 -(void)on:(NSDictionary *)json{
+    if ((!json) || (!_isMessageReceiver)) {
+        return;
+    }
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self on:json];
@@ -279,7 +284,12 @@ static bool customUserAgentHasSet = false;
         }
         if (appearance[@"navigationBarHidden"]) {
             _isNavBarHidden = [appearance[@"navigationBarHidden"] boolValue];
-            [self.navigationController setNavigationBarHidden:_isNavBarHidden animated:YES];
+            [self.navigationController setNavigationBarHidden:_isNavBarHidden animated:NO];
+            if (_isNavBarHidden) {
+                ((HeroScrollView*)self.view).contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            }else{
+                ((HeroScrollView*)self.view).contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.bounds.size.height, 0, 0, 0);
+            }
         }
         if (appearance[@"titleColor"]) {
             [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : UIColorFromStr(appearance[@"titleColor"])}];
@@ -497,6 +507,7 @@ static bool customUserAgentHasSet = false;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
+    _isMessageReceiver = YES;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -523,6 +534,7 @@ static bool customUserAgentHasSet = false;
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    _isMessageReceiver = NO;
     if (_actionDatas[@"viewWillDisappear"]) {
         [self on:_actionDatas[@"viewWillDisappear"]];
     }
