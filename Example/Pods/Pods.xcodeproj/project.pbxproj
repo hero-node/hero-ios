@@ -68,6 +68,8 @@
 		4A36E1AD1F984F09009EA762 /* HeroPaperTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A36E1AB1F984F09009EA762 /* HeroPaperTextField.m */; };
 		4ADA699D218305A700CF7187 /* HeroSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ADA699B218305A600CF7187 /* HeroSignature.h */; };
 		4ADA699E218305A700CF7187 /* HeroSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA699C218305A600CF7187 /* HeroSignature.m */; };
+		4ADA69A4218EA7C500CF7187 /* UIWindow+Hero.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ADA69A2218EA7C500CF7187 /* UIWindow+Hero.h */; };
+		4ADA69A5218EA7C500CF7187 /* UIWindow+Hero.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA69A3218EA7C500CF7187 /* UIWindow+Hero.m */; };
 		4AFBD5ADEF674C2A74E34E59DA4D591F /* HeroViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 592A777B93401F7826003C8DC1906F8E /* HeroViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E06A3ECAF208BAE046AEDFCE1474E5D /* HeroUploadFlowLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E368D1F8F33DF40EB1404CCEC12EA29E /* HeroUploadFlowLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E3C2ACB0C12A706E043641F445D6B03 /* DACircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 99DABEF6A8FB8F725C3BC50CC7B7383F /* DACircularProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -276,6 +278,8 @@
 		4ACBCE2DCE380583066E4D23C556B404 /* HeroTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HeroTextView.h; sourceTree = "<group>"; };
 		4ADA699B218305A600CF7187 /* HeroSignature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeroSignature.h; sourceTree = "<group>"; };
 		4ADA699C218305A600CF7187 /* HeroSignature.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroSignature.m; sourceTree = "<group>"; };
+		4ADA69A2218EA7C500CF7187 /* UIWindow+Hero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Hero.h"; sourceTree = "<group>"; };
+		4ADA69A3218EA7C500CF7187 /* UIWindow+Hero.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Hero.m"; sourceTree = "<group>"; };
 		4BEF1D53EB0943C3AC7715B273B3EA8E /* MJRefreshComponent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshComponent.m; path = MJRefresh/Base/MJRefreshComponent.m; sourceTree = "<group>"; };
 		4F70ECE62E1DC957C540FCB1C569FD19 /* NSBundle+MJRefresh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+MJRefresh.h"; path = "MJRefresh/NSBundle+MJRefresh.h"; sourceTree = "<group>"; };
 		4FB9919F1CBD922D4A96D7AAA5FA092E /* NSURL+HeroUrlEqual.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSURL+HeroUrlEqual.m"; sourceTree = "<group>"; };
@@ -633,6 +637,8 @@
 				FEACDB57186464D7525EB980067C988F /* UIView+Genie.h */,
 				AB0343AE07C07D068C51321BF178E2DA /* UIView+Genie.m */,
 				36A9457304CA7E22A9C6B45A1A19B360 /* UIView+Hero.h */,
+				4ADA69A2218EA7C500CF7187 /* UIWindow+Hero.h */,
+				4ADA69A3218EA7C500CF7187 /* UIWindow+Hero.m */,
 				09399E80A249640039EBEC82449A3D91 /* UIView+Hero.m */,
 				8B4CE924FCA1647C97FD5775A9D98FD4 /* UIView+Paper.h */,
 				CB3A23080A1FBC5DFDE2710E8AAF7E50 /* UIView+Paper.m */,
@@ -816,6 +822,7 @@
 				BD1A2899929BAE82EB30B837773C5DFF /* UINavigationController+webViewBack.h in Headers */,
 				4ADA699D218305A700CF7187 /* HeroSignature.h in Headers */,
 				0E9A9EB75777292E18BF8E948D8E4768 /* UIView+Addition.h in Headers */,
+				4ADA69A4218EA7C500CF7187 /* UIWindow+Hero.h in Headers */,
 				CCB647E8ACBBB9E38A6F7C10B378021C /* UIView+Frame.h in Headers */,
 				018B895C8A2C499D8C273DA6348ADAB2 /* UIView+Genie.h in Headers */,
 				ECB3934793CBAC7A76D26693EE2202A1 /* UIView+Hero.h in Headers */,
@@ -1008,6 +1015,7 @@
 				EF762404482CEA5251BBE10762401CA8 /* UIView+Addition.m in Sources */,
 				818A699A708BEC91D582E95E413495E5 /* UIView+Frame.m in Sources */,
 				3843AF6CB112796D1B7254915443BD9F /* UIView+Genie.m in Sources */,
+				4ADA69A5218EA7C500CF7187 /* UIWindow+Hero.m in Sources */,
 				93E96BBAA12D25A72DA69A9E32395B95 /* UIView+Hero.m in Sources */,
 				2F81685B3C4848A9B4D2442B393EC79E /* UIView+Paper.m in Sources */,
 				ED00E42223ADD89E3C06C3DBB57F1BBE /* UIView+Screenshot.m in Sources */,

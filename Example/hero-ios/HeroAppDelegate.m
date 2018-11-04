@@ -31,21 +31,10 @@
                    @"tintColor":@"ff0000",
                    @"tabs":
                        @[@{
-                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-store/home.html"],
+                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-home/home.html"],
                              @"title":@"消息",
                              @"class":@"ViewController",
-                             },
-                         @{
-                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-apollo/otc.html"],
-                             @"title":@"联系人",
-                             @"class":@"ViewController",
-                             },
-                         @{
-                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-chat/me.html"],
-                             @"title":@"我",
-                             @"class":@"ViewController",
-                             }
-                         ]
+                             }                         ]
                    }];
     return YES;
 }

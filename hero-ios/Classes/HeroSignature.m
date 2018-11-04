@@ -19,6 +19,7 @@
 }
 -(void)on:(NSDictionary *)json{
     [super on:json];
+    self.hidden = true;
     if (json[@"message"]) {
         if (hasKey) {
             

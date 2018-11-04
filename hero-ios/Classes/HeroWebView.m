@@ -44,7 +44,6 @@
 @end
 @implementation HeroWebView
 {
-    UILabel *_ownnerLabel;
     NSString *_urlStr;
     BOOL _isGetRequest;
     id _postData;
@@ -156,20 +155,10 @@
         self.controller.title = title;
     }
     [webView stringByEvaluatingJavaScriptFromString:@"window.Hero && Hero.viewWillAppear()"];
-    if (self.json[@"webViewDidFinishLoad"]) {
-        [self.controller on:self.json[@"webViewDidFinishLoad"]];
-    }
+    [self.controller on:@{@"command":@"webViewDidFinishLoad"}];
     if (self.controller.webview.superview) { //普通web页面
-        if (!_ownnerLabel) {
-            _ownnerLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, self.scrollView.contentInset.top, self.bounds.size.width, 48)];
-            _ownnerLabel.textAlignment = NSTextAlignmentCenter;
-            _ownnerLabel.font = [UIFont systemFontOfSize:12];
-            _ownnerLabel.textColor = UIColorFromRGB(0xaaaaaa);
-        }
-        _ownnerLabel.text = [NSString stringWithFormat:@"本页面由 %@ 提供",webView.request.URL.host];
-        [self addSubview:_ownnerLabel];
-        [self sendSubviewToBack:_ownnerLabel];
-        [self.controller on:@{@"common":@{@"event":@"finish"}}];
+        [self.controller.navigationController setNavigationBarHidden:NO animated:YES];
+        self.scrollView.contentInset = UIEdgeInsetsMake(self.controller.navigationController.navigationBar.bounds.size.height, 0, 0, 0);
     }
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
@@ -182,7 +171,14 @@
     if (self.json[@"didFailLoadWithError"]) {
         [self.controller on:self.json[@"didFailLoadWithError"]];
     }
-    [self loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"404" ofType:@"html"]]]];
+    if ([[NSFileManager defaultManager] fileExistsAtPath: [[NSBundle mainBundle] pathForResource:@"404" ofType:@"html"]]) {
+        [self loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"404" ofType:@"html"]]]];
+    }else{
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[@"{\"nav\":{\"title\":\"404\",\"navigationBarHidden\":false},\"views\":[{\"class\":\"HeroLabel\",\"text\":\"This is probably a land of nowhere\",\"frame\":{\"w\":\"1x\",\"y\":\"0.5x-80\",\"h\":\"40\"},\"alignment\":\"center\",\"textColor\":\"666666\"},{\"class\":\"HeroButton\",\"frame\":{\"w\":\"120\",\"x\":\"0.5x-50\",\"y\":\"0.5x\",\"h\":\"50\"},\"title\":\"Retry it\",\"titleColor\":\"778899\",\"backgroundColor\":\"eeeeeeee\",\"ripple\":true,\"click\":{\"command\":\"refresh\"},\"cornerRadius\":5}]}" dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+        [self.controller on:@{@"ui":json}];
+        [self.controller on:@{@"command":@"webViewDidFinishLoad"}];
+    }
+    
 }
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {

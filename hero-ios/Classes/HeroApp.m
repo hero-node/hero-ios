@@ -54,6 +54,11 @@
 {
     self = [super init];
     if (self) {
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        nav = [[UINavigationController alloc]init];
+        [nav setNavigationBarHidden:NO];
+        [nav.navigationBar setTranslucent:YES];
+
         //new app depreated
         [[NSNotificationCenter defaultCenter] addObserverForName:@"newApp" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             [self on:note.object];
@@ -66,9 +71,15 @@
         [[NSNotificationCenter defaultCenter] addObserverForName:@"HeroApp" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
             [self on:note.object];
         }];
+        
+        //app shake
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"HeroShakeNotification" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            [self->nav popViewControllerAnimated:YES];
+        }];
     }
     return self;
 }
+
 -(void)on:(NSDictionary *)json{
     if (json[@"tintColor"]) {
         _tintColor = UIColorFromStr(json[@"tintColor"]);
@@ -93,21 +104,16 @@
     }
     if (json[@"tabs"]) {
         NSArray *arr = json[@"tabs"];
-        if (self.window) {
-            [self.window.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [obj removeFromSuperview];
-            }];
-        }
-        [APP.keyWindow.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-        }];
-        if (arr.count > 1) {
+        if (arr.count > 0) {
             tabCon = [[UITabBarController alloc]init];
+            if (arr.count == 1) {
+                [tabCon.tabBar setHidden:YES];
+            }
             tabCon.automaticallyAdjustsScrollViewInsets = NO;
             tabCon.delegate = self;
             for (int i =0;i<arr.count;i++) {
                 NSDictionary *dic = arr[i];
-                NSString *type = dic[@"class"];
+                NSString *type = dic[@"class"]?dic[@"class"]:@"HeroViewController";
                 HeroViewController *vc = [[NSClassFromString(type) alloc]initWithUrl:dic[@"url"]];
                 vc.title = dic[@"title"];
                 UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:dic[@"title"] image:[UIImage imageNamed: dic[@"image"]] tag:i];
@@ -120,39 +126,13 @@
                     tabCon.navigationItem.titleView = vc.navigationItem.titleView;
                 }
             }
-            nav = [[UINavigationController alloc]initWithRootViewController:tabCon];
-            [nav setNavigationBarHidden:NO];
-            [nav.navigationBar setTranslucent:YES];
             [tabCon.tabBar setTranslucent:YES];
-            if (self.window) {
-                self.window.rootViewController = nav;
-                [self.window makeKeyAndVisible];
-            }else{
-                APP.keyWindow.rootViewController = nav;
-                [APP.keyWindow makeKeyAndVisible];
-            }
-        }else{
-            NSDictionary *dic = arr[0];
-            NSString *type = dic[@"class"];
-            HeroViewController *vc = [[NSClassFromString(type) alloc]initWithUrl:dic[@"url"]];
-            vc.title = dic[@"title"];
-            UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:dic[@"title"] image:[UIImage imageNamed: dic[@"image"]] tag:0];
-            [vc setTabBarItem:item];
-            UINavigationController *nav1 = [[UINavigationController alloc]initWithRootViewController:vc];
-            [nav setNavigationBarHidden:NO];
-            [nav.navigationBar setTranslucent:YES];
-            if (self.window) {
-                self.window.rootViewController = nav1;
-                [self.window makeKeyAndVisible];
-            }else{
-                APP.keyWindow.rootViewController = nav1;
-                [APP.keyWindow makeKeyAndVisible];
-            }
+            [nav pushViewController:tabCon animated:YES];
+            self.window.rootViewController = nav;
+            [self.window makeKeyAndVisible];
         }
         if (_tintColor) {
             [APP.keyWindow setTintColor:_tintColor];
-            CIColor *_tintColorCI = [[CIColor alloc]initWithColor:_tintColor];
-            [APP setStatusBarStyle: _tintColorCI.red+_tintColorCI.green+_tintColorCI.blue>1?UIStatusBarStyleDefault: UIStatusBarStyleLightContent];
         }
     }
 }

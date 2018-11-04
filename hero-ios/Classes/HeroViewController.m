@@ -63,6 +63,7 @@ static bool customUserAgentHasSet = false;
     UIView *_shadowView;
     BOOL _enableMenu;
     BOOL _isMessageReceiver;
+    BOOL _showLoading;
 }
 +(void)heroUseragent{
     if (customUserAgentHasSet) {
@@ -183,6 +184,9 @@ static bool customUserAgentHasSet = false;
             self.tabBarController.view.backgroundColor = UIColorFromStr(ui[@"backgroundColor"]);
             [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:UIColorFromStr(ui[@"backgroundColor"])] forBarMetrics:UIBarMetricsDefault];
             [self.tabBarController.tabBar setBackgroundImage:[UIImage imageWithColor:UIColorFromStr(ui[@"backgroundColor"])] ];
+            CIColor *_tintColorCI = [[CIColor alloc]initWithColor:self.view.backgroundColor];
+            [APP setStatusBarStyle: _tintColorCI.red+_tintColorCI.green+_tintColorCI.blue>1?UIStatusBarStyleDefault: UIStatusBarStyleLightContent];
+
         }
         if (ui[@"tintColor"]) {
             self.view.tintColor = UIColorFromStr(ui[@"tintColor"]);
@@ -350,6 +354,13 @@ static bool customUserAgentHasSet = false;
                 HeroViewController* vC = [[[self class] alloc]initWithUrl:url];
                 [self.navigationController pushViewController:vC animated:NO];
                 [vC magicMove:self];
+            }else if([command hasPrefix:@"gotoWithLoading"]){
+                NSString *url = [command stringByReplacingOccurrencesOfString:@"gotoWithLoading:" withString:@""];
+                NSURL *desUrl = [NSURL URLWithString:url];
+                HeroViewController* vC = [[[self class] alloc]initWithUrl:url];
+                vC->_showLoading = YES;
+                [self.navigationController pushViewController:vC animated:YES];
+                [vC magicMove:self];
             }else if ([command hasPrefix:@"load:"]){
                 NSString *url = [command stringByReplacingOccurrencesOfString:@"load:" withString:@""];
                 [self loadFromUrl:url];
@@ -384,21 +395,8 @@ static bool customUserAgentHasSet = false;
                 [self showLoading:loading]; //拎出去方便重载此方法
             }else if ([command hasPrefix:@"stopLoading"]){
                 [self stopLoading]; //拎出去方便重载此方法
-            }else if ([command hasPrefix:@"submit"]){
-                NSMutableDictionary *submitData = [NSMutableDictionary dictionary];
-                for (NSDictionary *viewJson in self.ui[@"views"]) {
-                    UIView *v = [self.view findViewByName:viewJson[@"name"]];
-                    if (v && [v isKindOfClass:[HeroTextField class]]) {
-                        NSString *text = ((HeroTextField*)v).text;
-                        if (((HeroTextField*)v).secureTextEntry) {
-                            text = [text md5];
-                        }
-                        [submitData setObject:text forKey:v.name];
-                    }else if (v && [v isKindOfClass:[HeroSwitch class]]){
-                        [submitData setObject:[NSNumber numberWithBool:((HeroSwitch*)v).on] forKey:v.name];
-                    }
-                }
-                [self on:@{@"her":submitData}];
+            }else if ([command hasPrefix:@"webViewDidFinishLoad"]){
+                [self stopLoading]; //拎出去方便重载此方法
             }
         }
         else if (json[@"command"][@"enableMenu"]) {
@@ -460,17 +458,6 @@ static bool customUserAgentHasSet = false;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self on:delayObj];
             });
-        }else if (command[@"viewWillAppear"]){
-            if (!_actionDatas) {
-                _actionDatas = [NSMutableDictionary dictionary];
-            }
-            [_actionDatas setObject:command[@"viewWillAppear"] forKey:@"viewWillAppear"];
-            [self on:command[@"viewWillAppear"]];
-        }else if (command[@"viewWillDisappear"]){
-            if (!_actionDatas) {
-                _actionDatas = [NSMutableDictionary dictionary];
-            }
-            [_actionDatas setObject:command[@"viewWillDisappear"] forKey:@"viewWillDisappear"];
         }
     }else if (json[@"global"]){
         NSDictionary *global = json[@"global"];
@@ -498,6 +485,9 @@ static bool customUserAgentHasSet = false;
         [self.view addSubview:self.webview];
     }
     [self.webview on:@{@"url":url}];
+    if (_showLoading) {
+        [self showLoading:nil];
+    }
 }
 -(BOOL)shouldLoadFromUrl:(NSString*)url{
     if ([url hasPrefix:@"http"] ) {
@@ -550,7 +540,7 @@ static bool customUserAgentHasSet = false;
     backgroundView.backgroundColor = [UIColor blackColor];
     backgroundView.alpha = 0.0f;
     backgroundView.tag = 187698;//随机不可能重复值
-    UIActivityIndicatorView *progress = [[UIActivityIndicatorView alloc]init];
+    UIActivityIndicatorView *progress = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleWhiteLarge)];
     [progress startAnimating];
     progress.center = CGPointMake(backgroundView.bounds.size.width/2, backgroundView.bounds.size.height/2);
     [backgroundView addSubview:progress];
@@ -571,11 +561,13 @@ static bool customUserAgentHasSet = false;
 }
 -(void)stopLoading{
     UIView *background = [[UIApplication sharedApplication].keyWindow viewWithTag:187698];
-    [UIView animateWithDuration:0.2 animations:^{
-        background.alpha = 0.0f;
-    } completion:^(BOOL finished) {
-        [background removeFromSuperview];
-    }];
+    if (background) {
+        [UIView animateWithDuration:0.2 animations:^{
+            background.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            [background removeFromSuperview];
+        }];
+    }
 }
 #pragma mark magic move
 -(NSMutableArray *)findAllMagicElementsWithRootView:(UIView*)rootView{
