@@ -476,6 +476,13 @@
 			path = "Target Support Files/Pods-hero-ios_Example";
 			sourceTree = "<group>";
 		};
+		4ADA69A621940D5900CF7187 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		6038FD2E49681B530C2909C536C63443 /* hero-ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +524,7 @@
 				2B96F7C5673DE08802A5507C86CE1327 /* HeroAddCell.m */,
 				4ADA699B218305A600CF7187 /* HeroSignature.h */,
 				4ADA699C218305A600CF7187 /* HeroSignature.m */,
+				4ADA69A621940D5900CF7187 /* New Group */,
 				987331F451E632C87A6EF43F11C4311F /* HeroApp.h */,
 				8DB2071B3455B34015C274512C144154 /* HeroApp.m */,
 				A8420207A908B5B2FCEEE23A846F96F9 /* HeroBadgeLabel.h */,
