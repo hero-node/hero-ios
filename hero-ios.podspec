@@ -38,5 +38,6 @@ TODO: Add long description of the pod here.
   s.public_header_files = 'hero-ios/Classes/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'MJRefresh'
-  s.dependency 'web3swift'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/ethers.framework'
+  #s.dependency 'web3swift'
 end

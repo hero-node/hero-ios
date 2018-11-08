@@ -1,12 +1,9 @@
-ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/BigInt" "${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift" "${PODS_CONFIGURATION_BUILD_DIR}/EthereumABI" "${PODS_CONFIGURATION_BUILD_DIR}/EthereumAddress" "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh" "${PODS_CONFIGURATION_BUILD_DIR}/PromiseKit" "${PODS_CONFIGURATION_BUILD_DIR}/SipHash" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftRLP" "${PODS_CONFIGURATION_BUILD_DIR}/hero-ios" "${PODS_CONFIGURATION_BUILD_DIR}/scrypt" "${PODS_CONFIGURATION_BUILD_DIR}/secp256k1_swift" "${PODS_CONFIGURATION_BUILD_DIR}/web3swift"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh" "${PODS_CONFIGURATION_BUILD_DIR}/hero-ios"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/BigInt/BigInt.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/CryptoSwift/CryptoSwift.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/EthereumABI/EthereumABI.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/EthereumAddress/EthereumAddress.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/PromiseKit/PromiseKit.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SipHash/SipHash.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SwiftRLP/SwiftRLP.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/hero-ios/hero_ios.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/scrypt/scrypt.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/secp256k1_swift/secp256k1_swift.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/web3swift/Web3swift.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "BigInt" -framework "CryptoSwift" -framework "EthereumABI" -framework "EthereumAddress" -framework "MJRefresh" -framework "PromiseKit" -framework "SipHash" -framework "SwiftRLP" -framework "Web3swift" -framework "hero_ios" -framework "scrypt" -framework "secp256k1_swift"
-OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh/MJRefresh.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/hero-ios/hero_ios.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -ObjC -framework "MJRefresh" -framework "hero_ios"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
 PODS_ROOT = ${SRCROOT}/Pods
-SWIFT_INCLUDE_PATHS = $(inherited) $(PODS_TARGET_SRCROOT)/scrypt

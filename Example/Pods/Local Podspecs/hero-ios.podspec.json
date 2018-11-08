@@ -24,9 +24,9 @@
   "dependencies": {
     "MJRefresh": [
 
-    ],
-    "web3swift": [
-
     ]
+  },
+  "ios": {
+    "vendored_frameworks": "hero-ios/Frameworks/ethers.framework"
   }
 }

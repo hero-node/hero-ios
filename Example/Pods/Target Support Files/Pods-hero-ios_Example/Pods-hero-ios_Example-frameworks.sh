@@ -143,32 +143,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/EthereumABI/EthereumABI.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/EthereumAddress/EthereumAddress.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftRLP/SwiftRLP.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/hero-ios/hero_ios.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/web3swift/Web3swift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/EthereumABI/EthereumABI.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/EthereumAddress/EthereumAddress.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftRLP/SwiftRLP.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/hero-ios/hero_ios.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/web3swift/Web3swift.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
