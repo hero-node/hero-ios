@@ -1,4 +1,4 @@
-module Pods_hero_ios_Example {
+framework module Pods_hero_ios_Example {
   umbrella header "Pods-hero-ios_Example-umbrella.h"
 
   export *

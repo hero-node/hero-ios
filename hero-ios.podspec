@@ -29,7 +29,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'hero-ios/Classes/*'
+  s.source_files = 'hero-ios/Classes/**/*'
 
   # s.resource_bundles = {
   #   'hero-ios' => ['hero-ios/Assets/*.png']

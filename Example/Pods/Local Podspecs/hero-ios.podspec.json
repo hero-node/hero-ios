@@ -19,7 +19,7 @@
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "hero-ios/Classes/*",
+  "source_files": "hero-ios/Classes/**/*",
   "public_header_files": "hero-ios/Classes/*.h",
   "dependencies": {
     "MJRefresh": [

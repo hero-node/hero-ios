@@ -1,1 +1,0 @@
-../../../../../hero-ios/Classes/HeroTableView.h

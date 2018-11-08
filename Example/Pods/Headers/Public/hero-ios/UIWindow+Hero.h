@@ -1,1 +1,0 @@
-../../../../../hero-ios/Classes/UIWindow+Hero.h
