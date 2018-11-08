@@ -34,6 +34,8 @@
 
 #import "HeroApp.h"
 #import "UIView+Hero.h"
+#import "UILazyImageView.h"
+#import "UIView+Screenshot.h"
 #import <CoreImage/CoreImage.h>
 
 @interface UITabBar (badge)
@@ -117,6 +119,12 @@
                 HeroViewController *vc = [[NSClassFromString(type) alloc]initWithUrl:dic[@"url"]];
                 vc.title = dic[@"title"];
                 UITabBarItem *item = [[UITabBarItem alloc]initWithTitle:dic[@"title"] image:[UIImage imageNamed: dic[@"image"]] tag:i];
+                [UILazyImageView registerForName:dic[@"image"] block:^(NSData *data) {
+                    UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 30,30)];
+                    imageView.image = [UIImage imageWithData:data scale:[UIScreen mainScreen].scale];
+                    item.image = [imageView screenshot];
+                }];
+
                 [vc setTabBarItem:item];
                 [tabCon addChildViewController:vc];
                 if (i == 0) {

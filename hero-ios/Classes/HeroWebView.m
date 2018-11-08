@@ -38,7 +38,9 @@
 #import "UIView+Hero.h"
 #import <JavaScriptCore/JSContext.h>
 #import "NSString+Additions.h"
+#import "hero.h"
 
+const NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){Object.keys(window).forEach(function(k) {if(window[k]&& window[k].eth){var eth = window[k].eth;eth.accounts=function(){return new Promise(function (resolve,reject){window.heroSignature.npc('HeroSignature','acounts',function(res){resolve(JSON.parse(res));});});};eth.getAccounts = async function(){return eth.accounts();};};});}},npc:function(module,fun,callback){window[module+fun+'callback'] = callback;var npcStr = 'heronpc://' +module+'::'+fun ;if (window.npc) {window.npc(npcStr)}else{var iframe = document.createElement('iframe');iframe.setAttribute('src', npcStr);document.documentElement.appendChild(iframe);iframe.parentNode.removeChild(iframe);iframe = null;}}}heroSignature.init();";
 @interface HeroWebView()<UIWebViewDelegate>
 
 @end
@@ -48,6 +50,7 @@
     BOOL _isGetRequest;
     id _postData;
     NSArray *_hijackURLs;
+    NSMutableDictionary * modules;
 }
 
 -(void)on:(NSDictionary *)json
@@ -159,10 +162,14 @@
     if (self.controller.webview.superview) { //普通web页面
         [self.controller.navigationController setNavigationBarHidden:NO animated:YES];
         self.scrollView.contentInset = UIEdgeInsetsMake(self.controller.navigationController.navigationBar.bounds.size.height, 0, 0, 0);
+        [webView stringByEvaluatingJavaScriptFromString:@"var js = document.createElement('script');js.src='http://localhost:3000/example/hero-home/t.js';document.body.appendChild(js)"];
+
     }
+    
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.deviceWidth=%f;window.deviceHeight=%f",SCREEN_W,SCREEN_H]];
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.deviceWidth=%f;window.deviceHeight=%f;window.web3={currentProvider:{isMetaMask:true}}",SCREEN_W,SCREEN_H]];
+
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     if([error code] == NSURLErrorCancelled)  {
@@ -178,7 +185,6 @@
         [self.controller on:@{@"ui":json}];
         [self.controller on:@{@"command":@"webViewDidFinishLoad"}];
     }
-    
 }
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -204,6 +210,24 @@
         if (json != nil) {
             [self.controller on:json];
         }
+        return NO;
+    }else if ([request.URL.absoluteString hasPrefix:@"heronpc://"]) {
+        NSString* str = [[request.URL.absoluteString stringByReplacingOccurrencesOfString:@"heronpc://" withString:@""] decodeFromPercentEscapeString];
+        NSString *module = [str componentsSeparatedByString:@"?"][0];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:[[str componentsSeparatedByString:@"?"][1] dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+        if (!modules) {
+            modules = [NSMutableDictionary dictionary];
+        }
+        if (!modules[module]) {
+            UIView *moduleObject = [[NSClassFromString(module) alloc]init];
+            if (!moduleObject) {
+                NSString *js = [NSString stringWithFormat:@"window['%@callback']({npc:'fail'})",module];
+                [self stringByEvaluatingJavaScriptFromString:js];
+            }
+            moduleObject.controller = self.controller;
+            modules[module] = moduleObject;
+        }
+        [modules[module] performSelector:@selector(on:) withObject:json];
         return NO;
     }else{
         return [self.controller shouldLoadFromUrl:path];

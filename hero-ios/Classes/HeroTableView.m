@@ -61,6 +61,12 @@
         self.tableFooterView = foot;
         
         self.rowHeight = 44;
+        self.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        if (@available(iOS 11.0, *)) {
+            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+
+        }
         refeshTimes = 0;
     }
     return self;

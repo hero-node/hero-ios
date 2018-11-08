@@ -90,6 +90,10 @@ static bool customUserAgentHasSet = false;
     HeroScrollView *scrollView = [[HeroScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H)];
     [scrollView on:@{@"name":@"contentView", @"class": @"HeroScrollView"}];
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    if (@available(iOS 11, *)) {
+        scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
+    scrollView.contentInset = UIEdgeInsetsMake(0,0,0,0);
     self.view = scrollView;
 }
 -(instancetype)initWithJson:(NSDictionary*)json{
@@ -291,8 +295,10 @@ static bool customUserAgentHasSet = false;
             [self.navigationController setNavigationBarHidden:_isNavBarHidden animated:NO];
             if (_isNavBarHidden) {
                 ((HeroScrollView*)self.view).contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+                [self.view setNeedsLayout];
             }else{
-                ((HeroScrollView*)self.view).contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.bounds.size.height, 0, 0, 0);
+                ((HeroScrollView*)self.view).contentInset = UIEdgeInsetsMake(self.navigationController.navigationBar.frame.origin.y+self.navigationController.navigationBar.bounds.size.height, 0, self.tabBarController.tabBar.bounds.size.height, 0);
+                [self.view setNeedsLayout];
             }
         }
         if (appearance[@"titleColor"]) {
@@ -318,17 +324,13 @@ static bool customUserAgentHasSet = false;
                                 if (buttonIndex == 0) {
                                     [[UIApplication sharedApplication]openURL:desUrl];
                                 }
-                            } onCancel:^{
-                                ;
-                            }];
+                            } onCancel:nil];
                         }else{
                             [UIAlertView showAlertViewWithTitle:LS(@"外部链接") message:[NSString stringWithFormat:@"%@",desUrl] cancelButtonTitle:LS(@"取消") otherButtonTitles:@[LS(@"跳转")] onDismiss:^(NSInteger buttonIndex) {
                                 if (buttonIndex == 0) {
                                     [[UIApplication sharedApplication]openURL:desUrl];
                                 }
-                            } onCancel:^{
-                                ;
-                            }];
+                            } onCancel:nil];
                         }
                     }
                 }
@@ -350,13 +352,11 @@ static bool customUserAgentHasSet = false;
                 [self.navigationController pushViewController:vC animated:YES];
             }else if([command hasPrefix:@"magicGoto"]){
                 NSString *url = [command stringByReplacingOccurrencesOfString:@"magicGoto:" withString:@""];
-                NSURL *desUrl = [NSURL URLWithString:url];
                 HeroViewController* vC = [[[self class] alloc]initWithUrl:url];
                 [self.navigationController pushViewController:vC animated:NO];
                 [vC magicMove:self];
             }else if([command hasPrefix:@"gotoWithLoading"]){
                 NSString *url = [command stringByReplacingOccurrencesOfString:@"gotoWithLoading:" withString:@""];
-                NSURL *desUrl = [NSURL URLWithString:url];
                 HeroViewController* vC = [[[self class] alloc]initWithUrl:url];
                 vC->_showLoading = YES;
                 [self.navigationController pushViewController:vC animated:YES];
@@ -409,8 +409,8 @@ static bool customUserAgentHasSet = false;
                     _shadowView.alpha = 0;
                     _leftMenuView.frame = CGRectMake(- [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, 0, [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, [UIScreen mainScreen].bounds.size.height);
                     [UIView animateWithDuration:.3 animations:^{
-                        _shadowView.alpha = 1;
-                        _leftMenuView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, [UIScreen mainScreen].bounds.size.height);
+                        self->_shadowView.alpha = 1;
+                        self->_leftMenuView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, [UIScreen mainScreen].bounds.size.height);
                         [self on:@{
                                    @"event":@"sidebar",
                                    @"value":@{@"opened":@(YES)}
@@ -418,8 +418,8 @@ static bool customUserAgentHasSet = false;
                     } completion:nil];
                 } else {
                     [UIView animateWithDuration:.3 animations:^{
-                        _shadowView.alpha = 0;
-                        _leftMenuView.frame = CGRectMake(- [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, 0, [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, [UIScreen mainScreen].bounds.size.height);
+                        self->_shadowView.alpha = 0;
+                        self->_leftMenuView.frame = CGRectMake(- [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, 0, [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, [UIScreen mainScreen].bounds.size.height);
                         [self on:@{
                                    @"event":@"sidebar",
                                    @"value":@{@"opened":@(NO)}
@@ -444,9 +444,7 @@ static bool customUserAgentHasSet = false;
                 UIView *v = [[NSClassFromString(showObj[@"class"]) alloc]init];
                 v.controller = self;
                 [v on :showObj ];
-                [UIAlertView showAlertViewWithView:v data:showObj onDismiss:^(NSInteger buttonIndex) {
-                    //
-                } onCancel:^{
+                [UIAlertView showAlertViewWithView:v data:showObj onDismiss:nil onCancel:^{
                     if (showObj[@"cancelAction"]) {
                         [self on:showObj[@"cancelAction"]];
                     }
@@ -479,7 +477,7 @@ static bool customUserAgentHasSet = false;
     if (!self.webview) {
         self.webview = [[HeroWebView alloc]init];
         UIScrollView *scrollView = (UIScrollView*)self.view;
-        self.webview.frame = CGRectMake(scrollView.contentInset.left, 0, scrollView.bounds.size.width-scrollView.contentInset.left-scrollView.contentInset.right, scrollView.bounds.size.height-scrollView.contentInset.top-scrollView.contentInset.bottom);
+        self.webview.frame = CGRectMake(0, 0, scrollView.bounds.size.width-scrollView.contentInset.left-scrollView.contentInset.right, scrollView.bounds.size.height-scrollView.contentInset.top-scrollView.contentInset.bottom);
         self.webview.autoresizingMask = 0x111111;
         self.webview.controller = self;
         [self.view addSubview:self.webview];
@@ -612,14 +610,14 @@ static bool customUserAgentHasSet = false;
                 }];
             }
         }
-        if (_isMagicMove) {
+        if (self->_isMagicMove) {
             [UIView animateWithDuration:1 animations:^{
                 for (UIView *view in self.view.subviews) {
                     view.alpha = 1.0f;
                 }
             }];
         }
-        _isMagicMove = false;
+        self->_isMagicMove = false;
     });
 }
 

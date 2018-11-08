@@ -14,12 +14,30 @@
     UIView *signView;
     HeroSignatureInportController *importViewController;
 }
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
 -(void)importFail {
     [importViewController dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)on:(NSDictionary *)json{
     [super on:json];
     self.hidden = true;
+    if (json[@"accounts"]) {
+        NSDictionary * defaultA = @[@"0x0000000000000000000000000000000000000000"];
+        if (json[@"isNpc"]) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:defaultA options:NSJSONWritingPrettyPrinted error:nil];
+                NSString *js = [NSString stringWithFormat:@"window['%@callback'](%@)",[self class],[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+                [self.controller.webview stringByEvaluatingJavaScriptFromString:js];
+            });
+        }else{
+            [self.controller on:defaultA];
+        }
+    }
     if (json[@"message"]) {
         if (hasKey) {
             

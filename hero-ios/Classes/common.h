@@ -34,16 +34,19 @@
 
 #define SCREEN_W                ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_H                ([[UIScreen mainScreen] bounds].size.height)
-#define CONTROLLER_W            (self.controller.view.bounds.size.width?(self.controller.view.bounds.size.width-((UIScrollView*)self.controller.view).contentInset.left-((UIScrollView*)self.controller.view).contentInset.right):SCREEN_W)
-#define CONTROLLER_H            (self.controller.view.bounds.size.height?(self.controller.view.bounds.size.height-((UIScrollView*)self.controller.view).contentInset.top - ((UIScrollView*)self.controller.view).contentInset.bottom):SCREEN_H)
+
+#define CONTENTINSET (@available(iOS 11.0, *)?((UIScrollView*)self.controller.view).adjustedContentInset:((UIScrollView*)self.controller.view).contentInset)
+
+#define CONTROLLER_W            (self.controller.view.bounds.size.width?(self.controller.view.bounds.size.width-CONTENTINSET.left-CONTENTINSET.right):SCREEN_W)
+#define CONTROLLER_H            (self.controller.view.bounds.size.height?(self.controller.view.bounds.size.height-CONTENTINSET.top - CONTENTINSET.bottom):SCREEN_H)
 #define KEY_WINDOW              [[UIApplication sharedApplication]keyWindow]
 #define ROOT_VIEW               ([[UIApplication sharedApplication]keyWindow].rootViewController.view)
 #define ROOT_VIEWCONTROLLER     ([[UIApplication sharedApplication]keyWindow].rootViewController)
 #define APP                     [UIApplication sharedApplication]
 #define SCALE                   [[UIScreen mainScreen]scale]
-#define PARENT_W                (self.superview.bounds.size.width?(self.superview.bounds.size.width-([self.superview isKindOfClass:[UIScrollView class]]?(((UIScrollView*)self.superview).contentInset.left + ((UIScrollView*)self.superview).contentInset.right):0)):CONTROLLER_W)
+#define PARENT_W                (self.superview.bounds.size.width?(self.superview.bounds.size.width-([self.superview isKindOfClass:[UIScrollView class]]?(CONTENTINSET.left + CONTENTINSET.right):0)):CONTROLLER_W)
 
-#define PARENT_H                (self.superview.bounds.size.height?(self.superview.bounds.size.height-([self.superview isKindOfClass:[UIScrollView class]]?(((UIScrollView*)self.superview).contentInset.top + ((UIScrollView*)self.superview).contentInset.bottom):0)):CONTROLLER_H)
+#define PARENT_H                (self.superview.bounds.size.height?(self.superview.bounds.size.height-([self.superview isKindOfClass:[UIScrollView class]]?(CONTENTINSET.top + CONTENTINSET.bottom):0)):CONTROLLER_H)
 #define NOT_NULL(s)             (s?s:@"")
 #define LS(str)                 NSLocalizedString(str, nil)
 #define SUBFIX(str)             ([NSString stringWithFormat:@"%@%@",[self class],str])

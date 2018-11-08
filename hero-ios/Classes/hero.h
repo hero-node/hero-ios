@@ -40,6 +40,7 @@
 #import "HeroLabel.h"
 #import "HeroApp.h"
 @protocol HeroProtocol <NSObject>
+@property (nonatomic,strong) id controller;
 -(instancetype)initWithJson:(NSDictionary*)json;
 -(void)on:(NSDictionary *)json;
 @end
