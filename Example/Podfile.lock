@@ -1,19 +1,23 @@
 PODS:
-  - hero-ios (0.0.3):
+  - hero-ios (1.1.50):
     - MJRefresh
   - MJRefresh (3.1.12)
 
 DEPENDENCIES:
   - hero-ios (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - MJRefresh
+
 EXTERNAL SOURCES:
   hero-ios:
     :path: "../"
 
 SPEC CHECKSUMS:
-  hero-ios: 23b6c5255cf236bf25a931804d30eab420f3d785
+  hero-ios: 6370860c47faeb8021b003a2dd2d03060df8635e
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
 
 PODFILE CHECKSUM: f2d436dd353e52d1b2be988ccff0804403973817
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.5.3
