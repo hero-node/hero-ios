@@ -20,9 +20,17 @@
     "ios": "9.0"
   },
   "source_files": "hero-ios/Classes/**/*",
+  "resource_bundles": {
+    "hero-ios": [
+      "hero-ios/Assets/images/*.png"
+    ]
+  },
   "public_header_files": "hero-ios/Classes/*.h",
   "dependencies": {
     "MJRefresh": [
+
+    ],
+    "UICKeyChainStore": [
 
     ]
   },

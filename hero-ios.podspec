@@ -31,13 +31,14 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'hero-ios/Classes/**/*'
 
-  # s.resource_bundles = {
-  #   'hero-ios' => ['hero-ios/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'hero-ios' => ['hero-ios/Assets/images/*.png']
+  }
 
   s.public_header_files = 'hero-ios/Classes/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'MJRefresh'
+  s.dependency 'UICKeyChainStore'
   s.ios.vendored_frameworks = 'hero-ios/Frameworks/ethers.framework'
   #s.dependency 'web3swift'
 end

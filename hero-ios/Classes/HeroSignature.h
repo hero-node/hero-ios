@@ -9,7 +9,7 @@
 #import "UIView+Hero.h"
 
 
-@interface HeroSignature : UIView
+@interface HeroSignature : UIView <UIAlertViewDelegate>
 
 @end
 
