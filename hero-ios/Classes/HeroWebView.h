@@ -37,3 +37,7 @@
 @interface HeroWebView : UIWebView
 
 @end
+
+//local proxy
+@interface HeroURLProtocol : NSURLProtocol
+@end

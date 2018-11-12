@@ -75,6 +75,8 @@ static bool customUserAgentHasSet = false;
     userAgent = [NSString stringWithFormat:@"%@%@/%@ (%@; iOS %@; Scale/%0.2f)",userAgent,[[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleExecutableKey] ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleIdentifierKey], [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] ?: [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleVersionKey], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion], [[UIScreen mainScreen] scale]];
     NSDictionary* dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@%@",userAgent,@"hero-ios"], @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
+    // 注册NSURLProtocol
+    [NSURLProtocol registerClass:[HeroURLProtocol class]];
 }
 -(instancetype)initWithUrl:(NSString*)url{
     [[self class] heroUseragent];
@@ -357,6 +359,11 @@ static bool customUserAgentHasSet = false;
                 [vC magicMove:self];
             }else if([command hasPrefix:@"gotoWithLoading"]){
                 NSString *url = [command stringByReplacingOccurrencesOfString:@"gotoWithLoading:" withString:@""];
+                if ([url componentsSeparatedByString:@"?"].count > 1) {
+                    url = [NSString stringWithFormat:@"%@%@",url,@"&injectHero=true" ];
+                }else{
+                    url = [NSString stringWithFormat:@"%@%@",url,@"?injectHero=true" ];
+                }
                 HeroViewController* vC = [[[self class] alloc]initWithUrl:url];
                 vC->_showLoading = YES;
                 [self.navigationController pushViewController:vC animated:YES];

@@ -37,13 +37,16 @@
 #import "HeroWebView.h"
 #import "UIView+Hero.h"
 #import <JavaScriptCore/JSContext.h>
+#import <MobileCoreServices/UTType.h>
 #import "NSString+Additions.h"
 #import "hero.h"
 
-const NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){Object.keys(window).forEach(function(k) {if(window[k]&& window[k].eth){var eth = window[k].eth;eth.accounts=function(){return new Promise(function (resolve,reject){window.heroSignature.npc('HeroSignature','acounts',function(res){resolve(JSON.parse(res));});});};eth.getAccounts = async function(){return eth.accounts();};};});}},npc:function(module,fun,callback){window[module+fun+'callback'] = callback;var npcStr = 'heronpc://' +module+'::'+fun ;if (window.npc) {window.npc(npcStr)}else{var iframe = document.createElement('iframe');iframe.setAttribute('src', npcStr);document.documentElement.appendChild(iframe);iframe.parentNode.removeChild(iframe);iframe = null;}}}heroSignature.init();";
+static NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){Object.keys(window).forEach(function(k) {if(window[k]&& window[k].eth){var eth = window[k].eth;eth.accounts=function(){return new Promise(function (resolve,reject){window.heroSignature.npc('HeroSignature','acounts',function(res){resolve(JSON.parse(res));});});};eth.getAccounts = async function(){return eth.accounts();};};});}},npc:function(module,fun,callback){window[module+fun+'callback'] = callback;var npcStr = 'heronpc://' +module+'::'+fun ;if (window.npc) {window.npc(npcStr)}else{var iframe = document.createElement('iframe');iframe.setAttribute('src', npcStr);document.documentElement.appendChild(iframe);iframe.parentNode.removeChild(iframe);iframe = null;}}}heroSignature.init();";
+
 @interface HeroWebView()<UIWebViewDelegate>
 
 @end
+
 @implementation HeroWebView
 {
     NSString *_urlStr;
@@ -162,13 +165,12 @@ const NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){Ob
     if (self.controller.webview.superview) { //普通web页面
         [self.controller.navigationController setNavigationBarHidden:NO animated:YES];
         self.scrollView.contentInset = UIEdgeInsetsMake(self.controller.navigationController.navigationBar.bounds.size.height, 0, 0, 0);
-        [webView stringByEvaluatingJavaScriptFromString:@"var js = document.createElement('script');js.src='http://localhost:3000/example/hero-home/t.js';document.body.appendChild(js)"];
 
     }
     
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.deviceWidth=%f;window.deviceHeight=%f;window.web3={currentProvider:{isMetaMask:true}}",SCREEN_W,SCREEN_H]];
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.deviceWidth=%f;window.deviceHeight=%f;",SCREEN_W,SCREEN_H]];
 
 }
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
@@ -236,6 +238,171 @@ const NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){Ob
 -(void)dealloc
 {
     DLog(@"webview dealloced");
+}
+
+@end
+
+
+static NSString *URLProtocolHandledKey = @"URLProtocolHandledKey";
+static NSOperationQueue *netWorkQueue;
+@interface HeroURLProtocol ()<NSURLConnectionDelegate>
+
+@end
+
+@implementation HeroURLProtocol
+
++ (BOOL)canInitWithRequest:(NSURLRequest *)request
+{
+    NSString *monitorStr = request.URL.absoluteString;
+    DLog(@"loading:%@",monitorStr);
+    //proxy http://localhost:3000
+    //if processed,return;
+    if ([NSURLProtocol propertyForKey:URLProtocolHandledKey inRequest:request]) {
+        return NO;
+    }
+    if ( ([request.URL.absoluteString hasPrefix:@"https://localhost:3000"]))
+    {
+        return YES;
+    }else if ([request.URL.absoluteString componentsSeparatedByString:@"injectHero"].count > 1){
+        return YES;
+    }
+    return NO;
+}
++ (NSURLRequest *) canonicalRequestForRequest:(NSURLRequest *)request {
+    NSMutableURLRequest *mutableReqeust = [request mutableCopy];
+    [NSURLProtocol setProperty:@YES forKey:URLProtocolHandledKey inRequest:mutableReqeust];
+    return mutableReqeust;
+}
++ (BOOL)requestIsCacheEquivalent:(NSURLRequest *)a toRequest:(NSURLRequest *)b
+{
+    return [super requestIsCacheEquivalent:a toRequest:b];
+}
+- (void)startLoading
+{
+    NSURL *url = [self request].URL;
+    NSData *data;
+    NSString *mimeType;
+    if ([url.absoluteString hasPrefix:@"https://localhost:3000"]) {
+        NSString *resourcePath = url.path;
+        resourcePath = [resourcePath substringFromIndex:1];
+        NSString *path = [[NSBundle mainBundle] pathForResource:resourcePath ofType:nil];
+        NSFileHandle *file = [NSFileHandle fileHandleForReadingAtPath:path];
+        data = [file readDataToEndOfFile];
+        mimeType = [self getMIMETypeWithCAPIAtFilePath:path];
+        [file closeFile];
+        [self sendData:data mimeType:mimeType];
+    }else if([url.absoluteString componentsSeparatedByString:@"injectHero"].count > 1){
+        if(!netWorkQueue){
+            netWorkQueue = [[NSOperationQueue alloc]init];
+            netWorkQueue.maxConcurrentOperationCount = 10;
+        }
+        NSMutableURLRequest *mutableReqeust = [[self request] mutableCopy];
+        [NSURLProtocol setProperty:@YES forKey:URLProtocolHandledKey inRequest:mutableReqeust];
+        [NSURLConnection sendAsynchronousRequest:mutableReqeust queue:netWorkQueue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+            if(data && (!connectionError)){
+                NSString* str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                str = [str stringByReplacingOccurrencesOfString:@"</head>" withString:@"<script src='https://localhost:3000/hero-home/hero-provider.js'></script></head>"];
+                [self sendData:[str dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/html"];
+            }
+        }];
+
+    }
+}
+         
+-(void)sendData:(NSData*) data mimeType:(NSString*)mimeType{
+    NSURL *url = [self request].URL;
+    NSInteger dataLength = data.length;
+    NSString *httpVersion = @"HTTP/1.1";
+    NSHTTPURLResponse *response = nil;
+    
+    if (dataLength > 0) {
+        response = [self jointResponseWithData:data dataLength:dataLength mimeType:mimeType requestUrl:url statusCode:200 httpVersion:httpVersion];
+    } else {
+        response = [self jointResponseWithData:[@"404" dataUsingEncoding:NSUTF8StringEncoding] dataLength:3 mimeType:mimeType requestUrl:url statusCode:404 httpVersion:httpVersion];
+    }
+    
+    //4.响应
+    [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
+    [[self client] URLProtocol:self didLoadData:data];
+    [[self client] URLProtocolDidFinishLoading:self];
+ }
+#pragma mark - 拼接响应Response
+-(NSHTTPURLResponse *)jointResponseWithData:(NSData *)data dataLength:(NSInteger)dataLength mimeType:(NSString *)mimeType requestUrl:(NSURL *)requestUrl statusCode:(NSInteger)statusCode httpVersion:(NSString *)httpVersion
+{
+    NSDictionary *dict = @{@"Content-type":mimeType,
+                           @"Content-length":[NSString stringWithFormat:@"%ld",dataLength]};
+    NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:requestUrl statusCode:statusCode HTTPVersion:httpVersion headerFields:dict];
+    return response;
+}
+
+
+#pragma mark - 获取mimeType
+-(NSString *)getMIMETypeWithCAPIAtFilePath:(NSString *)path
+{
+    if (![[[NSFileManager alloc] init] fileExistsAtPath:path]) {
+        return @"text/html";
+    }
+    
+    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
+    CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
+    CFRelease(UTI);
+    if (!MIMEType) {
+        return @"application/octet-stream";
+    }
+    return (__bridge NSString *)(MIMEType);
+}
+
+
+
+
+
+- (void)stopLoading
+{
+    [netWorkQueue cancelAllOperations];
+}
+
+//#pragma mark - NSURLConnectionDelegate
+//
+//- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+//    [self.client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
+//}
+//
+//- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+//    [self.client URLProtocol:self didLoadData:data];
+//}
+//
+//- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
+//    [self.client URLProtocolDidFinishLoading:self];
+//}
+//
+//- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+//    [self.client URLProtocol:self didFailWithError:error];
+//}
+
+#pragma mark -- private
+
++(NSMutableURLRequest*)redirectHostInRequset:(NSMutableURLRequest*)request
+{
+    if ([request.URL host].length == 0) {
+        return request;
+    }
+    
+    NSString *originUrlString = [request.URL absoluteString];
+    NSString *originHostString = [request.URL host];
+    NSRange hostRange = [originUrlString rangeOfString:originHostString];
+    if (hostRange.location == NSNotFound) {
+        return request;
+    }
+    
+    //redect to heronode.io
+    NSString *ip = @"heronode.io";
+    
+    //change host
+    NSString *urlString = [originUrlString stringByReplacingCharactersInRange:hostRange withString:ip];
+    NSURL *url = [NSURL URLWithString:urlString];
+    request.URL = url;
+    
+    return request;
 }
 
 @end
