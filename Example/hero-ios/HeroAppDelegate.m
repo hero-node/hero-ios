@@ -32,9 +32,7 @@
                    @"tabs":
                        @[@{
                              @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-home/home.html"],
-                             @"title":@"消息",
-                             }
-                         ]
+                        }]
                    }];
     return YES;
 }

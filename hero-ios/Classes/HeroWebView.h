@@ -39,5 +39,8 @@
 @end
 
 //local proxy
-@interface HeroURLProtocol : NSURLProtocol
+@interface HeroLocalhostURLProtocol : NSURLProtocol
+@end
+//hero provider
+@interface HeroProviderURLProtocol : HeroLocalhostURLProtocol
 @end

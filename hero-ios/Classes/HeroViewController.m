@@ -64,6 +64,7 @@ static bool customUserAgentHasSet = false;
     BOOL _enableMenu;
     BOOL _isMessageReceiver;
     BOOL _showLoading;
+    BOOL _injectHero;
 }
 +(void)heroUseragent{
     if (customUserAgentHasSet) {
@@ -76,7 +77,7 @@ static bool customUserAgentHasSet = false;
     NSDictionary* dict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%@%@",userAgent,@"hero-ios"], @"UserAgent", nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
     // 注册NSURLProtocol
-    [NSURLProtocol registerClass:[HeroURLProtocol class]];
+    [NSURLProtocol registerClass:[HeroLocalhostURLProtocol class]];
 }
 -(instancetype)initWithUrl:(NSString*)url{
     [[self class] heroUseragent];
@@ -359,13 +360,9 @@ static bool customUserAgentHasSet = false;
                 [vC magicMove:self];
             }else if([command hasPrefix:@"gotoWithLoading"]){
                 NSString *url = [command stringByReplacingOccurrencesOfString:@"gotoWithLoading:" withString:@""];
-                if ([url componentsSeparatedByString:@"?"].count > 1) {
-                    url = [NSString stringWithFormat:@"%@%@",url,@"&injectHero=true" ];
-                }else{
-                    url = [NSString stringWithFormat:@"%@%@",url,@"?injectHero=true" ];
-                }
                 HeroViewController* vC = [[[self class] alloc]initWithUrl:url];
                 vC->_showLoading = YES;
+                vC->_injectHero = YES;
                 [self.navigationController pushViewController:vC animated:YES];
                 [vC magicMove:self];
             }else if ([command hasPrefix:@"load:"]){
@@ -521,6 +518,9 @@ static bool customUserAgentHasSet = false;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.clipsToBounds = YES;
+    if (_injectHero) {
+        [NSURLProtocol registerClass:[HeroProviderURLProtocol class]];
+    }
     if (!self.ui) {
         [self loadFromUrl:self.url];
     }else{
@@ -534,6 +534,9 @@ static bool customUserAgentHasSet = false;
         [self on:_actionDatas[@"viewWillDisappear"]];
     }
     [self.webview stringByEvaluatingJavaScriptFromString:@"window.Hero && Hero.viewWillDisappear()"];
+    if (_injectHero) {
+        [NSURLProtocol unregisterClass:[HeroProviderURLProtocol class]];
+    }
 }
 //子应用可以重载此方法实现一致的品牌loading效果
 -(void)showLoading:(NSString*)str{

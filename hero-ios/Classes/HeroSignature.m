@@ -40,7 +40,16 @@
     }
     if (json[@"message"]) {
         if (hasKey) {
-            
+            NSDictionary * signTx =json[@"message"];
+            if (json[@"isNpc"]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:signTx options:NSJSONWritingPrettyPrinted error:nil];
+                    NSString *js = [NSString stringWithFormat:@"window['%@callback'](%@)",[self class],[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+                    [self.controller.webview stringByEvaluatingJavaScriptFromString:js];
+                });
+            }else{
+                [self.controller on:signTx];
+            }
         }else{
             [self initInportViewController];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:importViewController];

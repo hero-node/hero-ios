@@ -188,6 +188,7 @@ static NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){O
         [self.controller on:@{@"command":@"webViewDidFinishLoad"}];
     }
 }
+
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *path = [request URL].absoluteString;
@@ -245,21 +246,22 @@ static NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){O
 
 static NSString *URLProtocolHandledKey = @"URLProtocolHandledKey";
 static NSOperationQueue *netWorkQueue;
-@interface HeroURLProtocol ()<NSURLConnectionDelegate>
+//local proxy
 
+@interface HeroLocalhostURLProtocol ()
 @end
 
-@implementation HeroURLProtocol
+@implementation HeroLocalhostURLProtocol
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
     NSString *monitorStr = request.URL.absoluteString;
     DLog(@"loading:%@",monitorStr);
-    //proxy http://localhost:3000
     //if processed,return;
     if ([NSURLProtocol propertyForKey:URLProtocolHandledKey inRequest:request]) {
         return NO;
     }
+    //proxy http://localhost:3000
     if ( ([request.URL.absoluteString hasPrefix:@"https://localhost:3000"]))
     {
         return YES;
@@ -270,7 +272,6 @@ static NSOperationQueue *netWorkQueue;
 }
 + (NSURLRequest *) canonicalRequestForRequest:(NSURLRequest *)request {
     NSMutableURLRequest *mutableReqeust = [request mutableCopy];
-    [NSURLProtocol setProperty:@YES forKey:URLProtocolHandledKey inRequest:mutableReqeust];
     return mutableReqeust;
 }
 + (BOOL)requestIsCacheEquivalent:(NSURLRequest *)a toRequest:(NSURLRequest *)b
@@ -301,11 +302,10 @@ static NSOperationQueue *netWorkQueue;
         [NSURLConnection sendAsynchronousRequest:mutableReqeust queue:netWorkQueue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
             if(data && (!connectionError)){
                 NSString* str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                str = [str stringByReplacingOccurrencesOfString:@"</head>" withString:@"<script src='https://localhost:3000/hero-home/hero-provider.js'></script></head>"];
+                str = [str stringByReplacingOccurrencesOfString:@"<head>" withString:@"<head><script src='https://localhost:3000/hero-home/hero-provider.js'></script>"];
                 [self sendData:[str dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/html"];
             }
         }];
-
     }
 }
          
@@ -314,35 +314,29 @@ static NSOperationQueue *netWorkQueue;
     NSInteger dataLength = data.length;
     NSString *httpVersion = @"HTTP/1.1";
     NSHTTPURLResponse *response = nil;
-    
     if (dataLength > 0) {
         response = [self jointResponseWithData:data dataLength:dataLength mimeType:mimeType requestUrl:url statusCode:200 httpVersion:httpVersion];
     } else {
         response = [self jointResponseWithData:[@"404" dataUsingEncoding:NSUTF8StringEncoding] dataLength:3 mimeType:mimeType requestUrl:url statusCode:404 httpVersion:httpVersion];
     }
-    
-    //4.响应
     [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
     [[self client] URLProtocol:self didLoadData:data];
     [[self client] URLProtocolDidFinishLoading:self];
  }
-#pragma mark - 拼接响应Response
 -(NSHTTPURLResponse *)jointResponseWithData:(NSData *)data dataLength:(NSInteger)dataLength mimeType:(NSString *)mimeType requestUrl:(NSURL *)requestUrl statusCode:(NSInteger)statusCode httpVersion:(NSString *)httpVersion
 {
     NSDictionary *dict = @{@"Content-type":mimeType,
+                           @"Access-Control-Allow-Origin":@"*",
+                           @"Access-Control-Allow-Methods": @"POST, GET, OPTIONS, DELETE",
                            @"Content-length":[NSString stringWithFormat:@"%ld",dataLength]};
     NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:requestUrl statusCode:statusCode HTTPVersion:httpVersion headerFields:dict];
     return response;
 }
-
-
-#pragma mark - 获取mimeType
 -(NSString *)getMIMETypeWithCAPIAtFilePath:(NSString *)path
 {
     if (![[[NSFileManager alloc] init] fileExistsAtPath:path]) {
         return @"text/html";
     }
-    
     CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, (__bridge CFStringRef)[path pathExtension], NULL);
     CFStringRef MIMEType = UTTypeCopyPreferredTagWithClass (UTI, kUTTagClassMIMEType);
     CFRelease(UTI);
@@ -351,58 +345,67 @@ static NSOperationQueue *netWorkQueue;
     }
     return (__bridge NSString *)(MIMEType);
 }
-
-
-
-
-
 - (void)stopLoading
 {
     [netWorkQueue cancelAllOperations];
 }
+@end
 
-//#pragma mark - NSURLConnectionDelegate
-//
-//- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-//    [self.client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
-//}
-//
-//- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-//    [self.client URLProtocol:self didLoadData:data];
-//}
-//
-//- (void) connectionDidFinishLoading:(NSURLConnection *)connection {
-//    [self.client URLProtocolDidFinishLoading:self];
-//}
-//
-//- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-//    [self.client URLProtocol:self didFailWithError:error];
-//}
+@interface HeroProviderURLProtocol ()
+@end
 
-#pragma mark -- private
+@implementation HeroProviderURLProtocol
 
-+(NSMutableURLRequest*)redirectHostInRequset:(NSMutableURLRequest*)request
++ (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
-    if ([request.URL host].length == 0) {
-        return request;
+    if ([request.URL.absoluteString hasSuffix:@".js"]) {
+        return NO;
     }
-    
-    NSString *originUrlString = [request.URL absoluteString];
-    NSString *originHostString = [request.URL host];
-    NSRange hostRange = [originUrlString rangeOfString:originHostString];
-    if (hostRange.location == NSNotFound) {
-        return request;
+    if ([request.URL.absoluteString hasSuffix:@".css"]) {
+        return NO;
     }
-    
-    //redect to heronode.io
-    NSString *ip = @"heronode.io";
-    
-    //change host
-    NSString *urlString = [originUrlString stringByReplacingCharactersInRange:hostRange withString:ip];
-    NSURL *url = [NSURL URLWithString:urlString];
-    request.URL = url;
-    
-    return request;
+    if ([request.URL.absoluteString hasSuffix:@".jpeg"]) {
+        return NO;
+    }
+    if ([request.URL.absoluteString hasSuffix:@".png"]) {
+        return NO;
+    }
+    if ([NSURLProtocol propertyForKey:URLProtocolHandledKey inRequest:request]) {
+        return NO;
+    }
+    return YES;
+}
+- (void)startLoading
+{
+    if(!netWorkQueue){
+        netWorkQueue = [[NSOperationQueue alloc]init];
+        netWorkQueue.maxConcurrentOperationCount = 10;
+    }
+    NSMutableURLRequest *mutableReqeust = [[self request] mutableCopy];
+    [NSURLProtocol setProperty:@YES forKey:URLProtocolHandledKey inRequest:mutableReqeust];
+    if ([mutableReqeust.URL.absoluteString hasPrefix:@"https://localhost:3001"]) {
+        NSDictionary *dict = @{
+                               @"Access-Control-Allow-Origin":@"*",
+                               @"Access-Control-Allow-Methods": @"POST, GET, OPTIONS, DELETE",
+                               };
+        [mutableReqeust setAllHTTPHeaderFields:dict];
+        [mutableReqeust setURL:[NSURL URLWithString:@"http://47.52.172.254:8545"]];
+    }
+    [NSURLConnection sendAsynchronousRequest:mutableReqeust queue:netWorkQueue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+            if(data && (!connectionError)){
+                NSString* str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                if (str && ([str hasPrefix:@"<!"]||[str hasPrefix:@"<html>"])) {
+                    str = [str stringByReplacingOccurrencesOfString:@"<head>" withString:@"<head><script src='https://localhost:3000/hero-home/hero-provider.js'></script>"];
+                    [self sendData:[str dataUsingEncoding:NSUTF8StringEncoding] mimeType:[response MIMEType]?[response MIMEType]:@"text/html"];
+                }else if(data.length > 0){
+                    [self sendData:data mimeType:[response MIMEType]?[response MIMEType]:@"application/json"];
+                }else{
+                    [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
+                    [[self client] URLProtocol:self didLoadData:data];
+                    [[self client] URLProtocolDidFinishLoading:self];
+                }
+            }
+        }];
 }
 
 @end
