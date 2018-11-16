@@ -1,6 +1,6 @@
 {
   "name": "hero-ios",
-  "version": "0.0.3",
+  "version": "1.1.50",
   "summary": "A short description of hero-ios.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "http://www.hero-mobile.com",
@@ -12,18 +12,29 @@
     "刘国平": "guoping.liu@dianrong.com"
   },
   "source": {
-    "git": "https://code.dianrong.com/scm/mf/hero-ios.git",
-    "tag": "0.0.3"
+    "git": "https://github.com/hero-node/hero-ios",
+    "tag": "1.1.50"
   },
   "social_media_url": "http://www.hero-mobile.com",
   "platforms": {
-    "ios": "7.0"
+    "ios": "9.0"
   },
-  "source_files": "hero-ios/Classes/*",
+  "source_files": "hero-ios/Classes/**/*",
+  "resource_bundles": {
+    "hero-ios": [
+      "hero-ios/Assets/images/*.png"
+    ]
+  },
   "public_header_files": "hero-ios/Classes/*.h",
   "dependencies": {
     "MJRefresh": [
 
+    ],
+    "UICKeyChainStore": [
+
     ]
+  },
+  "ios": {
+    "vendored_frameworks": "hero-ios/Frameworks/ethers.framework"
   }
 }

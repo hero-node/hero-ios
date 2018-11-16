@@ -24,18 +24,21 @@ TODO: Add long description of the pod here.
   s.homepage         = 'http://www.hero-mobile.com'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { '刘国平' => 'guoping.liu@dianrong.com' }
-  s.source           = { :git => 'https://github.com/dianrong/hero-ios.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/hero-node/hero-ios', :tag => s.version.to_s }
   s.social_media_url = 'http://www.hero-mobile.com'
 
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '9.0'
 
-  s.source_files = 'hero-ios/Classes/*'
+  s.source_files = 'hero-ios/Classes/**/*'
 
-  # s.resource_bundles = {
-  #   'hero-ios' => ['hero-ios/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'hero-ios' => ['hero-ios/Assets/images/*.png']
+  }
 
   s.public_header_files = 'hero-ios/Classes/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'MJRefresh'
+  s.dependency 'UICKeyChainStore'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/ethers.framework'
+  #s.dependency 'web3swift'
 end
