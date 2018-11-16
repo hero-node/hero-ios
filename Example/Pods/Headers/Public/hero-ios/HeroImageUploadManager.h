@@ -1,1 +1,0 @@
-../../../../../hero-ios/Classes/HeroImageUploadManager.h

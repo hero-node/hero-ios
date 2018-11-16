@@ -1,1 +1,0 @@
-../../../../../hero-ios/Classes/HeroSwitch.h

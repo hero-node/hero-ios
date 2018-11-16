@@ -1,0 +1,6 @@
+framework module hero_ios {
+  umbrella header "hero-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}

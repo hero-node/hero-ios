@@ -1,1 +1,0 @@
-../../../../../hero-ios/Classes/NSString+Additions.h
