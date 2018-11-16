@@ -35,6 +35,7 @@
 #import "HeroChatView.h"
 #import "HeroChatMsgView.h"
 #import "UIImage+alpha.h"
+#import "UILazyImageView.h"
 @interface HeroWebFakeTextView : UITextView // web fake common keyboard delegate
 @end
 @implementation HeroWebFakeTextView
@@ -115,7 +116,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *cellItem  = self.data[indexPath.row];
+    NSMutableDictionary *cellItem  = self.data[indexPath.row];
     return [HeroChatMsgView height:cellItem];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,16 +150,24 @@
     [self.inputBar addSubview:_textView];
     
     UIButton *emoji = [[UIButton alloc]initWithFrame:CGRectMake(self.inputBar.bounds.size.width-80, 8, 36, 36)];
-    [emoji setImage:[UIImage imageNamed:@"ToolViewEmotion"] forState:(UIControlStateNormal)];
-    [emoji setImage:[UIImage imageNamed:@"ToolViewEmotionHL"] forState:(UIControlStateHighlighted)];
+    [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewEmotion@2x.png" block:^(NSData *data) {
+        [emoji setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+    }];
+    [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewEmotionHL@2x.png" block:^(NSData *data) {
+        [emoji setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateHighlighted)];
+    }];
     [emoji addTarget:self action:@selector(onInputEmoji:) forControlEvents:UIControlEventTouchUpInside];
     emoji.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleTopMargin ;
     emoji.tag = 10002;
     [self.inputBar addSubview:emoji];
 
     UIButton *add = [[UIButton alloc]initWithFrame:CGRectMake(self.inputBar.bounds.size.width-40, 8, 36, 36)];
-    [add setImage:[UIImage imageNamed:@"TypeSelectorBtn_Black"] forState:(UIControlStateNormal)];
-    [add setImage:[UIImage imageNamed:@"TypeSelectorBtnHL_Black"] forState:(UIControlStateHighlighted)];
+    [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/TypeSelectorBtn_Black@2x.png" block:^(NSData *data) {
+        [add setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+    }];
+    [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/TypeSelectorBtnHL_Black@2x.png" block:^(NSData *data) {
+        [add setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateHighlighted)];
+    }];
     [add addTarget:self action:@selector(onInputAdd:) forControlEvents:UIControlEventTouchUpInside];
     add.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
     add.tag = 10003;
@@ -169,8 +178,12 @@
         UIButton *trans = [[UIButton alloc]initWithFrame:CGRectMake(10, 8, 36, 36)];
         trans.tag = 10004;
         trans.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-        [trans setImage:[UIImage imageNamed:@"Mode_texttolist"] forState:(UIControlStateNormal)];
-        [trans setImage:[UIImage imageNamed:@"Mode_texttolistHL"] forState:(UIControlStateHighlighted)];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/Mode_texttolist@2x.png" block:^(NSData *data) {
+            [trans setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/Mode_texttolistHL@2x.png" block:^(NSData *data) {
+            [trans setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
         [trans addTarget:self action:@selector(onInputTrans:) forControlEvents:UIControlEventTouchUpInside];
         [self.inputBar addSubview:trans];
         trans.alpha = 0.0f;
@@ -256,8 +269,12 @@
     [self.faceInputView removeFromSuperview];
     [self.otherInputView removeFromSuperview];
     UIButton *emoji = [self.inputBar viewWithTag:10002];
-    [emoji setImage:[UIImage imageNamed:@"ToolViewEmotion"] forState:(UIControlStateNormal)];
-    [emoji setImage:[UIImage imageNamed:@"ToolViewEmotionHL"] forState:(UIControlStateHighlighted)];
+    [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewEmotion@2x.png" block:^(NSData *data) {
+        [emoji setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+    }];
+    [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewEmotionHL@2x.png" block:^(NSData *data) {
+        [emoji setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+    }];
 }
 - (void)textViewDidEndEditing:(UITextView *)textView{
 }
@@ -269,12 +286,20 @@
 -(void)onInputEmoji:(UIButton*)sender{
     [self.otherInputView removeFromSuperview];
     if (self.faceInputView.superview) {
-        [sender setImage:[UIImage imageNamed:@"ToolViewEmotion"] forState:(UIControlStateNormal)];
-        [sender setImage:[UIImage imageNamed:@"ToolViewEmotionHL"] forState:(UIControlStateHighlighted)];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewEmotion@2x.png" block:^(NSData *data) {
+            [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewEmotionHL@2x.png" block:^(NSData *data) {
+            [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
         [self.textView  becomeFirstResponder];
     }else{
-        [sender setImage:[UIImage imageNamed:@"ToolViewKeyboard"] forState:(UIControlStateNormal)];
-        [sender setImage:[UIImage imageNamed:@"ToolViewKeyboardHL"] forState:(UIControlStateHighlighted)];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewKeyboard@2x.png" block:^(NSData *data) {
+            [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/ToolViewKeyboardHL@2x.png" block:^(NSData *data) {
+            [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
         _visableRect = CGRectMake(0, 0, self.bounds.size.width,self.bounds.size.height-self.faceInputView.bounds.size.height);
         self.faceInputView.frame = CGRectMake(0, self.bounds.size.height, self.faceInputView.bounds.size.width, self.faceInputView.bounds.size.height);
         [self addSubview:self.faceInputView];
@@ -305,14 +330,22 @@
     customInputView.hidden = false;
     if (customInputView) {
         if (customInputView.frame.origin.y == 1) {
-            [sender setImage:[UIImage imageNamed:@"Mode_texttolist"] forState:(UIControlStateNormal)];
-            [sender setImage:[UIImage imageNamed:@"Mode_texttolistHL"] forState:(UIControlStateHighlighted)];
+            [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/Mode_texttolist@2x.png" block:^(NSData *data) {
+                [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+            }];
+            [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/Mode_texttolistHL@2x.png" block:^(NSData *data) {
+                [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+            }];
             [UIView animateWithDuration:0.25 animations:^{
                 customInputView.frame = CGRectMake(50, 120+1, _inputBar.bounds.size.width-50, _inputBar.bounds.size.height);
             }];
         }else{
-            [sender setImage:[UIImage imageNamed:@"Mode_listtotext"] forState:(UIControlStateNormal)];
-            [sender setImage:[UIImage imageNamed:@"Mode_listtotextHL"] forState:(UIControlStateHighlighted)];
+            [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/Mode_listtotext@2x.png" block:^(NSData *data) {
+                [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+            }];
+            [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/Mode_listtotextHL@2x.png" block:^(NSData *data) {
+                [sender setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+            }];
             [UIView animateWithDuration:0.25 animations:^{
                 customInputView.frame = CGRectMake(50, 1, _inputBar.bounds.size.width-50, _inputBar.bounds.size.height);
             }];
@@ -473,6 +506,9 @@
         _otherInputView.pagingEnabled = YES;
         UIButton *pic = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_W-200)/5, 15, 50, 50)];
         [pic setImage:[UIImage imageNamed: @"sharemore_pic"] forState:(UIControlStateNormal)];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/sharemore_pic@2x.png" block:^(NSData *data) {
+            [pic setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
         pic.layer.cornerRadius = 12;
         pic.backgroundColor = [UIColor whiteColor];
         pic.clipsToBounds = YES;
@@ -483,6 +519,9 @@
         
         UIButton *loc = [[UIButton alloc]initWithFrame:CGRectMake((SCREEN_W-200)/5*2+50, 15, 50, 50)];
         [loc setImage:[UIImage imageNamed: @"sharemore_location"] forState:(UIControlStateNormal)];
+        [UILazyImageView registerForName:@"https://localhost:3000/hero-home/images/chatui/sharemore_location@2x.png" block:^(NSData *data) {
+            [loc setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
         loc.layer.cornerRadius = 12;
         loc.backgroundColor = [UIColor whiteColor];
         loc.clipsToBounds = YES;
@@ -506,7 +545,9 @@
     NSMutableDictionary *faceList = [[self class] faceList];
     for (int i = 0; i<faceList.count; i++) {
         UIButton *faceBtn = [[UIButton alloc]initWithFrame:CGRectMake(i/29*_faceInputView.bounds.size.width+i%29%8*_faceInputView.bounds.size.width/8, i%29/8*_faceInputView.bounds.size.height/4, _faceInputView.bounds.size.width/8, _faceInputView.bounds.size.height/4)];
-        [faceBtn setImage:[UIImage imageNamed: [NSString stringWithFormat:@"Expression_%d",i+1]] forState:(UIControlStateNormal)];
+        [UILazyImageView registerForName:[NSString stringWithFormat:@"https://localhost:3000/hero-home/images/chatui/Expression_%d@2x.png",i+1] block:^(NSData *data) {
+            [faceBtn setImage:[UIImage imageWithData:data scale:2.0f] forState:(UIControlStateNormal)];
+        }];
         faceBtn.tag = i;
         [faceBtn addTarget:self action:@selector(onEmojiSelect:) forControlEvents:(UIControlEventTouchUpInside)];
         [s addSubview:faceBtn];

@@ -94,6 +94,7 @@ static UIImage *senderTextBackground,*senderTextBackgroundHL,*recTextBackground,
         _avatarView.layer.borderWidth = 1.0f/SCALE;
         _avatarView.layer.cornerRadius = 2;
         _avatarView.clipsToBounds = YES;
+        _avatarView.backgroundColor = UIColorFromStr(@"ffffff");
         _avatarView.userInteractionEnabled = YES;
         [self.contentView addSubview:_avatarView];
 
@@ -154,9 +155,9 @@ static UIImage *senderTextBackground,*senderTextBackgroundHL,*recTextBackground,
         [self.controller on:@{@"user":@"click",@"value":self.data[@"userid"]}];
     }
 }
-+(float)height:(NSMutableDictionary*)json{
-    if (json[@"height"]) {
-        return [json[@"height"] floatValue];
++(void)processMsg:(NSMutableDictionary*)json{
+    if (json[@"height"] && json[@"rect"]) {
+        return;
     }
     if (json[@"text"]) {
         NSString *text = json[@"text"];
@@ -180,18 +181,16 @@ static UIImage *senderTextBackground,*senderTextBackgroundHL,*recTextBackground,
         paragraphStyle.minimumLineHeight = kMessageFont.lineHeight; //line height equals to image height
         paragraphStyle.lineSpacing = 3;
         [str addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, str.length)];
-
+        
         CGRect rect = [str boundingRectWithSize:CGSizeMake(kbubbleMaxWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil];
         json[@"rect"] = [NSValue valueWithCGRect:rect];
         json[@"height"] = @(MAX(kbubbleMinHeight, rect.size.height)+4*kPadding + (json[@"nickname"]?kNameHeight:0));
         json[@"aText"] = str;
-        return MAX(kbubbleMinHeight, rect.size.height)+4*kPadding +(json[@"nickname"]?kNameHeight:0);
     }else if (json[@"systemMsg"]) {
         NSString *text = json[@"systemMsg"];
         CGRect rect = [text boundingRectWithSize:CGSizeMake(kbubbleMaxWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:kSysMessageFont} context:nil];
         json[@"rect"] = [NSValue valueWithCGRect:rect];
         json[@"height"] = @(rect.size.height+2*kPadding);
-        return rect.size.height+2*kPadding;
     }else if (json[@"image"]) {
         NSString *imageUrl = json[@"image"];
         CGSize size = CGSizeZero;
@@ -208,7 +207,6 @@ static UIImage *senderTextBackground,*senderTextBackgroundHL,*recTextBackground,
         }
         json[@"rect"] = [NSValue valueWithCGRect:CGRectMake(0, 0, size.width, size.height)];
         json[@"height"] = @(MAX(kbubbleMinHeight,size.height)+4*kPadding+ (json[@"nickname"]?kNameHeight:0));
-        return MAX(kbubbleMinHeight,size.height)+4*kPadding+ (json[@"nickname"]?kNameHeight:0);
     }else if (json[@"ui"]) {
         NSMutableDictionary *element = json[@"ui"];
         if (element[@"class"]) {
@@ -221,13 +219,16 @@ static UIImage *senderTextBackground,*senderTextBackgroundHL,*recTextBackground,
             json[@"ui"] = v;
             json[@"rect"] = [NSValue valueWithCGRect:CGRectMake(0, 0,v.bounds.size.width, v.bounds.size.height)];
             json[@"height"] = @(MAX(kbubbleMinHeight,v.bounds.size.height)+4*kPadding+ (json[@"nickname"]?kNameHeight:0));
-            return MAX(kbubbleMinHeight,v.bounds.size.height)+4*kPadding+ (json[@"nickname"]?kNameHeight:0);
         }
     }
-    return kbubbleMinHeight+4*kPadding+(json[@"nickname"]?kNameHeight:0);
 }
--(void)on:(NSDictionary *)json
++(float)height:(NSMutableDictionary*)json{
+    [self processMsg:json];
+    return [json[@"height"] floatValue];
+}
+-(void)on:(NSMutableDictionary *)json
 {
+    [[self class] processMsg:json];
     if (self.data == json) {
         return;
     }
@@ -239,7 +240,6 @@ static UIImage *senderTextBackground,*senderTextBackgroundHL,*recTextBackground,
             [v removeFromSuperview];
         }
     }
-
     self.data = json;
     CGRect rect = [json[@"rect"] CGRectValue];
     if (json[@"self"]) {
@@ -300,7 +300,7 @@ static UIImage *senderTextBackground,*senderTextBackgroundHL,*recTextBackground,
         imageView.layer.cornerRadius = 4.0f;
         NSString *imageStr = json[@"image"];
         if ([imageStr hasPrefix:@"data:"]) {
-            self.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:imageStr options:NSDataBase64DecodingIgnoreUnknownCharacters]];
+            imageView.image = [UIImage imageWithData:[[NSData alloc] initWithBase64EncodedString:imageStr options:NSDataBase64DecodingIgnoreUnknownCharacters]];
         }else if([imageStr hasPrefix:@"http"]){
             imageView.imageURL = [NSURL URLWithString:json[@"image"]];
         }
