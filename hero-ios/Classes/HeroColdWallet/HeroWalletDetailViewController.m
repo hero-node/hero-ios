@@ -6,10 +6,11 @@
 //
 
 #import "HeroWalletDetailViewController.h"
-#import "UIView+hero.h"
+#import "UIView+Hero.h"
 #import "UIImage+color.h"
 #import "HeroWallet.h"
 #import "UIAlertView+blockDelegate.h"
+#import "HeroModifyPasswordViewController.h"
 
 @interface HeroWalletDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -161,6 +162,7 @@
     NSString *title;
     if (indexPath.row == 0) {
         title = @"修改密码";
+        
     }
     if (indexPath.row == 1) {
         title = @"导出私钥";
@@ -178,11 +180,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         // 修改密码
+        HeroModifyPasswordViewController *modify = [[HeroModifyPasswordViewController alloc] initWithAccount:self.account];
+        [self.navigationController pushViewController:modify animated:YES];
     } else if (indexPath.row == 1) {
         // 导出私钥
-        [self onExportPrivateTapped];
+        __weak HeroWalletDetailViewController *weakSelf = self;
+        [self.account validatePasswordThen:^{
+            [weakSelf onExportPrivateTapped];
+        }];
+        
     } else if (indexPath.row == 2) {
         // 导出Keystore
+        [self.account validatePasswordThen:^{
+            
+        }];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
