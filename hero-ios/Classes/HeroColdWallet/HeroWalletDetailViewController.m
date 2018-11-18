@@ -11,6 +11,7 @@
 #import "HeroWallet.h"
 #import "UIAlertView+blockDelegate.h"
 #import "HeroModifyPasswordViewController.h"
+#import "HeroExportKeystoreViewController.h"
 
 @interface HeroWalletDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -56,6 +57,8 @@
     _tableView.rowHeight = 50;
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.scrollEnabled = NO;
+    _tableView.backgroundColor = [UIColor blueColor];
     
     UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteBtn setTitle:@"删除钱包" forState:UIControlStateNormal];
@@ -191,9 +194,8 @@
         
     } else if (indexPath.row == 2) {
         // 导出Keystore
-        [self.account validatePasswordThen:^{
-            
-        }];
+        HeroExportKeystoreViewController *keystore = [[HeroExportKeystoreViewController alloc] initWithAccount:self.account];
+        [self.navigationController pushViewController:keystore animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
