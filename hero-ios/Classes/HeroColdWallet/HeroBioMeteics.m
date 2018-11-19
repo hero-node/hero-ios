@@ -43,7 +43,14 @@ static LAContext *_context;
                 return HeroBioNone;
             }
         }
+    } else {
+        return HeroBioTouchID;
     }
+    return HeroBioNone;
+}
+
++ (void)evaluate:(NSString *)title reply:(void (^)(BOOL, NSError * _Nonnull))reply {
+    [[self context] evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:title reply:reply];
 }
 
 @end

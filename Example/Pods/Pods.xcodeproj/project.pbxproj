@@ -70,6 +70,8 @@
 		4A8D9F480D6A2828AE55768B7FB3F345 /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F4B67B00C318254E4ABDE4A5FDD29D /* UIView+Frame.m */; };
 		4BFC232CF62A382433D1749F366176FB /* UIColor+Reverse.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D0E7D2BA52DFE5DDF7B6DECDBF61142 /* UIColor+Reverse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4ED79AB2CAE972FB340955587E10F473 /* UIView+Genie.h in Headers */ = {isa = PBXBuildFile; fileRef = A6930EF39AC6BB4D6BD1AC10B0478DB1 /* UIView+Genie.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EEA9A7721A25A49006C0AFD /* HeroSignView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4EEA9A7521A25A49006C0AFD /* HeroSignView.h */; };
+		4EEA9A7821A25A49006C0AFD /* HeroSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EEA9A7621A25A49006C0AFD /* HeroSignView.m */; };
 		51AA0618B3F85DDBC4722CB8D4612DB7 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = B17CE644304C398F39CE1646D7C1CFA0 /* MJRefreshBackFooter.m */; };
 		522C7A3E8BF83F295AD7CDE381611DFD /* HeroWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = ABBDDDE8ED20497E3C6DFEA4686B56AF /* HeroWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5268B39229733F8968609FD8CA4161E5 /* HeroToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 36EB8F67BB56F08E72DB808219B297DA /* HeroToast.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -307,7 +309,7 @@
 		155A747D25AFC4BEAB49B30D9FF2FDCB /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshAutoFooter.h; path = MJRefresh/Base/MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		15F05904255B6C263DE90238F3E7AA24 /* Pods-hero-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-hero-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
 		16260DD2D1F0216A773AD053E0CBA6B2 /* NSData+Base64.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "hero-ios/Classes/NSData+Base64.h"; sourceTree = "<group>"; };
-		172B54AC6953EFD4520D597661E0396F /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MJRefresh.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		172B54AC6953EFD4520D597661E0396F /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A57E8DB83E34694A9B6A0C6814E0F7B /* MJRefreshStateHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshStateHeader.m; path = MJRefresh/Custom/Header/MJRefreshStateHeader.m; sourceTree = "<group>"; };
 		1A76C58382EC68C1EE0078FD924BBEC6 /* HeroImagePickFlowLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroImagePickFlowLayout.m; path = "hero-ios/Classes/HeroImagePickFlowLayout.m"; sourceTree = "<group>"; };
 		1B0B0E7119523A06CE82AED9E6F0887A /* HeroImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroImageView.h; path = "hero-ios/Classes/HeroImageView.h"; sourceTree = "<group>"; };
@@ -317,7 +319,7 @@
 		1C2C8D3D8A6B5272FB04FEC20B0FBDDF /* HeroImagePickViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroImagePickViewController.m; path = "hero-ios/Classes/HeroImagePickViewController.m"; sourceTree = "<group>"; };
 		1C7BBDC15DECBD53ECCBDE153F8007C4 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshBackFooter.h; path = MJRefresh/Base/MJRefreshBackFooter.h; sourceTree = "<group>"; };
 		1CEB6C45AD200ACBEA387F711E32B58F /* HeroScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroScrollView.m; path = "hero-ios/Classes/HeroScrollView.m"; sourceTree = "<group>"; };
-		1E94CB36A7DC3389BDC27287AC20AB25 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		1E94CB36A7DC3389BDC27287AC20AB25 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1F411DA752B3ACF1902EF0D1FAB2BD71 /* NSDate+ToString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+ToString.m"; path = "hero-ios/Classes/NSDate+ToString.m"; sourceTree = "<group>"; };
 		1F589E22D6F85F9EFAC69DF3D75435B5 /* HeroUploadCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroUploadCell.m; path = "hero-ios/Classes/HeroUploadCell.m"; sourceTree = "<group>"; };
 		1FD3CCDE715F072F2EF87957D9538B2F /* UIImage+alpha.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+alpha.h"; path = "hero-ios/Classes/UIImage+alpha.h"; sourceTree = "<group>"; };
@@ -341,7 +343,7 @@
 		2F0F87244C54D170CEB587CEADC1B2F3 /* HeroScanBarCodeView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroScanBarCodeView.h; path = "hero-ios/Classes/HeroScanBarCodeView.h"; sourceTree = "<group>"; };
 		308A85A8D3B1CB9ACE2C4358490179CC /* Pods-hero-ios_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-hero-ios_Example-dummy.m"; sourceTree = "<group>"; };
 		311A5123F8568B6BEADD1EA00B1391E0 /* MJRefreshHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshHeader.m; path = MJRefresh/Base/MJRefreshHeader.m; sourceTree = "<group>"; };
-		319DC1A20FC5600008F029ACA71C4969 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UICKeyChainStore.framework; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		319DC1A20FC5600008F029ACA71C4969 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31BFDAA4DAB11FEC8D39C8D5A81B192F /* UIView+Addition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Addition.m"; path = "hero-ios/Classes/UIView+Addition.m"; sourceTree = "<group>"; };
 		31D4B5F9958A4970406610D8149C33E3 /* HeroUploadItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroUploadItem.m; path = "hero-ios/Classes/HeroUploadItem.m"; sourceTree = "<group>"; };
 		33E965799232F9F3AA13ED92EDFC6F23 /* HeroPaperTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroPaperTextField.m; path = "hero-ios/Classes/HeroPaperTextField.m"; sourceTree = "<group>"; };
@@ -363,11 +365,13 @@
 		47EA5338C4F5ED1DC7EA5C8EB38DC0BD /* HeroChatMsgView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroChatMsgView.m; path = "hero-ios/Classes/HeroChatMsgView.m"; sourceTree = "<group>"; };
 		4AEABA8B148B32A920CF28A064EE84D7 /* UIColor+Reverse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Reverse.m"; path = "hero-ios/Classes/UIColor+Reverse.m"; sourceTree = "<group>"; };
 		4CFF424EED3DCA1D8E7B2DE3FD7D9A60 /* HeroIndicator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroIndicator.m; path = "hero-ios/Classes/HeroIndicator.m"; sourceTree = "<group>"; };
+		4EEA9A7521A25A49006C0AFD /* HeroSignView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeroSignView.h; sourceTree = "<group>"; };
+		4EEA9A7621A25A49006C0AFD /* HeroSignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeroSignView.m; sourceTree = "<group>"; };
 		50394F1350C1593FA803B9B7BB45DD71 /* HeroImageUploader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroImageUploader.h; path = "hero-ios/Classes/HeroImageUploader.h"; sourceTree = "<group>"; };
 		51BD62484A83E82BD07CC9BBD17633BF /* MJRefreshConst.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshConst.m; path = MJRefresh/MJRefreshConst.m; sourceTree = "<group>"; };
 		51EECC29389148F597B0F9C57CB6122F /* DACircularProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DACircularProgressView.h; path = "hero-ios/Classes/DACircularProgressView.h"; sourceTree = "<group>"; };
 		51FEED0367378C28AD146356EA1FDE25 /* Pods-hero-ios_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-hero-ios_Example-resources.sh"; sourceTree = "<group>"; };
-		52931949739EDA5BEB95475D924D9724 /* hero-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "hero-ios.bundle"; path = "hero-ios-hero-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52931949739EDA5BEB95475D924D9724 /* hero-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hero-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E348752458C60CAF13348CE4FC2868 /* NSData+HexString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSData+HexString.h"; sourceTree = "<group>"; };
 		5485A538E1EB4EE625E8554327E84455 /* faceID_s@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "faceID_s@2x.png"; path = "hero-ios/Assets/images/faceID_s@2x.png"; sourceTree = "<group>"; };
 		55BD54C824625E71899AFDFE1D21066B /* HeroCustomButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroCustomButton.m; path = "hero-ios/Classes/HeroCustomButton.m"; sourceTree = "<group>"; };
@@ -389,7 +393,7 @@
 		695B8AFBE69F802C7F7F35CF3B5A7D26 /* HeroTableView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroTableView.m; path = "hero-ios/Classes/HeroTableView.m"; sourceTree = "<group>"; };
 		69ED071E01DC2C19065046A076C367B6 /* UIView+Screenshot.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Screenshot.m"; path = "hero-ios/Classes/UIView+Screenshot.m"; sourceTree = "<group>"; };
 		6A7A9BA3B0CF03960F80C0AD6EE1B1D2 /* UIDevice+SystemVersion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+SystemVersion.m"; path = "hero-ios/Classes/UIDevice+SystemVersion.m"; sourceTree = "<group>"; };
-		6AA0F023A52091E1D6AC0629DE73BDC7 /* hero_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = hero_ios.framework; path = "hero-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA0F023A52091E1D6AC0629DE73BDC7 /* hero_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = hero_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BA44AD2306821BEF1546F7847E24016 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D5D02FFB7C096F382EFAEB4D98590AC /* UICKeyChainStore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = UICKeyChainStore.modulemap; sourceTree = "<group>"; };
 		6E687E5ECE5346845D8B8E68779DFBE1 /* MJRefreshAutoStateFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshAutoStateFooter.h; path = MJRefresh/Custom/Footer/Auto/MJRefreshAutoStateFooter.h; sourceTree = "<group>"; };
@@ -404,7 +408,7 @@
 		775740FADD1A9CE990D64FE7E06FBBF5 /* UIWindow+Hero.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWindow+Hero.h"; path = "hero-ios/Classes/UIWindow+Hero.h"; sourceTree = "<group>"; };
 		7788900EB8180D7060393E71147C4075 /* HeroButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroButton.h; path = "hero-ios/Classes/HeroButton.h"; sourceTree = "<group>"; };
 		7967E7897B8810FB265A45785A1BFDF5 /* MJRefreshNormalHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshNormalHeader.m; path = MJRefresh/Custom/Header/MJRefreshNormalHeader.m; sourceTree = "<group>"; };
-		79C7A3B3EE58E99426A515BBF30418B8 /* Pods_hero_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_hero_ios_Example.framework; path = "Pods-hero-ios_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79C7A3B3EE58E99426A515BBF30418B8 /* Pods_hero_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hero_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A2DEF45ED47C35E464DF93C06573E63 /* HeroBrowserCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroBrowserCell.m; path = "hero-ios/Classes/HeroBrowserCell.m"; sourceTree = "<group>"; };
 		7B78B206273E4344DDF4C10160394E63 /* HeroChatView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroChatView.h; path = "hero-ios/Classes/HeroChatView.h"; sourceTree = "<group>"; };
 		7CDE49CF2D12A3F1B2603E407EA30FA0 /* HeroImageUploader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroImageUploader.m; path = "hero-ios/Classes/HeroImageUploader.m"; sourceTree = "<group>"; };
@@ -419,7 +423,7 @@
 		8CA03963C407D8102175D3B6252A66FA /* HeroPhotoBrowerViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroPhotoBrowerViewController.m; path = "hero-ios/Classes/HeroPhotoBrowerViewController.m"; sourceTree = "<group>"; };
 		8F5686C4C32698A5B596A31B59BDE370 /* HeroScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroScrollView.h; path = "hero-ios/Classes/HeroScrollView.h"; sourceTree = "<group>"; };
 		8F98FC688C0709AFD35EA03CE4AFC5C9 /* HeroTextView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroTextView.h; path = "hero-ios/Classes/HeroTextView.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94C385DC4E21537593E5AAA0C2922FCA /* MJRefresh.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MJRefresh.modulemap; sourceTree = "<group>"; };
 		963410138E03B4E84728EFE725BA4BA5 /* avatar@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "avatar@2x.png"; path = "hero-ios/Assets/images/avatar@2x.png"; sourceTree = "<group>"; };
 		975ECF42ADFFA906FAD498472DDE5BF1 /* UICKeyChainStore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UICKeyChainStore-dummy.m"; sourceTree = "<group>"; };
@@ -462,7 +466,7 @@
 		C230CC318E24D340055E316D6F2CCE20 /* DACircularProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DACircularProgressView.m; path = "hero-ios/Classes/DACircularProgressView.m"; sourceTree = "<group>"; };
 		C2AB0EB9556479D4FA1D72AB46EE353A /* HeroPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroPickerView.h; path = "hero-ios/Classes/HeroPickerView.h"; sourceTree = "<group>"; };
 		C2AB3E80133C99F311DBA745CAB493FD /* HeroTakePicCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroTakePicCell.h; path = "hero-ios/Classes/HeroTakePicCell.h"; sourceTree = "<group>"; };
-		C35D08972D7246CB5C5588228BA1787C /* hero-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = "hero-ios.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C35D08972D7246CB5C5588228BA1787C /* hero-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = "hero-ios.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C76861211720E457AC269E0A7108BFDF /* UINavigationController+webViewBack.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+webViewBack.m"; path = "hero-ios/Classes/UINavigationController+webViewBack.m"; sourceTree = "<group>"; };
 		C7A8DB866CDA84ED3F80DE011D839743 /* NSBundle+MJRefresh.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+MJRefresh.m"; path = "MJRefresh/NSBundle+MJRefresh.m"; sourceTree = "<group>"; };
 		C8FD216C7B6B3DB2E8754786CB5BF6F7 /* NSData+HexString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSData+HexString.m"; sourceTree = "<group>"; };
@@ -523,7 +527,7 @@
 		EC278F37563BC43A2642FD27004F6FDF /* HeroLockPatternView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroLockPatternView.m; path = "hero-ios/Classes/HeroLockPatternView.m"; sourceTree = "<group>"; };
 		EDA5998F4E7046AB7D03A86F7640C000 /* MJRefreshAutoGifFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshAutoGifFooter.h; path = MJRefresh/Custom/Footer/Auto/MJRefreshAutoGifFooter.h; sourceTree = "<group>"; };
 		EDCD407BAE1A9830516467197E912EC3 /* HeroApp.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroApp.m; path = "hero-ios/Classes/HeroApp.m"; sourceTree = "<group>"; };
-		EDF12D52BE823F00626C1B80A16AD19D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		EDF12D52BE823F00626C1B80A16AD19D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EE512AFB64524FB098AB08C2B5E78C45 /* HeroSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroSlider.h; path = "hero-ios/Classes/HeroSlider.h"; sourceTree = "<group>"; };
 		EE5D201778FBE69D4F3BE659051F8BC7 /* UIImage+color.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+color.h"; path = "hero-ios/Classes/UIImage+color.h"; sourceTree = "<group>"; };
 		EEF73311907F43DBA1E848F41CED9BD1 /* HeroApp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroApp.h; path = "hero-ios/Classes/HeroApp.h"; sourceTree = "<group>"; };
@@ -653,7 +657,6 @@
 				E814D89E0C283730CBA9C39E511894A6 /* UICKeyChainStore.m */,
 				092EC7FBD121B682BD5581BBE0A379D4 /* Support Files */,
 			);
-			name = UICKeyChainStore;
 			path = UICKeyChainStore;
 			sourceTree = "<group>";
 		};
@@ -730,6 +733,8 @@
 				8AAFC8C7C70A9A5D6D5F68F1FF910DF7 /* NSString+Hex.m */,
 				CE24E631914DE715B7DF1A73175ADA47 /* WalletListCell.h */,
 				3E844834BCDFDA2801E50BC58A3DF1D0 /* WalletListCell.m */,
+				4EEA9A7521A25A49006C0AFD /* HeroSignView.h */,
+				4EEA9A7621A25A49006C0AFD /* HeroSignView.m */,
 			);
 			name = HeroColdWallet;
 			path = "hero-ios/Classes/HeroColdWallet";
@@ -995,7 +1000,6 @@
 				5AD1BA0FDE8C135870C880BD070EFDC7 /* Resources */,
 				DC4B8998B10B212E4A4B121342F71168 /* Support Files */,
 			);
-			name = MJRefresh;
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
@@ -1125,6 +1129,7 @@
 				AAE19B7F50187F26EEAF7AC39B10A50B /* UIAlertView+blockDelegate.h in Headers */,
 				4BFC232CF62A382433D1749F366176FB /* UIColor+Reverse.h in Headers */,
 				DB29F667106956F3FCA8DBFD018C620D /* UIDevice+SystemVersion.h in Headers */,
+				4EEA9A7721A25A49006C0AFD /* HeroSignView.h in Headers */,
 				2B2B1245F0281D27E062223E7615E99B /* UIImage+alpha.h in Headers */,
 				3957EBD7457BC8C7E38383EDC6A789B6 /* UIImage+color.h in Headers */,
 				A907C52F24C742C3EFCB9ADBC658F39B /* UILazyImageView.h in Headers */,
@@ -1393,6 +1398,7 @@
 				814F09A0CE259639F3ADF577A6330BF7 /* HeroImagePickFlowLayout.m in Sources */,
 				673C1F849E5EF413E01E8FE70EBFA7F8 /* HeroImagePickViewController.m in Sources */,
 				CB9AB11424324D2ED98A4B2475D9A5B8 /* HeroImageUploader.m in Sources */,
+				4EEA9A7821A25A49006C0AFD /* HeroSignView.m in Sources */,
 				472B93CF77AD1F87A928015FBD03F663 /* HeroImageUploadManager.m in Sources */,
 				BE9F0E68833B4DFB979959D922933511 /* HeroImageUploadView.m in Sources */,
 				BD94BECA528AFED9F4072540B3752A4B /* HeroImageView.m in Sources */,
@@ -1611,8 +1617,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};

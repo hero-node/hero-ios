@@ -19,6 +19,8 @@ typedef enum : NSUInteger {
 
 + (HeroBioType)type;
 
++ (void)evaluate:(NSString *)title reply:(void (^)(BOOL success, NSError *error))reply;
+
 @end
 
 NS_ASSUME_NONNULL_END
