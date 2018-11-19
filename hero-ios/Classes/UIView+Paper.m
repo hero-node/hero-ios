@@ -75,7 +75,7 @@ static void *s_rippleExpanding = &s_rippleExpanding;
         UILongPressGestureRecognizer *tap = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(touchesBeganRipple:)];
         tap.minimumPressDuration = 0.0001f;
         tap.cancelsTouchesInView = NO;
-        tap.delaysTouchesEnded = YES;
+        tap.delaysTouchesEnded = NO;
         [self addGestureRecognizer:tap];
     }
 }

@@ -167,6 +167,8 @@
 		4ADA6B3E219E9ADF00CF7187 /* Expression_82@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6AA1219E9ADF00CF7187 /* Expression_82@2x.png */; };
 		4ADA6B3F219E9ADF00CF7187 /* Expression_101@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6AA2219E9ADF00CF7187 /* Expression_101@2x.png */; };
 		4ADA6B40219E9ADF00CF7187 /* Expression_90@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6AA3219E9ADF00CF7187 /* Expression_90@2x.png */; };
+		4ADA6B4321A25B7800CF7187 /* backgrounnd.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6B4121A25B7700CF7187 /* backgrounnd.png */; };
+		4ADA6B4421A25B7800CF7187 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6B4221A25B7700CF7187 /* icon.png */; };
 		5B6CF44FBDB728985C936A26 /* Pods_hero_ios_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2496E07B9E191B24F6DE12A /* Pods_hero_ios_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -355,6 +357,8 @@
 		4ADA6AA1219E9ADF00CF7187 /* Expression_82@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_82@2x.png"; sourceTree = "<group>"; };
 		4ADA6AA2219E9ADF00CF7187 /* Expression_101@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_101@2x.png"; sourceTree = "<group>"; };
 		4ADA6AA3219E9ADF00CF7187 /* Expression_90@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_90@2x.png"; sourceTree = "<group>"; };
+		4ADA6B4121A25B7700CF7187 /* backgrounnd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgrounnd.png; sourceTree = "<group>"; };
+		4ADA6B4221A25B7700CF7187 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* hero-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hero-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -629,6 +633,8 @@
 				4ADA69302179AA2100CF7187 /* LaunchScreen.storyboard */,
 				6003F5A5195388D20070C39A /* ViewController.h */,
 				6003F5A6195388D20070C39A /* ViewController.m */,
+				4ADA6B4121A25B7700CF7187 /* backgrounnd.png */,
+				4ADA6B4221A25B7700CF7187 /* icon.png */,
 				4ADA6A0121992B2600CF7187 /* hero-home */,
 				4ADA692E21798D5C00CF7187 /* Assets.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -761,6 +767,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ADA6B4421A25B7800CF7187 /* icon.png in Resources */,
 				4ADA6AFA219E9ADF00CF7187 /* Expression_75@2x.png in Resources */,
 				4ADA6AF7219E9ADF00CF7187 /* Expression_37@2x.png in Resources */,
 				4ADA6B2E219E9ADF00CF7187 /* Expression_3@2x.png in Resources */,
@@ -819,6 +826,7 @@
 				4ADA6AE9219E9ADF00CF7187 /* Expression_83@2x.png in Resources */,
 				4ADA6A0221992B2600CF7187 /* hero-home in Resources */,
 				4ADA6AD2219E9ADF00CF7187 /* sharemore_location@2x.png in Resources */,
+				4ADA6B4321A25B7800CF7187 /* backgrounnd.png in Resources */,
 				4ADA6B21219E9ADF00CF7187 /* Expression_103@2x.png in Resources */,
 				4ADA6B3B219E9ADF00CF7187 /* Expression_12@2x.png in Resources */,
 				4ADA6AB1219E9ADF00CF7187 /* SenderTextNodeBkgHL@3x.png in Resources */,

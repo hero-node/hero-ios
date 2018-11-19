@@ -389,7 +389,8 @@ static NSOperationQueue *netWorkQueue;
                                @"Access-Control-Allow-Methods": @"POST, GET, OPTIONS, DELETE",
                                };
         [mutableReqeust setAllHTTPHeaderFields:dict];
-        [mutableReqeust setURL:[NSURL URLWithString:@"http://47.52.172.254:8545"]];
+//        [mutableReqeust setURL:[NSURL URLWithString:@"http://47.52.172.254:8545"]];
+        [mutableReqeust setURL:[NSURL URLWithString:@"https://mainnet.infura.io/33USgHxvCp3UoDItBSRs"]];
     }
     [NSURLConnection sendAsynchronousRequest:mutableReqeust queue:netWorkQueue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
             if(data && (!connectionError)){
