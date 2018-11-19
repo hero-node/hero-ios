@@ -58,5 +58,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>使用面部识别签名</string>
 </dict>
 </plist>
