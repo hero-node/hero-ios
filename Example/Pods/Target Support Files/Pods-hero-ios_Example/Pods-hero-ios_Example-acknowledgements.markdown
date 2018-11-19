@@ -38,7 +38,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## hero-ios
 
-Copyright (c) 2016 刘国平 <guoping.liu@dianrong.com>
+Copyright (c) 2016 刘国平 <gpliu@heronode.io>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

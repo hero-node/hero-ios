@@ -64,6 +64,7 @@
 #define IOS10_OR_LATER           ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0f)
 #define IOS_OR_LATER(v)           ([[[UIDevice currentDevice] systemVersion] floatValue] >= v)
 #define IS_IPAD                 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+#define NavigationHeight (isIPhoneXSeries() ? 88 : 64)
 
 #ifdef DEBUG
 #define DLog(fmt,...) NSLog((@"%@ [line %u]: " fmt), NSStringFromClass(self.class), __LINE__, ##__VA_ARGS__)
@@ -140,5 +141,7 @@ static inline BOOL isIPhoneXSeries() {
     
     return iPhoneXSeries;
 }
+
+
 
 
