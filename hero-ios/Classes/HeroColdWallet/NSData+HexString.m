@@ -11,6 +11,9 @@
 
 // Not efficent
 +(id)dataWithHexString:(NSString *)hex {
+    if ([hex rangeOfString:@"0x"].length > 0) {
+        hex = [hex stringByReplacingOccurrencesOfString:@"0x" withString:@""];
+    }
     char buf[3];
     buf[2] = '\0';
     NSAssert(0 == [hex length] % 2, @"Hex strings should have an even number of digits (%@)", hex);

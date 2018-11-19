@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)hexString;
 
+- (NSString *)addHexPrefix;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,6 +7,7 @@
 
 #import "WalletListCell.h"
 #import "UIView+Hero.h"
+#import "UIView+Addition.h"
 
 @interface WalletListCell ()
 
@@ -48,10 +49,15 @@
     
     _addressLabel = [UILabel new];
     _addressLabel.textColor = UIColorFromRGB(0x999999);
-    _addressLabel.frame = CGRectMake(99, 58, SCREEN_W-99-87, 21);
+    _addressLabel.frame = CGRectMake(99, 50, SCREEN_W-99-87, 21);
     _addressLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
     _addressLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_addressLabel];
+    
+    UIView *line = [UIView new];
+    line.backgroundColor = UIColorFromRGB(0xe2e2e2);
+    line.frame = CGRectMake(21, 89, SCREEN_W-21*2, 1);
+    [self.contentView addSubview:line];
 }
 
 - (void)setAccount:(HeroAccount *)account {

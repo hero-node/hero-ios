@@ -12,6 +12,7 @@
 #import "UIAlertView+blockDelegate.h"
 #import "HeroModifyPasswordViewController.h"
 #import "HeroExportKeystoreViewController.h"
+#import "UIView+Addition.h"
 
 @interface HeroWalletDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -52,13 +53,13 @@
     [self.view addSubview:addressLabel];
     addressLabel.frame = CGRectMake(30, 229 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W-60, 20);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 334 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, 150) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 280 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, 200) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.rowHeight = 50;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.scrollEnabled = NO;
-    _tableView.backgroundColor = [UIColor blueColor];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteBtn setTitle:@"删除钱包" forState:UIControlStateNormal];
@@ -175,7 +176,13 @@
     }
     cell.textLabel.text = title;
     cell.textLabel.textColor = UIColorFromRGB(0x999999);
+    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    UIView *line = [UIView new];
+    line.backgroundColor = UIColorFromRGB(0xe2e2e2);
+    [cell.contentView addSubview:line];
+    line.frame = CGRectMake(24, 49, SCREEN_W-40, 1);
     
     return cell;
 }

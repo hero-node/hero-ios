@@ -11,6 +11,7 @@
 #import "NSString+Hex.h"
 #import "NSData+HexString.h"
 #import "HeroBioMeteics.h"
+#import "UIImage+color.h"
 
 @interface HeroSignView ()
 @property (nonatomic) UITextField *passwordTextField;
@@ -45,7 +46,7 @@
     [top addGestureRecognizer:tap];
     top.backgroundColor = UIColorFromRGBA(0x605f5f, 0.7);
     [self addSubview:top];
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_H-600, SCREEN_W, SCREEN_H)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_H-580, SCREEN_W, 580)];
     contentView.backgroundColor = [UIColor whiteColor];
     [self addSubview:contentView];
     
@@ -55,7 +56,8 @@
     titleLabel.textColor = UIColorFromRGB(0x333333);
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:17];
-    titleLabel.center = CGPointMake(SCREEN_W/2, 20);
+    titleLabel.size = CGSizeMake(100, 30);
+    titleLabel.center = CGPointMake(SCREEN_W/2, 25);
     
     UIView *line = [UIView new];
     line.backgroundColor = UIColorFromRGB(0xdfdfdf);
@@ -64,7 +66,7 @@
     
     UILabel *fromLabel = [self keyLabel:@"from: "];
     [contentView addSubview:fromLabel];
-    fromLabel.frame = CGRectMake(30, 71, 56, 20);
+    fromLabel.frame = CGRectMake(30, 69, 56, 20);
     
     UILabel *toLabel = [self keyLabel:@"to: "];
     [contentView addSubview:toLabel];
@@ -92,7 +94,7 @@
     
     UILabel *fromValue = [self valueLabel:[[HeroWallet sharedInstance] defaultAccount].address];
     [contentView addSubview:fromValue];
-    fromValue.frame = CGRectMake(105, 71, SCREEN_W-101-30, 20);
+    fromValue.frame = CGRectMake(105, 69, SCREEN_W-101-30, 20);
     
     UILabel *toValue = [self valueLabel:_tran.toAddress.checksumAddress];
     [contentView addSubview:toValue];
@@ -115,14 +117,15 @@
     gasPriceValue.frame = CGRectMake(105, 219, SCREEN_W-101-30, 20);
     
     UITextView *inputTextView = [[UITextView alloc] init];
-    inputTextView.text = [_tran.data hexString];
+    inputTextView.text = [[_tran.data hexString] addHexPrefix];
     [contentView addSubview:inputTextView];
-    inputTextView.layer.borderColor = UIColorFromRGB(0x979797).CGColor;
+    inputTextView.layer.borderColor = UIColorFromRGB(0xe2e2e2).CGColor;
     inputTextView.layer.borderWidth = 1;
     inputTextView.textColor = UIColorFromRGB(0xff6666);
     inputTextView.backgroundColor = UIColorFromRGB(0xf0f0f0);
     inputTextView.font = [UIFont systemFontOfSize:14];
     inputTextView.frame = CGRectMake(30, 280, SCREEN_W-30*2, 110);
+    inputTextView.editable = NO;
     
     __weak HeroSignView *weakSelf = self;
     void (^bioAuthUI)(HeroBioType type) = ^(HeroBioType type){
@@ -130,9 +133,13 @@
         confirmLabel.text = @"密钥认证";
         confirmLabel.font = [UIFont systemFontOfSize:14];
         [contentView addSubview:confirmLabel];
-        confirmLabel.frame = CGRectMake(35, 413, 58, 17);
+        confirmLabel.frame = CGRectMake(35, 425, 58, 17);
         
-        UITextField *passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(35, 452, 180, 35)];
+        UITextField *passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(35, confirmLabel.bottom + 15, 180, 35)];
+        UIView *pad = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        passwordTextField.leftView = pad;
+        passwordTextField.leftViewMode = UITextFieldViewModeAlways;
+        passwordTextField.font = [UIFont systemFontOfSize:14];
         passwordTextField.borderStyle = UITextBorderStyleNone;
         passwordTextField.layer.borderColor = UIColorFromRGB(0xafafaf).CGColor;
         passwordTextField.layer.borderWidth = 1;
@@ -145,20 +152,21 @@
         [contentView addSubview:confirmButton];
         [confirmButton setTitle:@"确认" forState:UIControlStateNormal];
         [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        confirmButton.backgroundColor = self.tintColor;
-        confirmButton.frame =  CGRectMake(35, 509, 180, 35);
+        [confirmButton setBackgroundImage:[UIImage fromColor:UIColorFromRGB(0x39adf9)] forState:UIControlStateNormal];
+        confirmButton.frame =  CGRectMake(35, passwordTextField.bottom + 10, 180, 35);
         [confirmButton addTarget:self action:@selector(sign) forControlEvents:UIControlEventTouchUpInside];
+        confirmButton.titleLabel.font = [UIFont systemFontOfSize:14];
         
         UIView *line = [UIView new];
-        line.backgroundColor = UIColorFromRGB(0x979797);
+        line.backgroundColor = UIColorFromRGB(0xe2e2e2);
         [contentView addSubview:line];
-        line.frame = CGRectMake(confirmButton.right + 35, confirmLabel.top, 1, 140);
+        line.frame = CGRectMake(confirmButton.right + 35, confirmLabel.top-10, 1, 140);
         
         NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"hero-ios" withExtension:@"bundle"]];
         NSString *bioImageName = type == HeroBioFaceID ? @"faceID_s" : @"finger_s";
         UIImage *logo = [UIImage imageNamed:bioImageName inBundle:bundle compatibleWithTraitCollection:nil];
         weakSelf.bioImageView = [[UIImageView alloc] initWithImage:logo];
-        weakSelf.bioImageView.frame = CGRectMake(line.right+35, line.top, 100, 100);
+        weakSelf.bioImageView.frame = CGRectMake(line.right+35, line.top + 5, 100, 100);
         [contentView addSubview:weakSelf.bioImageView];
         weakSelf.bioImageView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bioTapped)];
@@ -172,7 +180,6 @@
         bioLabel.top = weakSelf.bioImageView.bottom+12;
         bioLabel.centerX = weakSelf.bioImageView.centerX;
         bioLabel.font = [UIFont systemFontOfSize:12];
-        [contentView addSubview:bioLabel];
         
     };
     
@@ -187,14 +194,18 @@
         confirmLabel.text = @"密钥认证";
         confirmLabel.font = [UIFont systemFontOfSize:14];
         [contentView addSubview:confirmLabel];
-        confirmLabel.frame = CGRectMake(41, 413, 58, 17);
+        confirmLabel.frame = CGRectMake(30, 413, 58, 17);
         
-        UITextField *passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(41, 452, SCREEN_W-2*41, 35)];
+        UITextField *passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, confirmLabel.bottom + 15, SCREEN_W-2*30, 35)];
         passwordTextField.borderStyle = UITextBorderStyleNone;
         passwordTextField.layer.borderColor = UIColorFromRGB(0xafafaf).CGColor;
         passwordTextField.layer.borderWidth = 1;
+        UIView *pad = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        passwordTextField.leftView = pad;
+        passwordTextField.leftViewMode = UITextFieldViewModeAlways;
         passwordTextField.placeholder = @"输入密码";
         passwordTextField.secureTextEntry = YES;
+        passwordTextField.font = [UIFont systemFontOfSize:14];
         [contentView addSubview:passwordTextField];
         _passwordTextField = passwordTextField;
         
@@ -203,8 +214,12 @@
         [confirmButton setTitle:@"确认" forState:UIControlStateNormal];
         [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         confirmButton.backgroundColor = self.tintColor;
-        confirmButton.frame =  CGRectMake(41, 509, SCREEN_W-2*41, 35);
+        confirmButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        confirmButton.frame =  CGRectMake(30, passwordTextField.bottom+10, SCREEN_W-2*30, 35);
+        [confirmButton setBackgroundImage:[UIImage fromColor:UIColorFromRGB(0x39adf9)] forState:UIControlStateNormal];
         [confirmButton addTarget:self action:@selector(sign) forControlEvents:UIControlEventTouchUpInside];
+        
+        [contentView setFrame:CGRectMake(0, SCREEN_H-560, SCREEN_W, 560)];
     }
 }
 

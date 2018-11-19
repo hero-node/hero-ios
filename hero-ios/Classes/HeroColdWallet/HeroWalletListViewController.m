@@ -27,6 +27,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_W, SCREEN_H-90) style:UITableViewStylePlain];
+    _tableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0);
     [self.view addSubview:_tableView];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -41,6 +42,10 @@
     [importButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.view addSubview:importButton];
     [importButton addTarget:self action:@selector(onImportTapped) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x39adf9);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -65,6 +70,10 @@
     
     [cell setAccount:[HeroWallet sharedInstance].accounts[indexPath.row]];
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [UIView new];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

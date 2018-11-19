@@ -25,6 +25,8 @@
 
 @property (nonatomic) UITextView *textView;
 
+@property (nonatomic) UIActivityIndicatorView *loading;
+
 @end
 
 @implementation HeroExportKeystoreViewController
@@ -42,6 +44,11 @@
     self.title = @"导出Keystore";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.loading = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:self.loading];
+    self.loading.center = self.view.center;
+    [self.loading startAnimating];
+    
     UIView *top = [UIView new];
     top.frame = CGRectMake(0, NavigationHeight, SCREEN_W, 50);
     [self.view addSubview:top];
@@ -50,12 +57,14 @@
     [_fileBtn setTitle:@"Keystore 文件" forState:UIControlStateNormal];
     [_fileBtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
     [_fileBtn setTitleColor:UIColorFromRGB(0x39adf9) forState:UIControlStateSelected];
+    _fileBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [_fileBtn addTarget:self action:@selector(onKeystoreFileTapped) forControlEvents:UIControlEventTouchUpInside];
     [top addSubview:_fileBtn];
     _fileBtn.frame = CGRectMake(0, 0, SCREEN_W/2, top.height);
     _currentBtn = _fileBtn;
     
     _qrcodeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _qrcodeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [_qrcodeBtn setTitle:@"二维码" forState:UIControlStateNormal];
     [_qrcodeBtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
     [_qrcodeBtn setTitleColor:UIColorFromRGB(0x39adf9) forState:UIControlStateSelected];
@@ -64,7 +73,7 @@
     _qrcodeBtn.frame = CGRectMake(SCREEN_W/2, 0, SCREEN_W/2, top.height);
     
     UIView *line = [UIView new];
-    line.backgroundColor = UIColorFromRGB(0x9d9d9d);
+    line.backgroundColor = UIColorFromRGB(0xe2e2e2);
     [top addSubview:line];
     line.frame = CGRectMake(0, top.height-1, SCREEN_W, 1);
     
@@ -81,7 +90,7 @@
     key1.text = @"离线保存";
     key1.font = [UIFont systemFontOfSize:16];
     key1.textColor = UIColorFromRGB(0x39adf9);
-    key1.frame = CGRectMake(40, 30, 200, 23);
+    key1.frame = CGRectMake(40, 25, 200, 23);
     [_fileView addSubview:key1];
     
     UILabel *value1 = [UILabel new];
@@ -97,7 +106,7 @@
     key2.text = @"请勿使用网络传输";
     key2.textColor = UIColorFromRGB(0x39adf9);
     key2.font = [UIFont systemFontOfSize:16];
-    key2.frame = CGRectMake(value1.left, value1.bottom + 30, 300, 23);
+    key2.frame = CGRectMake(value1.left, value1.bottom + 25, 300, 23);
     [_fileView addSubview:key2];
     
     UILabel *value2 = [UILabel new];
@@ -113,7 +122,7 @@
     key3.text = @"密码保险箱保存";
     key3.textColor = UIColorFromRGB(0x39adf9);
     key3.font = [UIFont systemFontOfSize:16];
-    key3.frame = CGRectMake(value1.left, value2.bottom + 30, 300, 23);
+    key3.frame = CGRectMake(value1.left, value2.bottom + 25, 300, 23);
     [_fileView addSubview:key3];
     
     UILabel *value3 = [UILabel new];
@@ -126,14 +135,16 @@
     [_fileView addSubview:value3];
     
     _textView = [[UITextView alloc] init];
-    _textView.frame = CGRectMake(40, value3.bottom + 30, SCREEN_W - 80, 184);
+    _textView.frame = CGRectMake(40, value3.bottom + 25, SCREEN_W - 80, 184);
     _textView.backgroundColor = UIColorFromRGB(0xfafafa);
     _textView.layer.borderColor = UIColorFromRGB(0xcecece).CGColor;
     _textView.layer.borderWidth = 1;
     _textView.editable = NO;
+    _textView.textColor = UIColorFromRGB(0x666666);
     __weak HeroExportKeystoreViewController *weakSelf = self;
     [_fileView addSubview:_textView];
     [self.account.ethAccount encryptSecretStorageJSON:self.account.password callback:^(NSString *json) {
+        [weakSelf.loading stopAnimating];
         weakSelf.textView.text = json;
     }];
     
@@ -142,7 +153,7 @@
     [copyButton setTitle:@"复制 Keystore" forState:UIControlStateNormal];
     [copyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [copyButton setBackgroundImage:[UIImage fromColor:UIColorFromRGB(0x39adf9)] forState:UIControlStateNormal];
-    copyButton.frame = CGRectMake(40, _textView.bottom+35, SCREEN_W-80, 50);
+    copyButton.frame = CGRectMake(40, _textView.bottom+30, SCREEN_W-80, 50);
     [_fileView addSubview:copyButton];
     
     
@@ -154,7 +165,7 @@
     qrKey1.textColor = UIColorFromRGB(0x39adf9);
     qrKey1.font = [UIFont systemFontOfSize:16];
     [_qrView addSubview:qrKey1];
-    qrKey1.frame = CGRectMake(40, 30, 200, 23);
+    qrKey1.frame = CGRectMake(40, 25, 200, 23);
     
     UILabel *qrValue1 = [UILabel new];
     qrValue1.text = @"二维码禁止保存、截图、以及拍照。仅供用户在安全环境下直接扫描来方便的导入钱包。";
@@ -172,7 +183,7 @@
     qrKey2.textColor = UIColorFromRGB(0x39adf9);
     qrKey2.font = [UIFont systemFontOfSize:16];
     [_qrView addSubview:qrKey2];
-    qrKey2.frame = CGRectMake(40, qrValue1.bottom+30, 200, 23);
+    qrKey2.frame = CGRectMake(40, qrValue1.bottom+25, 200, 23);
     
     UILabel *qrValue2 = [UILabel new];
     qrValue2.text = @"请在确保四周无人及无摄像头的情况下使用。二维码一旦泄漏被他人获取将造成不可挽回的资产损失。";
@@ -186,9 +197,9 @@
     [_qrView addSubview:qrValue2];
     
     UIView *contentView = [UIView new];
-    contentView.layer.borderColor = UIColorFromRGB(0x979797).CGColor;
+    contentView.layer.borderColor = UIColorFromRGB(0xe2e2e2).CGColor;
     contentView.layer.borderWidth = 1;
-    contentView.top = qrValue2.bottom + 70;
+    contentView.top = qrValue2.bottom + 60;
     contentView.size = CGSizeMake(280, 280);
     contentView.left = SCREEN_W/2-contentView.width/2;
      [_qrView addSubview:contentView];

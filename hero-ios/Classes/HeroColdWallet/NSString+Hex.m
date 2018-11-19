@@ -20,4 +20,12 @@
     return [@"0x" stringByAppendingString:hexStr];
 }
 
+- (NSString *)addHexPrefix {
+    if ([self rangeOfString:@"0x"].length > 0) {
+        return self;
+    }
+    
+    return [@"0x" stringByAppendingString:self];
+}
+
 @end

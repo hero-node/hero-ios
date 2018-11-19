@@ -11,6 +11,7 @@
 #import "UITextView+Placeholder.h"
 #import "HeroWallet.h"
 #import "UIAlertView+blockDelegate.h"
+#import "UIView+Addition.h"
 
 @interface HeroImportWalletViewController ()
 
@@ -46,37 +47,39 @@
     UIView *top = [UIView new];
     [self.view addSubview:top];
     top.backgroundColor = [UIColor whiteColor];
-    top.frame = CGRectMake(0, 64 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, 60);
+    top.frame = CGRectMake(0, 64 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, 50);
     
     _topKeystoreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_topKeystoreBtn setTitle:@"Keystore" forState:UIControlStateNormal];
     [_topKeystoreBtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
     [_topKeystoreBtn setTitleColor:UIColorFromRGB(0x39adf9) forState:UIControlStateSelected];
     [top addSubview:_topKeystoreBtn];
-    _topKeystoreBtn.frame = CGRectMake(0, 0, SCREEN_W/2, 60);
+    _topKeystoreBtn.frame = CGRectMake(0, 0, SCREEN_W/2, 50);
+    _topKeystoreBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [_topKeystoreBtn addTarget:self action:@selector(selectKeystore) forControlEvents:UIControlEventTouchUpInside];
     
     _topPrivateBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_topPrivateBtn setTitle:@"私钥" forState:UIControlStateNormal];
+    _topPrivateBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [_topPrivateBtn setTitleColor:UIColorFromRGB(0x666666) forState:UIControlStateNormal];
     [_topPrivateBtn setTitleColor:UIColorFromRGB(0x39adf9) forState:UIControlStateSelected];
     [top addSubview:_topPrivateBtn];
-    _topPrivateBtn.frame = CGRectMake(SCREEN_W/2, 0, SCREEN_W/2, 60);
+    _topPrivateBtn.frame = CGRectMake(SCREEN_W/2, 0, SCREEN_W/2, 50);
     [_topPrivateBtn addTarget:self action:@selector(selectPrivate) forControlEvents:UIControlEventTouchUpInside];
     
     UIView *shortLine = [UIView new];
-    shortLine.backgroundColor = UIColorFromRGB(0x9d9d9d);
+    shortLine.backgroundColor = UIColorFromRGB(0xe2e2e2);
     [top addSubview:shortLine];
-    shortLine.frame = CGRectMake(0, 59, SCREEN_W, 1);
+    shortLine.frame = CGRectMake(0, 49, SCREEN_W, 1);
     
     _line = [UIView new];
     _line.backgroundColor = UIColorFromRGB(0x39adf9);
     [top addSubview:_line];
-    _line.frame = CGRectMake(0, 57, SCREEN_W/2, 3);
+    _line.frame = CGRectMake(0, 47, SCREEN_W/2, 3);
     
     _contentView = [UIView new];
     [self.view addSubview:_contentView];
-    _contentView.frame = CGRectMake(0, 124 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, SCREEN_H-124);
+    _contentView.frame = CGRectMake(0, 114 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, SCREEN_H-114);
     _contentView.backgroundColor = [UIColor whiteColor];
     
     [self setupKeystoreView];
@@ -90,33 +93,36 @@
     UILabel *keystoreIntro = [UILabel new];
     keystoreIntro.text = @"直接复制粘贴以太坊官方钱包 keystore 文件内容至输入框。或者通过生产 keystore 内容的二维码，扫描录入。";
     keystoreIntro.textColor = UIColorFromRGB(0x999999);
-    keystoreIntro.font = [UIFont systemFontOfSize:16];
+    keystoreIntro.font = [UIFont systemFontOfSize:15];
     keystoreIntro.numberOfLines = 0;
     [_contentKeystore addSubview:keystoreIntro];
-    keystoreIntro.frame = CGRectMake(40, 38, SCREEN_W-80, 85);
+    keystoreIntro.frame = CGRectMake(40, 25, SCREEN_W-80, 85);
+    [keystoreIntro sizeToFit];
     
     _keystoreTextView = [UITextView new];
     _keystoreTextView.placeholder = @"keystore 文本内容";
     _keystoreTextView.font = [UIFont systemFontOfSize:16];
-    _keystoreTextView.layer.borderColor = UIColorFromRGB(0x979797).CGColor;
+    _keystoreTextView.layer.borderColor = UIColorFromRGB(0xe2e2e2).CGColor;
     _keystoreTextView.layer.borderWidth = 1;
+    _keystoreTextView.font = [UIFont systemFontOfSize:15];
     [_contentKeystore addSubview:_keystoreTextView];
-    _keystoreTextView.frame = CGRectMake(40, 130, SCREEN_W-80, 130);
+    _keystoreTextView.frame = CGRectMake(40, keystoreIntro.bottom+25, SCREEN_W-80, 130);
     
-    _keystorePwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 275, SCREEN_W-80, 50)];
+    _keystorePwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _keystoreTextView.bottom, SCREEN_W-80, 50)];
     _keystorePwdTextField.placeholder = @"请输入密码";
     _keystorePwdTextField.secureTextEntry = YES;
     _keystorePwdTextField.borderStyle = UITextBorderStyleNone;
+    _keystorePwdTextField.font = [UIFont systemFontOfSize:15];
     [_contentKeystore addSubview:_keystorePwdTextField];
     UIView *line = [UIView new];
-    line.backgroundColor = UIColorFromRGB(0x979797);
+    line.backgroundColor = UIColorFromRGB(0xe2e2e2);
     [_contentKeystore addSubview:line];
-    line.frame = CGRectMake(40, 324, SCREEN_W-80, 1);
+    line.frame = CGRectMake(40, _keystorePwdTextField.bottom-1, SCREEN_W-80, 1);
     
-    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 350, SCREEN_W-80, 25)];
+    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, _keystorePwdTextField.bottom+18, SCREEN_W-80, 25)];
     policyLabel.text = @"我已经仔细阅读并同意以太坊白皮书，理解区块链的核心思想";
     policyLabel.font = [UIFont systemFontOfSize:12];
-    policyLabel.textColor = UIColorFromRGB(0x1b0000);
+    policyLabel.textColor = UIColorFromRGB(0x999999);
     [_contentKeystore addSubview:policyLabel];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -124,44 +130,47 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage fromColor:UIColorFromRGB(0x39adf9)] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(onImportTapped) forControlEvents:UIControlEventTouchUpInside];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     [_contentKeystore addSubview:button];
-    button.frame = CGRectMake(40, 384, SCREEN_W-80, 50);
+    button.frame = CGRectMake(40, policyLabel.bottom+15, SCREEN_W-80, 50);
 }
 
 - (void)setupPrivateView {
     _contentPrivate = [UIView new];
     _contentPrivate.frame = _contentView.bounds;
-    _privateTextView = [[UITextView alloc] initWithFrame:CGRectMake(40, 40, SCREEN_W-80, 130)];
+    _privateTextView = [[UITextView alloc] initWithFrame:CGRectMake(40, 25, SCREEN_W-80, 130)];
     _privateTextView.placeholder = @"明文私钥";
-    _privateTextView.layer.borderColor = UIColorFromRGB(0x979797).CGColor;
+    _privateTextView.layer.borderColor = UIColorFromRGB(0xe2e2e2).CGColor;
     _privateTextView.layer.borderWidth = 1;
-    _privateTextView.font = [UIFont systemFontOfSize:16];
+    _privateTextView.font = [UIFont systemFontOfSize:15];
     [_contentPrivate addSubview:_privateTextView];
     
-    _privatePwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 190, SCREEN_W-80, 50)];
+    _privatePwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _privateTextView.bottom, SCREEN_W-80, 50)];
     _privatePwdTextField.secureTextEntry = YES;
     _privatePwdTextField.placeholder = @"密码";
     _privatePwdTextField.borderStyle = UITextBorderStyleNone;
+    _privatePwdTextField.font = [UIFont systemFontOfSize:15];
     [_contentPrivate addSubview:_privatePwdTextField];
     UIView *line1 = [UIView new];
-    line1.backgroundColor = UIColorFromRGB(0x979797);
-    line1.frame = CGRectMake(40, 239, SCREEN_W-80, 1);
+    line1.backgroundColor = UIColorFromRGB(0xe2e2e2);
+    line1.frame = CGRectMake(40, _privatePwdTextField.bottom-1, SCREEN_W-80, 1);
     [_contentPrivate addSubview:line1];
     
-    _privateRepeatTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 242, SCREEN_W-80, 50)];
+    _privateRepeatTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _privatePwdTextField.bottom, SCREEN_W-80, 50)];
     _privateRepeatTextField.secureTextEntry = YES;
     _privateRepeatTextField.placeholder = @"重复密码";
     _privateRepeatTextField.borderStyle = UITextBorderStyleNone;
+    _privateRepeatTextField.font = [UIFont systemFontOfSize:15];
     [_contentPrivate addSubview:_privateRepeatTextField];
     UIView *line2 = [UIView new];
-    line2.backgroundColor = UIColorFromRGB(0x979797);
-    line2.frame = CGRectMake(40, 291, SCREEN_W-80, 1);
+    line2.backgroundColor = UIColorFromRGB(0xe2e2e2);
+    line2.frame = CGRectMake(40, _privateRepeatTextField.bottom-1, SCREEN_W-80, 1);
     [_contentPrivate addSubview:line2];
     
-    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 328, SCREEN_W-80, 25)];
+    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, _privateRepeatTextField.bottom+18, SCREEN_W-80, 25)];
     policyLabel.text = @"我已经仔细阅读并同意以太坊白皮书，理解区块链的核心思想";
     policyLabel.font = [UIFont systemFontOfSize:12];
-    policyLabel.textColor = UIColorFromRGB(0x1b0000);
+    policyLabel.textColor = UIColorFromRGB(0x999999);
     [_contentPrivate addSubview:policyLabel];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -169,8 +178,9 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage fromColor:UIColorFromRGB(0x39adf9)] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(onImportTapped) forControlEvents:UIControlEventTouchUpInside];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     [_contentPrivate addSubview:button];
-    button.frame = CGRectMake(40, 362, SCREEN_W-80, 50);
+    button.frame = CGRectMake(40, policyLabel.bottom+15, SCREEN_W-80, 50);
     
 }
 
@@ -242,7 +252,7 @@
         [self.contentPrivate removeFromSuperview];
         [self.contentView addSubview:self.contentKeystore];
         [UIView animateWithDuration:0.3 animations:^{
-            self.line.frame = CGRectMake(0, 57, SCREEN_W/2, 3);
+            self.line.left = 0;
         }];
     }
 }
@@ -256,7 +266,7 @@
         [self.contentKeystore removeFromSuperview];
         [self.contentView addSubview:self.contentPrivate];
         [UIView animateWithDuration:0.3 animations:^{
-            self.line.frame = CGRectMake(SCREEN_W/2, 57, SCREEN_W/2, 3);
+            self.line.left = SCREEN_W/2;
         }];
     }
 }

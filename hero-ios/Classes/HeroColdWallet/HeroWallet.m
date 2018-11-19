@@ -7,6 +7,7 @@
 
 #import "HeroWallet.h"
 #import "HeroImportWalletViewController.h"
+#import "NSData+HexString.h"
 
 static HeroWallet *_wallet;
 NSString * const HERO_WALLET_LIST = @"HERO_WALLET_LIST";
@@ -81,6 +82,7 @@ NSString * const HERO_WALLET_LIST = @"HERO_WALLET_LIST";
     tran.gasPrice = [BigNumber bigNumberWithDecimalString:json[@"gasPrice"]];
     tran.nonce = [json[@"nonce"] integerValue];
     tran.value = [BigNumber bigNumberWithDecimalString:json[@"value"]];
+    tran.data = [NSData dataWithHexString:json[@"data"]];
     
     return tran;
 }

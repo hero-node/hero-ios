@@ -45,7 +45,6 @@
         }
     }
     
-    
     void (^signResult)(NSDictionary *sig) = ^(NSDictionary *sig) {
         NSDictionary *result;
         if (sig) {

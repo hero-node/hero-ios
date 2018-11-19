@@ -34,19 +34,21 @@
     self.title = @"修改密码";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _currentTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, NavigationHeight + 40, SCREEN_W-80, 50)];
+    _currentTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, NavigationHeight + 40, SCREEN_W-80, 45)];
     _currentTextField.placeholder = @"当前密码";
     _currentTextField.secureTextEntry = YES;
+    _currentTextField.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:_currentTextField];
     _currentTextField.borderStyle = UITextBorderStyleNone;
     UIView *line1 = [UIView new];
-    line1.backgroundColor = UIColorFromRGB(0x979797);
+    line1.backgroundColor = UIColorFromRGB(0xe2e2e2);
     [self.view addSubview:line1];
     line1.frame = CGRectMake(40, _currentTextField.bottom, _currentTextField.width, 1);
     
-    _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _currentTextField.bottom + 6, _currentTextField.width, 50)];
+    _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _currentTextField.bottom + 6, _currentTextField.width, 45)];
     _passwordTextField.placeholder = @"新密码";
     _passwordTextField.secureTextEntry = YES;
+    _passwordTextField.font = [UIFont systemFontOfSize:15];
     _passwordTextField.borderStyle = UITextBorderStyleNone;
     [self.view addSubview:_passwordTextField];
     UIView *line2 = [UIView new];
@@ -54,8 +56,9 @@
     [self.view addSubview:line2];
     line2.frame = CGRectMake(40, _passwordTextField.bottom, _passwordTextField.width, 1);
     
-    _repeatTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _passwordTextField.bottom + 6,  _passwordTextField.width, 50)];
+    _repeatTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _passwordTextField.bottom + 6,  _passwordTextField.width, 45)];
     _repeatTextField.placeholder = @"重复密码";
+    _repeatTextField.font = [UIFont systemFontOfSize:15];
     _repeatTextField.secureTextEntry = YES;
     _repeatTextField.borderStyle = UITextBorderStyleNone;
     [self.view addSubview:_repeatTextField];
