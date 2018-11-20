@@ -73,14 +73,10 @@
 }
 
 - (void)onDeleteTapped {
-    [UIAlertView showAlertViewWithTitle:@"" message:@"是否删除钱包" cancelButtonTitle:@"取消" otherButtonTitles:@[@"确认"] onDismiss:^(NSInteger buttonIndex) {
-        __weak HeroWalletDetailViewController *weakSelf = self;
-        [[[HeroWallet sharedInstance] defaultAccount] validatePasswordThen:^{
-            [[HeroWallet sharedInstance] removeAccount:self.account];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        }];
-    } onCancel:^{
-        
+    __weak HeroWalletDetailViewController *weakSelf = self;
+    [[[HeroWallet sharedInstance] defaultAccount] validatePasswordThen:^{
+        [[HeroWallet sharedInstance] removeAccount:self.account];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     }];
 }
 
@@ -182,7 +178,7 @@
     UIView *line = [UIView new];
     line.backgroundColor = UIColorFromRGB(0xe2e2e2);
     [cell.contentView addSubview:line];
-    line.frame = CGRectMake(24, 49, SCREEN_W-40, 1);
+    line.frame = CGRectMake(22, 49, SCREEN_W-40, 1);
     
     return cell;
 }

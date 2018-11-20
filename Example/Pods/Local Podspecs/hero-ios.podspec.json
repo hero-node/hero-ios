@@ -26,7 +26,10 @@
     ]
   },
   "public_header_files": "hero-ios/Classes/*.h",
-  "frameworks": "LocalAuthentication",
+  "frameworks": [
+    "LocalAuthentication",
+    "AVFoundation"
+  ],
   "dependencies": {
     "MJRefresh": [
 

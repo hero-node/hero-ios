@@ -12,6 +12,7 @@
 #import "HeroWallet.h"
 #import "UIAlertView+blockDelegate.h"
 #import "UIView+Addition.h"
+#import "HeroScanQRViewController.h"
 
 @interface HeroImportWalletViewController ()
 
@@ -84,6 +85,16 @@
     
     [self setupKeystoreView];
     [self setupPrivateView];
+    
+    NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"hero-ios" withExtension:@"bundle"]];
+    UIImage *scan = [UIImage imageNamed:@"scan" inBundle:bundle compatibleWithTraitCollection:nil];
+    UIButton *scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [scanBtn setBackgroundImage:scan forState:UIControlStateNormal];
+    scanBtn.frame = CGRectMake(0, 0, 20, 20);
+    [scanBtn addTarget:self action:@selector(onScanTapped) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:scanBtn];
+    rightItem.width = 20;
+    self.navigationItem.rightBarButtonItem = rightItem;
 }
 
 - (void)setupKeystoreView {
@@ -282,6 +293,19 @@
 
 - (void)importFail {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)onScanTapped {
+    
+    __weak HeroImportWalletViewController *weakSelf = self;
+    HeroScanQRViewController *scan = [[HeroScanQRViewController alloc] initWithCompletion:^(NSString * _Nonnull result) {
+        if (weakSelf.currentButton == self.topKeystoreBtn) {
+            weakSelf.keystoreTextView.text = result;
+        } else if (weakSelf.currentButton == self.topPrivateBtn) {
+            weakSelf.privateTextView.text = result;
+        }
+    }];
+    [self.navigationController pushViewController:scan animated:YES];
 }
 
 @end

@@ -210,7 +210,7 @@
     qrImageView.width = contentView.width-32;
     qrImageView.height = contentView.height-32;
     [self.account.ethAccount encryptSecretStorageJSON:self.account.password callback:^(NSString *json) {
-        qrImageView.image = [HeroQRCoder qrImageWithString:json];
+        qrImageView.image = [HeroQRCoder createQRImageString:json sizeWidth:300 fillColor:nil];
     }];
 }
 

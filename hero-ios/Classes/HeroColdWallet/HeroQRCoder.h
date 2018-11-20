@@ -11,7 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HeroQRCoder : NSObject
 
-+ (UIImage *)qrImageWithString:(NSString *)str;
++ (UIImage *)createQRImageString:(NSString *)QRString sizeWidth:(CGFloat)sizeWidth fillColor:(UIColor *)color;
+
++ (NSString *)readQRCodeFromImage:(UIImage *)image;
 
 @end
 
