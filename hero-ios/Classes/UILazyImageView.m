@@ -252,8 +252,7 @@ static NSString * cacheFolder;
         }
         NSURLSession *session = [NSURLSession sharedSession];
         req.timeoutInterval = 30.0;
-        
-        [[session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable d, NSURLResponse * _Nullable response, NSError * _Nullable e) {
+        [[session dataTaskWithURL:url completionHandler:^(NSData * _Nullable d, NSURLResponse * _Nullable response, NSError * _Nullable e) {
             if (d &&(!e)) {
                 if (d.length > 100)
                 {
@@ -290,8 +289,7 @@ static NSString * cacheFolder;
                     });
                 }
             }
-        }] resume];
-        
+        }] resume];        
     }
     else
     {

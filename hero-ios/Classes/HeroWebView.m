@@ -40,6 +40,7 @@
 #import <MobileCoreServices/UTType.h>
 #import "NSString+Additions.h"
 #import "hero.h"
+#import <AVFoundation/AVAssetDownloadTask.h>
 
 static NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){Object.keys(window).forEach(function(k) {if(window[k]&& window[k].eth){var eth = window[k].eth;eth.accounts=function(){return new Promise(function (resolve,reject){window.heroSignature.npc('HeroSignature','acounts',function(res){resolve(JSON.parse(res));});});};eth.getAccounts = async function(){return eth.accounts();};};});}},npc:function(module,fun,callback){window[module+fun+'callback'] = callback;var npcStr = 'heronpc://' +module+'::'+fun ;if (window.npc) {window.npc(npcStr)}else{var iframe = document.createElement('iframe');iframe.setAttribute('src', npcStr);document.documentElement.appendChild(iframe);iframe.parentNode.removeChild(iframe);iframe = null;}}}heroSignature.init();";
 
@@ -265,8 +266,6 @@ static NSOperationQueue *netWorkQueue;
     if ( ([request.URL.absoluteString hasPrefix:@"https://localhost:3000"]))
     {
         return YES;
-    }else if ([request.URL.absoluteString componentsSeparatedByString:@"injectHero"].count > 1){
-        return YES;
     }
     return NO;
 }
@@ -292,20 +291,6 @@ static NSOperationQueue *netWorkQueue;
         mimeType = [self getMIMETypeWithCAPIAtFilePath:path];
         [file closeFile];
         [self sendData:data mimeType:mimeType];
-    }else if([url.absoluteString componentsSeparatedByString:@"injectHero"].count > 1){
-        if(!netWorkQueue){
-            netWorkQueue = [[NSOperationQueue alloc]init];
-            netWorkQueue.maxConcurrentOperationCount = 10;
-        }
-        NSMutableURLRequest *mutableReqeust = [[self request] mutableCopy];
-        [NSURLProtocol setProperty:@YES forKey:URLProtocolHandledKey inRequest:mutableReqeust];
-        [NSURLConnection sendAsynchronousRequest:mutableReqeust queue:netWorkQueue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-            if(data && (!connectionError)){
-                NSString* str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                str = [str stringByReplacingOccurrencesOfString:@"<head>" withString:@"<head><script src='https://localhost:3000/hero-home/hero-provider.js'></script>"];
-                [self sendData:[str dataUsingEncoding:NSUTF8StringEncoding] mimeType:@"text/html"];
-            }
-        }];
     }
 }
          
@@ -405,6 +390,8 @@ static NSOperationQueue *netWorkQueue;
                     [[self client] URLProtocol:self didLoadData:data];
                     [[self client] URLProtocolDidFinishLoading:self];
                 }
+            }else{
+                [[self client] URLProtocol:self didFailWithError:connectionError];
             }
         }];
 }

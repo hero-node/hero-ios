@@ -24,6 +24,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.hidden = true;
         cancelTitle = @"取消";
     }
     return self;
@@ -43,16 +44,17 @@
                 [_alertContrller addAction:cancelAction];
                 UIAlertAction *itemAction;
                 self.actionData = [NSMutableDictionary dictionary];
-                for (id item in _data) {
+                for (int i = 0 ; i < ((NSArray*)self.data).count; i++) {
+                    NSDictionary *item = ((NSArray*)self.data)[i];
                     [_actionData addEntriesFromDictionary:@{item[@"title"]:item[@"action"]}];
                     itemAction = [UIAlertAction actionWithTitle:item[@"title"] ?: @"" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        if (_actionData[action.title]) {
+                        if (self->_actionData[action.title]) {
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                [self.controller on:_actionData[action.title]];
+                                [self.controller on:self->_actionData[action.title]];
                             });
                         }else{
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                [self.controller on:_actionData[action.title]];
+                                [self.controller on:self->_actionData[action.title]];
                             });
                         }
                     }];
