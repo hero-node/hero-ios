@@ -51,6 +51,9 @@ NSString * const HERO_ACCOUNT_SERVICE = @"HERO_ACCOUNT_SERVICE";
         self.aID = [[NSUUID UUID] UUIDString];
         self.password = password;
         NSData *data = [NSData dataWithHexString:privateKey];
+        if (!data) {
+            return nil;
+        }
         self.ethAccount = [Account accountWithPrivateKey:data];
     }
     return self.ethAccount ? self : nil;
@@ -111,16 +114,19 @@ NSString * const HERO_ACCOUNT_SERVICE = @"HERO_ACCOUNT_SERVICE";
         return nil;
     }
     return @{
-             @"txHash": tx.transactionHash.hexString,
-             @"from": tx.fromAddress.checksumAddress,
-             @"to": tx.toAddress.checksumAddress,
-             @"nonce": @(tx.nonce).stringValue,
-             @"gasLimit": tx.gasLimit.decimalString,
-             @"gasPrice": tx.gasPrice.decimalString,
-             @"value": tx.value.decimalString,
-             @"r": [SecureData dataToHexString:tx.signature.r],
-             @"s": [SecureData dataToHexString:tx.signature.s],
-             @"v": [NSString stringWithFormat:@"0x%02x", tx.signature.v]
+             @"raw":[@"0x" stringByAppendingString:[[tx serialize] hexString]],
+             @"tx": @{
+                     @"nonce": [NSString stringWithFormat:@"0x%02lx", (unsigned long)tx.nonce],
+                     @"gasPrice": [tx.gasPrice hexString],
+                     @"gas":[tx.gasLimit hexString],
+                     @"to": tx.toAddress.checksumAddress,
+                     @"value": [tx.value hexString],
+                     @"input": [tx.data hexString],
+                     @"r": [SecureData dataToHexString:tx.signature.r],
+                     @"s": [SecureData dataToHexString:tx.signature.s],
+                     @"v":[NSString stringWithFormat:@"0x%02x", tx.signature.v],
+                     @"hash": [tx.transactionHash hexString]
+                     }
              };
 }
 

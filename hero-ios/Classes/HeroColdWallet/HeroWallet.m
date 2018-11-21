@@ -78,11 +78,12 @@ NSString * const HERO_WALLET_LIST = @"HERO_WALLET_LIST";
 + (instancetype)transactionWithJSON:(NSDictionary *)json {
     Transaction *tran = [Transaction transaction];
     tran.toAddress = [Address addressWithString:json[@"to"]];
-    tran.gasLimit = [BigNumber bigNumberWithDecimalString:json[@"gasLimit"]];
-    tran.gasPrice = [BigNumber bigNumberWithDecimalString:json[@"gasPrice"]];
-    tran.nonce = [json[@"nonce"] integerValue];
-    tran.value = [BigNumber bigNumberWithDecimalString:json[@"value"]];
+    tran.gasLimit = [BigNumber bigNumberWithHexString:json[@"gas"]];
+    tran.gasPrice = [BigNumber bigNumberWithHexString:json[@"gasPrice"]];
+    tran.nonce = [BigNumber bigNumberWithHexString:json[@"nonce"]].integerValue;
+    tran.value = json[@"value"] ? [BigNumber bigNumberWithHexString:json[@"value"]] : [BigNumber bigNumberWithInteger:0];
     tran.data = [NSData dataWithHexString:json[@"data"]];
+    tran.chainId = 0x01;
     
     return tran;
 }

@@ -242,6 +242,9 @@
                 if (acc) {
                     [[HeroWallet sharedInstance] addAccount:acc];
                     successe();
+                } else {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"私钥格式不正确" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
+                    [alert show];
                 }
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"密码输入不一致" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
