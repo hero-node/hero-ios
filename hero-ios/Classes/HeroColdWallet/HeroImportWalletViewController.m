@@ -109,6 +109,7 @@
     [_contentKeystore addSubview:keystoreIntro];
     keystoreIntro.frame = CGRectMake(40, 25, SCREEN_W-80, 85);
     [keystoreIntro sizeToFit];
+    self.currentButton = self.topKeystoreBtn;
     
     _keystoreTextView = [UITextView new];
     _keystoreTextView.placeholder = @"keystore 文本内容";

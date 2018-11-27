@@ -60,5 +60,7 @@
 	<false/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>使用面部识别签名</string>
+	<key>NSCameraUsageDescription</key>
+	<string>使用相机扫描二维码</string>
 </dict>
 </plist>
