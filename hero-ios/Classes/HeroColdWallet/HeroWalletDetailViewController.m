@@ -70,6 +70,19 @@
     [self.view addSubview:deleteBtn];
     deleteBtn.frame = CGRectMake(25, SCREEN_H-30-50, SCREEN_W-2*25, 50);
     [deleteBtn addTarget:self action:@selector(onDeleteTapped) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (![self.account.aID isEqualToString:[HeroWallet sharedInstance].accounts[0].aID]) {
+        UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"设为默认" style:UIBarButtonItemStylePlain target:self action:@selector(setDefault)];
+        self.navigationItem.rightBarButtonItem = right;
+    }
+}
+
+- (void)setDefault {
+    [[HeroWallet sharedInstance].accounts removeObject:self.account];
+    [[HeroWallet sharedInstance].accounts insertObject:self.account atIndex:0];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"已将该钱包设为默认钱包" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
+    [alert show];
 }
 
 - (void)onDeleteTapped {
