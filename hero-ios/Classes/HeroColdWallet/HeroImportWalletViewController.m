@@ -30,10 +30,14 @@
 
 @property (nonatomic) UITextView *keystoreTextView;
 @property (nonatomic) UITextField *keystorePwdTextField;
+@property (nonatomic) UITextField *keystoreNameTextField;
+@property (nonatomic) UIButton *keystoreConfirmBtn;
 
 @property (nonatomic) UITextView *privateTextView;
 @property (nonatomic) UITextField *privatePwdTextField;
 @property (nonatomic) UITextField *privateRepeatTextField;
+@property (nonatomic) UITextField *privateNameTextField;
+@property (nonatomic) UIButton *privateConfirmBtn;
 
 @end
 
@@ -95,6 +99,17 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:scanBtn];
     rightItem.width = 20;
     self.navigationItem.rightBarButtonItem = rightItem;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onAnyTapped)]];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)onAnyTapped {
+    [self.view endEditing:YES];
 }
 
 - (void)setupKeystoreView {
@@ -131,13 +146,24 @@
     [_contentKeystore addSubview:line];
     line.frame = CGRectMake(40, _keystorePwdTextField.bottom-1, SCREEN_W-80, 1);
     
-    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, _keystorePwdTextField.bottom+18, SCREEN_W-80, 25)];
+    _keystoreNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _keystorePwdTextField.bottom, SCREEN_W-80, 50)];
+    _keystoreNameTextField.placeholder = @"请输入钱包名称";
+    _keystoreNameTextField.borderStyle = UITextBorderStyleNone;
+    _keystoreNameTextField.font = [UIFont systemFontOfSize:15];
+    [_contentKeystore addSubview:_keystoreNameTextField];
+    UIView *line2 = [UIView new];
+    line2.backgroundColor = UIColorFromRGB(0xe2e2e2);
+    [_contentKeystore addSubview:line2];
+    line2.frame = CGRectMake(40, _keystoreNameTextField.bottom-1, SCREEN_W-80, 1);
+    
+    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, _keystoreNameTextField.bottom+18, SCREEN_W-80, 25)];
     policyLabel.text = @"我已经仔细阅读并同意以太坊白皮书，理解区块链的核心思想";
     policyLabel.font = [UIFont systemFontOfSize:12];
     policyLabel.textColor = UIColorFromRGB(0x999999);
     [_contentKeystore addSubview:policyLabel];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    _keystoreConfirmBtn = button;
     [button setTitle:@"开始导入" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage fromColor:UIColorFromRGB(0x39adf9)] forState:UIControlStateNormal];
@@ -179,13 +205,24 @@
     line2.frame = CGRectMake(40, _privateRepeatTextField.bottom-1, SCREEN_W-80, 1);
     [_contentPrivate addSubview:line2];
     
-    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, _privateRepeatTextField.bottom+18, SCREEN_W-80, 25)];
+    _privateNameTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, _privateRepeatTextField.bottom, SCREEN_W-80, 50)];
+    _privateNameTextField.placeholder = @"请输入钱包名称";
+    _privateNameTextField.borderStyle = UITextBorderStyleNone;
+    _privateNameTextField.font = [UIFont systemFontOfSize:15];
+    [_contentPrivate addSubview:_privateNameTextField];
+    UIView *line3 = [UIView new];
+    line3.backgroundColor = UIColorFromRGB(0xe2e2e2);
+    line3.frame = CGRectMake(40, _privateNameTextField.bottom-1, SCREEN_W-80, 1);
+    [_contentPrivate addSubview:line3];
+    
+    UILabel *policyLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, _privateNameTextField.bottom+18, SCREEN_W-80, 25)];
     policyLabel.text = @"我已经仔细阅读并同意以太坊白皮书，理解区块链的核心思想";
     policyLabel.font = [UIFont systemFontOfSize:12];
     policyLabel.textColor = UIColorFromRGB(0x999999);
     [_contentPrivate addSubview:policyLabel];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    _privateConfirmBtn = button;
     [button setTitle:@"开始导入" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage fromColor:UIColorFromRGB(0x39adf9)] forState:UIControlStateNormal];
@@ -220,13 +257,13 @@
     
     if (self.currentButton == self.topKeystoreBtn) {
         // keystore
-        if (self.keystoreTextView.text.length > 0 && self.keystorePwdTextField.text.length > 0) {
+        if (self.keystoreTextView.text.length > 0 && self.keystorePwdTextField.text.length > 0 && self.keystoreNameTextField.text.length > 0) {
             [Account decryptSecretStorageJSON:self.keystoreTextView.text password:self.keystorePwdTextField.text callback:^(Account *account, NSError *err) {
                 if (err) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:err.localizedDescription delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
                     [alert show];
                 } else {
-                    HeroAccount *acc = [[HeroAccount alloc] initWithName:@"导入钱包1" logo:@"" ethAccount:account password:self.keystorePwdTextField.text];
+                    HeroAccount *acc = [[HeroAccount alloc] initWithName:self.keystoreNameTextField.text logo:@"" ethAccount:account password:self.keystorePwdTextField.text];
                     [[HeroWallet sharedInstance] addAccount:acc];
                     successe();
                 }
@@ -237,9 +274,9 @@
         }
     } else {
         // private
-        if (self.privateTextView.text.length > 0 && self.privatePwdTextField.text.length > 0 && self.privateRepeatTextField.text.length > 0) {
+        if (self.privateTextView.text.length > 0 && self.privatePwdTextField.text.length > 0 && self.privateRepeatTextField.text.length > 0 && self.privateNameTextField.text.length > 0) {
             if ([self.privatePwdTextField.text isEqualToString:self.privateRepeatTextField.text]) {
-                HeroAccount *acc = [[HeroAccount alloc] initWithName:@"导入钱包2" logo:@"" privateKey:self.privateTextView.text password:self.privatePwdTextField.text];
+                HeroAccount *acc = [[HeroAccount alloc] initWithName:self.privateNameTextField.text logo:@"" privateKey:self.privateTextView.text password:self.privatePwdTextField.text];
                 if (acc) {
                     [[HeroWallet sharedInstance] addAccount:acc];
                     successe();
@@ -310,6 +347,32 @@
         }
     }];
     [self.navigationController pushViewController:scan animated:YES];
+}
+
+#pragma -
+- (void)keyboardChangeFrame:(NSNotification *)noti {
+    
+    NSDictionary *info = noti.userInfo;
+    CGRect frame = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    UIButton *btn = self.keystoreConfirmBtn;
+    double height = self.contentKeystore.height - btn.bottom;
+    UIView *view = self.contentView;
+    if (self.currentButton == self.topPrivateBtn) {
+        btn = self.privateConfirmBtn;
+        height = self.contentPrivate.height - btn.bottom;
+    }
+    if (frame.origin.y < SCREEN_H) {
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage fromColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
+        [UIView animateWithDuration:[info[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+            view.transform = CGAffineTransformMakeTranslation(0, -(frame.size.height-height) - 10);
+        }];
+    } else {
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+        [UIView animateWithDuration:[info[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+            view.transform = CGAffineTransformIdentity;
+        }];
+    }
+    
 }
 
 @end
