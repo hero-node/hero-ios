@@ -32,6 +32,19 @@ NSString * const HERO_WALLET_LIST = @"HERO_WALLET_LIST";
 - (HeroAccount *)defaultAccount {
     return self.accounts.firstObject;
 }
+- (void)setDefaultAccount:(NSString *)aId {
+    NSMutableArray *idList = [NSMutableArray array];
+    [idList addObject:aId];
+    [self.accounts enumerateObjectsUsingBlock:^(HeroAccount * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![obj.aID isEqualToString:aId]) {
+            [idList addObject:obj.aID];
+        }
+    }];
+    [[NSUserDefaults standardUserDefaults] setValue:idList forKey:HERO_WALLET_LIST];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self loadAccounts];
+
+}
 
 - (void)addAccount:(HeroAccount *)account {
     [self.accounts addObject:account];

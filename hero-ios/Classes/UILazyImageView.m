@@ -289,7 +289,7 @@ static NSString * cacheFolder;
                     });
                 }
             }
-        }] resume];        
+        }] resume];
     }
     else
     {
@@ -479,7 +479,6 @@ static NSString * cacheFolder;
 - (void) loadDataInBackground:(NSURL*)imageURL{
     NSData * cachedData = [UILazyImageView getCachedImageDataForURL:imageURL];
     if (!cachedData || cachedData.length < 200){
-        self.alpha = 0.0f;
         [self performSelectorOnMainThread:@selector(startDownloading:) withObject:imageURL waitUntilDone:YES];
     }
     else{

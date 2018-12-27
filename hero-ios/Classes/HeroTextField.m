@@ -135,6 +135,11 @@
             self.keyboardType = UIKeyboardTypeEmailAddress;
             self.autocorrectionType = UITextAutocorrectionTypeNo;
         }
+        if ([@"url" isEqualToString:type]) {
+            self.keyboardType = UIKeyboardTypeURL;
+            self.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            self.autocorrectionType = UITextAutocorrectionTypeYes;
+        }
         if ([@"phone" isEqualToString:type]) {
             self.keyboardType = UIKeyboardTypePhonePad;
             self.autocorrectionType = UITextAutocorrectionTypeNo;

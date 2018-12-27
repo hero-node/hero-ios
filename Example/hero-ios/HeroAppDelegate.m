@@ -8,7 +8,7 @@
 
 #import "HeroAppDelegate.h"
 #import "HeroApp.h"
-#import "UIView+hero.h"
+#import "UIView+Hero.h"
 
 
 @interface HeroAppDelegate ()
@@ -31,9 +31,10 @@
                    @"tintColor":@"ff0000",
                    @"tabs":
                        @[@{
-                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/example/hero-home/home.html"],
+                             @"url":[NSString stringWithFormat:@"%@%@",urlPath,@"/projects/hero-home/home.html"],
                         }]
                    }];
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     return YES;
 }
 
@@ -63,5 +64,4 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
 @end

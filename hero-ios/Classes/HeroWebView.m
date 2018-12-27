@@ -42,8 +42,6 @@
 #import "hero.h"
 #import <AVFoundation/AVAssetDownloadTask.h>
 
-static NSString* INJECTJS = @"heroSignature = {init:function(){if(window.Web3){Object.keys(window).forEach(function(k) {if(window[k]&& window[k].eth){var eth = window[k].eth;eth.accounts=function(){return new Promise(function (resolve,reject){window.heroSignature.npc('HeroSignature','acounts',function(res){resolve(JSON.parse(res));});});};eth.getAccounts = async function(){return eth.accounts();};};});}},npc:function(module,fun,callback){window[module+fun+'callback'] = callback;var npcStr = 'heronpc://' +module+'::'+fun ;if (window.npc) {window.npc(npcStr)}else{var iframe = document.createElement('iframe');iframe.setAttribute('src', npcStr);document.documentElement.appendChild(iframe);iframe.parentNode.removeChild(iframe);iframe = null;}}}heroSignature.init();";
-
 @interface HeroWebView()<UIWebViewDelegate>
 
 @end
@@ -369,21 +367,22 @@ static NSOperationQueue *netWorkQueue;
     NSMutableURLRequest *mutableReqeust = [[self request] mutableCopy];
     [NSURLProtocol setProperty:@YES forKey:URLProtocolHandledKey inRequest:mutableReqeust];
     if ([mutableReqeust.URL.absoluteString hasPrefix:@"https://localhost:3001"]) {
+//        NSString *host = @"http://localhost:8545";
+                NSString *host = @"https://mainnet.infura.io/33USgHxvCp3UoDItBSRs";
+        //        NSString *host = @"https://ropsten.infura.io/v3/719be1b239a24d1e87a2e326be6c4384";
+        [mutableReqeust setURL:[NSURL URLWithString:host]];
         NSDictionary *dict = @{
                                @"Access-Control-Allow-Origin":@"*",
                                @"Access-Control-Allow-Methods": @"POST, GET, OPTIONS, DELETE",
                                };
         [mutableReqeust setAllHTTPHeaderFields:dict];
-//        [mutableReqeust setURL:[NSURL URLWithString:@"http://47.52.172.254:8545"]];
-        [mutableReqeust setURL:[NSURL URLWithString:@"https://mainnet.infura.io/33USgHxvCp3UoDItBSRs"]];
-//        [mutableReqeust setURL:[NSURL URLWithString:@"https://ropsten.infura.io/v3/719be1b239a24d1e87a2e326be6c4384"]];
-        
     }
     [NSURLConnection sendAsynchronousRequest:mutableReqeust queue:netWorkQueue completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
             if(data && (!connectionError)){
                 NSString* str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 if (str && ([str hasPrefix:@"<!"]||[str hasPrefix:@"<html>"])) {
                     str = [str stringByReplacingOccurrencesOfString:@"<head>" withString:@"<head><script src='https://localhost:3000/hero-home/hero-provider.js'></script>"];
+                    str = [str stringByReplacingOccurrencesOfString:@"Content-Security-Policy" withString:@"Hero Web3 Provider"];
                     [self sendData:[str dataUsingEncoding:NSUTF8StringEncoding] mimeType:[response MIMEType]?[response MIMEType]:@"text/html"];
                 }else if(data.length > 0){
                     [self sendData:data mimeType:[response MIMEType]?[response MIMEType]:@"application/json"];

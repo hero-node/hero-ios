@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (HeroAccount *)defaultAccount;
 
 - (void)addAccount:(HeroAccount *)account;
+- (void)setDefaultAccount:(NSString *)aId;
 - (void)removeAccount:(HeroAccount *)account;
 
 - (void)loadAccounts;

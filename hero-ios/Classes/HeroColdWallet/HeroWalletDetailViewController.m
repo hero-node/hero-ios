@@ -13,6 +13,7 @@
 #import "HeroModifyPasswordViewController.h"
 #import "HeroExportKeystoreViewController.h"
 #import "UIView+Addition.h"
+#import "HeroQRCoder.h"
 
 @interface HeroWalletDetailViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -36,13 +37,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = self.account.name;
+
     self.view.backgroundColor = [UIColor whiteColor];
-    NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"hero-ios" withExtension:@"bundle"]];
-    UIImage *logo = [UIImage imageNamed:@"avatar" inBundle:bundle compatibleWithTraitCollection:nil];
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:logo];
+    UIImageView *logoView = [[UIImageView alloc]init];
     logoView.clipsToBounds = YES;
-    logoView.layer.cornerRadius = 45;
-    logoView.frame = CGRectMake(SCREEN_W/2-45, 109 + (isIPhoneXSeries() ? 24 : 0), 90, 90);
+    logoView.frame = CGRectMake(SCREEN_W/2-50, 105 + (isIPhoneXSeries() ? 24 : 0), 100, 100);
+    logoView.image = [HeroQRCoder createQRImageString:self.account.address sizeWidth:300 fillColor:[UIColor blackColor]];
     [self.view addSubview:logoView];
     
     UILabel *addressLabel = [UILabel new];
@@ -53,12 +53,11 @@
     [self.view addSubview:addressLabel];
     addressLabel.frame = CGRectMake(30, 229 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W-60, 20);
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 280 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, 200) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 280 + (isIPhoneXSeries() ? 24 : 0), SCREEN_W, 300) style:UITableViewStylePlain];
     [self.view addSubview:_tableView];
     _tableView.rowHeight = 50;
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.scrollEnabled = NO;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -141,7 +140,9 @@
     
     [self.view addSubview:exportPrivateView];
 }
-
+- (void)onChangeDefault:(UISwitch *)sw {
+    [[HeroWallet sharedInstance] setDefaultAccount: self.account.aID];
+}
 - (void)dismissExportPrivate {
     [self.exportPrivateView removeFromSuperview];
     self.exportPrivateView = nil;
@@ -154,7 +155,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,13 +163,24 @@
     NSString *title;
     if (indexPath.row == 0) {
         title = @"修改密码";
-        
     }
     if (indexPath.row == 1) {
         title = @"导出私钥";
     }
     if (indexPath.row == 2) {
         title = @"导出Keystore";
+    }
+    if (indexPath.row == 3) {
+        title = @"设为默认钱包";
+        UISwitch *sw = [[UISwitch alloc]init];
+        sw.on = [self.account.aID isEqualToString:[[HeroWallet sharedInstance] defaultAccount].aID];
+        if (!sw.on) {
+            [sw addTarget:self action:@selector(onChangeDefault:) forControlEvents:UIControlEventValueChanged];
+        }
+        cell.accessoryView = sw;
+    }
+    if (indexPath.row == 4) {
+        title = @"修改钱包名字";
     }
     cell.textLabel.text = title;
     cell.textLabel.textColor = UIColorFromRGB(0x999999);
@@ -199,6 +211,11 @@
         // 导出Keystore
         HeroExportKeystoreViewController *keystore = [[HeroExportKeystoreViewController alloc] initWithAccount:self.account];
         [self.navigationController pushViewController:keystore animated:YES];
+    }else if (indexPath.row == 4) {
+        // 修改名字
+        [self.account changeNameThen:^(NSString * _Nonnull name) {
+            [[NSUserDefaults standardUserDefaults] setObject:name forKey:[self.account.aID stringByAppendingString:@"_name"]];
+        }];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

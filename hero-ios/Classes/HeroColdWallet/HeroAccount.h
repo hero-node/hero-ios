@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary *)signTx:(Transaction *)tx;
 
 - (void)validatePasswordThen:(void(^)(void))then;
-    
+- (void)changeNameThen:(void (^)(NSString *name))then;
 @end
 
 NS_ASSUME_NONNULL_END

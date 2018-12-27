@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface HeroSignView : UIView
 
 @property (nonatomic, copy) void (^done)(NSDictionary *sig);
+@property (nonatomic, copy) void (^reset)(NSString *err);
 
 - (instancetype)initWithTransaction:(Transaction *)tran;
 - (void)show;

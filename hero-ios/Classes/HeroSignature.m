@@ -119,6 +119,10 @@
     HeroSignView *signView = [[HeroSignView alloc] initWithTransaction:tx];
     [signView show];
     signView.done = done;
+    signView.reset = ^(NSString *err) {
+        NSString *js = [NSString stringWithFormat:@"window['%@callback']({npc:\"fail\",desc:\"User denied transaction signature\"})",[self class]];
+        [self.controller.webview stringByEvaluatingJavaScriptFromString:js];
+    };
 }
 
 @end

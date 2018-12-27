@@ -243,6 +243,7 @@
 }
 
 - (void)exit {
+    self.reset(@"");
     [self removeFromSuperview];
 }
 

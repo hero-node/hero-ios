@@ -14,6 +14,7 @@ NSString * const HERO_ACCOUNT_SERVICE = @"HERO_ACCOUNT_SERVICE";
 @interface HeroAccount () <UIAlertViewDelegate>
 
 @property (nonatomic, copy) void (^validatePwd)(void);
+@property (nonatomic, copy) void (^changeName)(NSString*);
 
 @end
 
@@ -134,12 +135,21 @@ NSString * const HERO_ACCOUNT_SERVICE = @"HERO_ACCOUNT_SERVICE";
     self.validatePwd = then;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"输入钱包密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil];
     [alert addButtonWithTitle:@"确认"];
+    alert.tag = 100;
+    alert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [alert show];
+}
+- (void)changeNameThen:(void (^)(NSString *name))then{
+    self.changeName = then;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"输入钱包名字" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil];
+    [alert addButtonWithTitle:@"确认"];
+    alert.tag = 101;
     alert.alertViewStyle = UIAlertViewStyleSecureTextInput;
     [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
+    if (buttonIndex == 1 && alertView.tag == 100) {
         NSString *pwd = [alertView textFieldAtIndex:0].text;
         if ([pwd isEqualToString:self.password]) {
             self.validatePwd();
@@ -147,6 +157,10 @@ NSString * const HERO_ACCOUNT_SERVICE = @"HERO_ACCOUNT_SERVICE";
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"密码错误" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles:nil];
             [alert show];
         }
+    }
+    if (buttonIndex == 1 && alertView.tag == 101) {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        self.changeName(name);
     }
 }
 

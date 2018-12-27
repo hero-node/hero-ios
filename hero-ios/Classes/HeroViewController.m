@@ -484,8 +484,8 @@ static bool customUserAgentHasSet = false;
         self.webview.frame = CGRectMake(0, 0, scrollView.bounds.size.width-scrollView.contentInset.left-scrollView.contentInset.right, scrollView.bounds.size.height-scrollView.contentInset.top-scrollView.contentInset.bottom);
         self.webview.autoresizingMask = 0x111111;
         self.webview.controller = self;
-        [self.view addSubview:self.webview];
     }
+    [self.view addSubview:self.webview];
     [self.webview on:@{@"url":url}];
     if (_showLoading) {
         [self showLoading:nil];

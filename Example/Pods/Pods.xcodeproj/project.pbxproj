@@ -88,6 +88,8 @@
 		4953FDDE8309068C0DE46FEEF7CC4768 /* HeroImageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 60B6288CC8E4E679E3C356345988EE96 /* HeroImageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4A429BD63256933DF096B3A7BA4928D6 /* HeroActionSheetView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B51022129ECCA5B0A77310C6FC7DBBB /* HeroActionSheetView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4AD29EF34E6107139766CAA811E1A028 /* HeroImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7887FEBCF6B5BFC78CC5B477BC8BA51C /* HeroImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4ADA6C8221A7F96100CF7187 /* HeroBackgroundTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ADA6C8021A7F96000CF7187 /* HeroBackgroundTask.h */; };
+		4ADA6C8321A7F96100CF7187 /* HeroBackgroundTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADA6C8121A7F96000CF7187 /* HeroBackgroundTask.m */; };
 		4C9182AB219D3606C419D3319FD376B4 /* HeroLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9139AFF074FFF138B03E49F7B4420A48 /* HeroLocationView.m */; };
 		4EEBCED8A896D019320F1884A2975A4D /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = AB588E3B5EA6D10CB19991D259524FE1 /* MJRefreshAutoGifFooter.m */; };
 		4F945EDD0D88542A55214C6C5220DDBC /* HeroImportWalletViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A2A4C58D7A27C0CEC8A80A602A9D1E /* HeroImportWalletViewController.m */; };
@@ -311,14 +313,14 @@
 		15F05904255B6C263DE90238F3E7AA24 /* Pods-hero-ios_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-hero-ios_Example.release.xcconfig"; sourceTree = "<group>"; };
 		160B83CBA1DFBA094AAAC93E150DEF4A /* HeroAccount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HeroAccount.h; sourceTree = "<group>"; };
 		16898E68DF29B9741A35FDF968483820 /* NSString+Hex.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+Hex.h"; sourceTree = "<group>"; };
-		172B54AC6953EFD4520D597661E0396F /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MJRefresh.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		172B54AC6953EFD4520D597661E0396F /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17ADA5F95E4DC25C76D1E12F7548E08B /* HeroToast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroToast.h; path = "hero-ios/Classes/HeroToast.h"; sourceTree = "<group>"; };
 		1A57E8DB83E34694A9B6A0C6814E0F7B /* MJRefreshStateHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshStateHeader.m; path = MJRefresh/Custom/Header/MJRefreshStateHeader.m; sourceTree = "<group>"; };
 		1AEBE7CDB519977E21C8520F9E4CA183 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B51022129ECCA5B0A77310C6FC7DBBB /* HeroActionSheetView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroActionSheetView.h; path = "hero-ios/Classes/HeroActionSheetView.h"; sourceTree = "<group>"; };
 		1B5A06C632A3E759BE397AD02C244786 /* Pods-hero-ios_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-hero-ios_Example-frameworks.sh"; sourceTree = "<group>"; };
 		1C7BBDC15DECBD53ECCBDE153F8007C4 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshBackFooter.h; path = MJRefresh/Base/MJRefreshBackFooter.h; sourceTree = "<group>"; };
-		1C7D77594730BDB76BEF0D173C5C72BA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		1C7D77594730BDB76BEF0D173C5C72BA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		1DAAAB1BB8C0C9F2F700830DA4996570 /* UINavigationController+webViewBack.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+webViewBack.m"; path = "hero-ios/Classes/UINavigationController+webViewBack.m"; sourceTree = "<group>"; };
 		1EB62A43C88F351D2B0B18AC300B8891 /* HeroBrowserCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroBrowserCell.m; path = "hero-ios/Classes/HeroBrowserCell.m"; sourceTree = "<group>"; };
 		241110EDE6A4650EEF7641B6493E8950 /* HeroWalletDetailViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = HeroWalletDetailViewController.h; sourceTree = "<group>"; };
@@ -338,7 +340,7 @@
 		308A85A8D3B1CB9ACE2C4358490179CC /* Pods-hero-ios_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-hero-ios_Example-dummy.m"; sourceTree = "<group>"; };
 		30BFCA08A78B3D4FE3A5E38B08AC082C /* UIView+Paper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Paper.m"; path = "hero-ios/Classes/UIView+Paper.m"; sourceTree = "<group>"; };
 		311A5123F8568B6BEADD1EA00B1391E0 /* MJRefreshHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshHeader.m; path = MJRefresh/Base/MJRefreshHeader.m; sourceTree = "<group>"; };
-		319DC1A20FC5600008F029ACA71C4969 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UICKeyChainStore.framework; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		319DC1A20FC5600008F029ACA71C4969 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		332CE20A4369E0A9F4C8935DDBD9698B /* HeroScanQRViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = HeroScanQRViewController.m; sourceTree = "<group>"; };
 		340F2E70F49F847A0A0A3A56C870F89F /* MJRefreshBackNormalFooter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshBackNormalFooter.m; path = MJRefresh/Custom/Footer/Back/MJRefreshBackNormalFooter.m; sourceTree = "<group>"; };
 		34728919B063B0AE0EE0C0965477DBF0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -360,6 +362,8 @@
 		482918F130360B09DEA93C18BD301E13 /* UINavigationController+webViewBack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+webViewBack.h"; path = "hero-ios/Classes/UINavigationController+webViewBack.h"; sourceTree = "<group>"; };
 		48FA84CC87AF0D11D285F7F547AC132A /* HeroChatMsgView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroChatMsgView.m; path = "hero-ios/Classes/HeroChatMsgView.m"; sourceTree = "<group>"; };
 		4A465D949A0C3C223A10F5255D2BD1DB /* HeroTextField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroTextField.m; path = "hero-ios/Classes/HeroTextField.m"; sourceTree = "<group>"; };
+		4ADA6C8021A7F96000CF7187 /* HeroBackgroundTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HeroBackgroundTask.h; path = "hero-ios/Classes/HeroBackgroundTask.h"; sourceTree = "<group>"; };
+		4ADA6C8121A7F96000CF7187 /* HeroBackgroundTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HeroBackgroundTask.m; path = "hero-ios/Classes/HeroBackgroundTask.m"; sourceTree = "<group>"; };
 		4AEED91B62CAC2A77537C8607D962B14 /* HeroTouchID.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroTouchID.m; path = "hero-ios/Classes/HeroTouchID.m"; sourceTree = "<group>"; };
 		4BA9662CFE33FDC2C6CF5F0FF050F9EC /* UIView+Frame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Frame.h"; path = "hero-ios/Classes/UIView+Frame.h"; sourceTree = "<group>"; };
 		4C1431278FDE4A507A5E8D66F9961EDE /* HeroTextView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroTextView.m; path = "hero-ios/Classes/HeroTextView.m"; sourceTree = "<group>"; };
@@ -376,7 +380,7 @@
 		51FEED0367378C28AD146356EA1FDE25 /* Pods-hero-ios_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-hero-ios_Example-resources.sh"; sourceTree = "<group>"; };
 		51FF0869C09AC6BE94116F79E023C87D /* HeroDevice.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroDevice.m; path = "hero-ios/Classes/HeroDevice.m"; sourceTree = "<group>"; };
 		52805D9D1959BBE7A8BF04386D12E8DE /* HeroTakePicCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroTakePicCell.h; path = "hero-ios/Classes/HeroTakePicCell.h"; sourceTree = "<group>"; };
-		52931949739EDA5BEB95475D924D9724 /* hero-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "hero-ios.bundle"; path = "hero-ios-hero-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52931949739EDA5BEB95475D924D9724 /* hero-ios.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hero-ios.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		537077A637F0B6C459854455449553AE /* HeroChatMsgView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroChatMsgView.h; path = "hero-ios/Classes/HeroChatMsgView.h"; sourceTree = "<group>"; };
 		54A2F455C0FEF045E13255F1B5D80EA5 /* HeroScanView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroScanView.m; path = "hero-ios/Classes/HeroScanView.m"; sourceTree = "<group>"; };
 		55330302DFDFA97FB0139FFAF03C83AB /* HeroSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroSlider.h; path = "hero-ios/Classes/HeroSlider.h"; sourceTree = "<group>"; };
@@ -398,7 +402,7 @@
 		60A82A1FB09EF290A3832135F3749077 /* HeroApp.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroApp.m; path = "hero-ios/Classes/HeroApp.m"; sourceTree = "<group>"; };
 		60B6288CC8E4E679E3C356345988EE96 /* HeroImageCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroImageCell.h; path = "hero-ios/Classes/HeroImageCell.h"; sourceTree = "<group>"; };
 		634B202B7C53C6F59A33F71BEBC3C5D0 /* MJRefreshAutoStateFooter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshAutoStateFooter.m; path = MJRefresh/Custom/Footer/Auto/MJRefreshAutoStateFooter.m; sourceTree = "<group>"; };
-		637DA2D12D52CF66BCF231E858297997 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		637DA2D12D52CF66BCF231E858297997 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6486C64F9644EE93FC1CFF5E1E724742 /* UICKeyChainStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UICKeyChainStore.h; path = Lib/UICKeyChainStore/UICKeyChainStore.h; sourceTree = "<group>"; };
 		65DFD4503F563377E27459EA8F99F2C2 /* ResourceBundle-hero-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-hero-ios-Info.plist"; sourceTree = "<group>"; };
 		664D287575D9CEC86FEA9CEADB2DEB60 /* UIView+Genie.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Genie.h"; path = "hero-ios/Classes/UIView+Genie.h"; sourceTree = "<group>"; };
@@ -408,7 +412,7 @@
 		690893C9B6193A6D5E2208592A355B41 /* Pods-hero-ios_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-hero-ios_Example.modulemap"; sourceTree = "<group>"; };
 		696E9C9B25D7FAB8E117F6A632ECA1DF /* NSData+HexString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSData+HexString.m"; sourceTree = "<group>"; };
 		6A6ABB2C8B0AFC31AE54D8D70C591974 /* HeroPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroPickerView.h; path = "hero-ios/Classes/HeroPickerView.h"; sourceTree = "<group>"; };
-		6AA0F023A52091E1D6AC0629DE73BDC7 /* hero_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = hero_ios.framework; path = "hero-ios.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AA0F023A52091E1D6AC0629DE73BDC7 /* hero_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = hero_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BA44AD2306821BEF1546F7847E24016 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C9E89F2A5EE1FD4562C6B42A0DFAE44 /* HeroWebView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroWebView.m; path = "hero-ios/Classes/HeroWebView.m"; sourceTree = "<group>"; };
 		6D5D02FFB7C096F382EFAEB4D98590AC /* UICKeyChainStore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = UICKeyChainStore.modulemap; sourceTree = "<group>"; };
@@ -426,7 +430,7 @@
 		7887FEBCF6B5BFC78CC5B477BC8BA51C /* HeroImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroImageView.h; path = "hero-ios/Classes/HeroImageView.h"; sourceTree = "<group>"; };
 		78E64DC5BE9DF9D59C1BE10203079869 /* NSString+Hex.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hex.m"; sourceTree = "<group>"; };
 		7967E7897B8810FB265A45785A1BFDF5 /* MJRefreshNormalHeader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshNormalHeader.m; path = MJRefresh/Custom/Header/MJRefreshNormalHeader.m; sourceTree = "<group>"; };
-		79C7A3B3EE58E99426A515BBF30418B8 /* Pods_hero_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_hero_ios_Example.framework; path = "Pods-hero-ios_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79C7A3B3EE58E99426A515BBF30418B8 /* Pods_hero_ios_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hero_ios_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B04C7167969EE5E53A79580606A8E6F /* UIImage+color.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+color.h"; path = "hero-ios/Classes/UIImage+color.h"; sourceTree = "<group>"; };
 		7C3B53B03795FC051539D9B8D22D9FA1 /* HeroImagePickFlowLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HeroImagePickFlowLayout.h; path = "hero-ios/Classes/HeroImagePickFlowLayout.h"; sourceTree = "<group>"; };
 		7C9AF453244700DD4E5D0EDDB3936E7B /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,7 +447,7 @@
 		90B7A1E87E1F7C049D911F3EAF9FDC99 /* UIColor+Reverse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Reverse.m"; path = "hero-ios/Classes/UIColor+Reverse.m"; sourceTree = "<group>"; };
 		9139AFF074FFF138B03E49F7B4420A48 /* HeroLocationView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroLocationView.m; path = "hero-ios/Classes/HeroLocationView.m"; sourceTree = "<group>"; };
 		92DF9BC9AA194DF50374A07C17CCBA65 /* HeroCustomButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroCustomButton.m; path = "hero-ios/Classes/HeroCustomButton.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94C385DC4E21537593E5AAA0C2922FCA /* MJRefresh.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = MJRefresh.modulemap; sourceTree = "<group>"; };
 		95CD840AE25C2FBE5EC88321B7752DAA /* HeroImagePickFlowLayout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroImagePickFlowLayout.m; path = "hero-ios/Classes/HeroImagePickFlowLayout.m"; sourceTree = "<group>"; };
 		9641BC58C98B222C1B42FB9D3ADEBDA8 /* UIView+Screenshot.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Screenshot.h"; path = "hero-ios/Classes/UIView+Screenshot.h"; sourceTree = "<group>"; };
@@ -543,7 +547,7 @@
 		EA40BB251D5F80FDE4F4473E11F6354C /* HeroImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroImageView.m; path = "hero-ios/Classes/HeroImageView.m"; sourceTree = "<group>"; };
 		EAD48AE25BDC71C2735ECC24AE1D7E93 /* MJRefreshComponent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshComponent.h; path = MJRefresh/Base/MJRefreshComponent.h; sourceTree = "<group>"; };
 		EDA5998F4E7046AB7D03A86F7640C000 /* MJRefreshAutoGifFooter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshAutoGifFooter.h; path = MJRefresh/Custom/Footer/Auto/MJRefreshAutoGifFooter.h; sourceTree = "<group>"; };
-		EE164F84608F342EF87CA12B6B7C8813 /* hero-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = "hero-ios.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		EE164F84608F342EF87CA12B6B7C8813 /* hero-ios.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = "hero-ios.podspec"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EEFEBA1D45636B37D0BF153E2036F9E1 /* HeroViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HeroViewController.m; path = "hero-ios/Classes/HeroViewController.m"; sourceTree = "<group>"; };
 		F0A5EB1820F8C650AAE4865337035EF9 /* UIView+Hero.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Hero.m"; path = "hero-ios/Classes/UIView+Hero.m"; sourceTree = "<group>"; };
 		F2635F0F096B7FE9ADB69282F14B8A1D /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+MJRefresh.h"; path = "MJRefresh/UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
@@ -744,6 +748,8 @@
 				4AEED91B62CAC2A77537C8607D962B14 /* HeroTouchID.m */,
 				761E8988CF07663FF4CC32DD9564D584 /* HeroUploadCell.h */,
 				38B36FABE8C64B100487E5445DD3A200 /* HeroUploadCell.m */,
+				4ADA6C8021A7F96000CF7187 /* HeroBackgroundTask.h */,
+				4ADA6C8121A7F96000CF7187 /* HeroBackgroundTask.m */,
 				5F306A1F0B2323E31E699E6F23DC0CBD /* HeroUploadFlowLayout.h */,
 				250FA326E6A3B2C859F164C1331B0F2C /* HeroUploadFlowLayout.m */,
 				A69A6EA87B15F83BEFD38ACCE2DBE5D7 /* HeroUploadItem.h */,
@@ -811,7 +817,6 @@
 				E814D89E0C283730CBA9C39E511894A6 /* UICKeyChainStore.m */,
 				092EC7FBD121B682BD5581BBE0A379D4 /* Support Files */,
 			);
-			name = UICKeyChainStore;
 			path = UICKeyChainStore;
 			sourceTree = "<group>";
 		};
@@ -1022,7 +1027,6 @@
 				5AD1BA0FDE8C135870C880BD070EFDC7 /* Resources */,
 				DC4B8998B10B212E4A4B121342F71168 /* Support Files */,
 			);
-			name = MJRefresh;
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
@@ -1093,6 +1097,7 @@
 				F22D4C40888711A112589F6734EB8E58 /* HeroScanView.h in Headers */,
 				03830C1170F80A70A8BC38951B675302 /* HeroScrollView.h in Headers */,
 				0412ED61478C0D8D55F5DAE87532A706 /* HeroSegmentControl.h in Headers */,
+				4ADA6C8221A7F96100CF7187 /* HeroBackgroundTask.h in Headers */,
 				6D2E540327BB24AEAD74B8DD34CA5201 /* HeroSignature.h in Headers */,
 				B06B8370D07A4ECE9E39FA0A34288D8A /* HeroSignView.h in Headers */,
 				C1F067BE5610544874E18D5E89523F57 /* HeroSlider.h in Headers */,
@@ -1389,6 +1394,7 @@
 				45B22BC5136EEB3A1669AD6898B90698 /* HeroChatMsgView.m in Sources */,
 				AAE98B48D298F95DE42DA2818EBB5F2A /* HeroChatView.m in Sources */,
 				78A00739434E840B6877842D5C335C14 /* HeroCheckBox.m in Sources */,
+				4ADA6C8321A7F96100CF7187 /* HeroBackgroundTask.m in Sources */,
 				BDEC24F05ED5D061DE1639E106C6BE51 /* HeroCodeView.m in Sources */,
 				C3F6581FBACE79AAD557016C47699ED8 /* HeroContactView.m in Sources */,
 				A1F16CB3583D896F05AB4A7479B9A2E5 /* HeroCustomButton.m in Sources */,
@@ -1738,8 +1744,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
