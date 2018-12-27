@@ -24,7 +24,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.app = [[HeroApp alloc]init];
     self.app.window = self.window;
-    NSString *urlHost = @"http://127.0.0.1:3000";
+//    NSString *urlHost = @"http://127.0.0.1:3000";
+    NSString *urlHost = @"http://hero.com:3000";
     NSString *home = @"__PATH";
     NSString *urlPath = [NSString stringWithFormat:@"%@%@",urlHost,[home hasPrefix:@"__"]?@"":home];
     [self.app on:@{

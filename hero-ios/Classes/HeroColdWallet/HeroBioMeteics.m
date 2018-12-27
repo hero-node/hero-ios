@@ -11,24 +11,18 @@
 @implementation HeroBioMeteics
 
 static LAContext *_context;
-+ (LAContext *)context {
-    if (!_context) {
-        _context = [[LAContext alloc] init];
-    }
-    return _context;
-}
 
 + (HeroBioType)type {
-
+    _context = [[LAContext alloc] init];
     if (@available(iOS 8.0, *)) {
         NSError *err;
-        BOOL isCanEvaluatePolicy = [[self context] canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&err];
+        BOOL isCanEvaluatePolicy = [_context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&err];
         if (err) {
             return HeroBioNone;
         } else {
             if (isCanEvaluatePolicy) {
                 if (@available(iOS 11.0, *)) {
-                    switch ([self context].biometryType) {
+                    switch (_context.biometryType) {
                         case LABiometryNone:
                             return HeroBioNone;
                         case LABiometryTypeTouchID:
@@ -50,7 +44,9 @@ static LAContext *_context;
 }
 
 + (void)evaluate:(NSString *)title reply:(void (^)(BOOL, NSError * _Nonnull))reply {
-    [[self context] evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:title reply:reply];
+    if (_context) {
+        [_context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:title reply:reply];
+    }
 }
 
 @end

@@ -100,7 +100,7 @@
     [contentView addSubview:toValue];
     toValue.frame = CGRectMake(105, 99, SCREEN_W-101-30, 20);
     
-    UILabel *valueValue = [self valueLabel:@(_tran.value.integerValue).stringValue];
+    UILabel *valueValue = [self valueLabel:[@(_tran.value.integerValue).stringValue stringByAppendingString:@" ETH"]];
     [contentView addSubview:valueValue];
     valueValue.frame = CGRectMake(105, 129, SCREEN_W-101-30, 20);
     
@@ -112,7 +112,7 @@
     [contentView addSubview:gasLimitValue];
     gasLimitValue.frame = CGRectMake(105, 189, SCREEN_W-101-30, 20);
     
-    UILabel *gasPriceValue = [self valueLabel:@(_tran.gasPrice.integerValue).stringValue];
+    UILabel *gasPriceValue = [self valueLabel:[[[_tran.gasPrice div:[BigNumber bigNumberWithDecimalString:@"1000000000"]] decimalString] stringByAppendingString:@" gwei"]];
     [contentView addSubview:gasPriceValue];
     gasPriceValue.frame = CGRectMake(105, 219, SCREEN_W-101-30, 20);
     

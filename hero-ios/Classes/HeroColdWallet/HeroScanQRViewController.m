@@ -16,7 +16,7 @@
 
 #define kScanRect CGRectMake(LEFT, TOP, 220, 220)
 
-@interface HeroScanQRViewController () <UIImagePickerControllerDelegate>
+@interface HeroScanQRViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, copy) void(^completion)(NSString *result);
 
