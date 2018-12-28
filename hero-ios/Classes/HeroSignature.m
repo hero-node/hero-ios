@@ -84,25 +84,35 @@
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:list];
         list.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemCancel) target:list action:@selector(exitWallet)];
         [APP.keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
-        
+    }
+    
+    if (json[@"pub"]) {
         HeroAccount *acc = [[HeroWallet sharedInstance] defaultAccount];
-        NSLog(@"加密开始");
-        NSString *pub = [acc publicString];
-        NSLog(@"公钥: %@", pub);
-        NSString *data = @"hello";
-        NSString *enc = [acc encrypt:pub data:data];
-        NSLog(enc);
-        NSString *orig = [acc decrypt:enc];
-        NSLog(orig);
+        if (acc) {
+            NSString *pub = [acc publicString];
+            [self.controller on:@{@"pub": pub}];
+        }
     }
     
     if (json[@"encrypt"]) {
-        
+        HeroAccount *acc = [[HeroWallet sharedInstance] defaultAccount];
+        NSString *data = json[@"encrypt"][@"data"];
+        NSString *pub = json[@"encrypt"][@"pub"];
+        if (acc) {
+            NSString *result = [acc encrypt:pub data:data];
+            [self.controller on:@{@"encrypt": @{@"result": result, @"original": data}}];
+        }
     }
     
     if (json[@"decrypt"]) {
-
-        
+        HeroAccount *acc = [[HeroWallet sharedInstance] defaultAccount];
+        NSString *data = json[@"decrypt"][@"text"];
+        if (acc) {
+            NSString *result = [acc decrypt:data];
+            NSMutableDictionary *mutDic = json[@"decrypt"];
+            mutDic[@"result"] = result;
+            [self.controller on:@{@"decrypt": mutDic}];
+        }
     }
 }
 
