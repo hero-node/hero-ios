@@ -193,7 +193,7 @@ JSContext *context;
 
 - (NSString *)decrypt:(NSString *)data {
     JSContext *context = [HeroAccount jsContext];
-    JSValue *value = [context[@"decrypt"] callWithArguments:@[[self privateString], @"eGsHOW9sZhFsMempB/AzdQR2KK+cdKWzZioSZFxj9Jw3hhYZypPI7FzJwb1lIKtn8U2EN4rT0GPK7jUPdTTEx5PhDZYQT9boLfYhRG9WUOG7Wi8znJEf4VXl2bS6uvWMWi4cGFVwMlviQBzYDmCqgPR4gViZRKaaLJtuRgeB8ltC"]];
+    JSValue *value = [context[@"decrypt"] callWithArguments:@[[self privateString], data]];
     return [value toString];
 }
 
