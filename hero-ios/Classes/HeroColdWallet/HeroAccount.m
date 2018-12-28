@@ -5,11 +5,14 @@
 //  Created by 李潇 on 2018/11/8.
 //
 
+#import "HeroWallet.h"
+#import <JavaScriptCore/JavaScriptCore.h>
 #import <UICKeyChainStore/UICKeyChainStore.h>
 #import "HeroAccount.h"
 #import "NSData+HexString.h"
 
 NSString * const HERO_ACCOUNT_SERVICE = @"HERO_ACCOUNT_SERVICE";
+JSContext *context;
 
 @interface HeroAccount () <UIAlertViewDelegate>
 
@@ -162,6 +165,54 @@ NSString * const HERO_ACCOUNT_SERVICE = @"HERO_ACCOUNT_SERVICE";
         NSString *name = [alertView textFieldAtIndex:0].text;
         self.changeName(name);
     }
+}
+
++ (JSContext *)jsContext {
+    if (!context) {
+        context = [JSContext new];
+        NSString *heroEncryptJS = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://localhost:3000/hero-home/hero-encrypt.js"] encoding:NSUTF8StringEncoding error:nil];
+        heroEncryptJS = [@"var window = this;\n" stringByAppendingString:heroEncryptJS];
+        [context evaluateScript:heroEncryptJS];
+    }
+    return context;
+}
+
+- (NSString *)publicString {
+    JSContext *context = [HeroAccount jsContext];
+    JSValue *value = [context[@"getPublicKey"] callWithArguments:@[[self privateString]]];
+    return [value toString];
+}
+
+- (NSString *)encrypt:(NSString *)pub data:(NSString *)data {
+    NSString *randomString = [self randomString:32];
+    NSString *iv = [self randomString:16];
+    JSContext *context = [HeroAccount jsContext];
+    JSValue *value = [context[@"heroencrypt"] callWithArguments:@[pub, data, iv, randomString]];
+    return [value toString];
+}
+
+- (NSString *)decrypt:(NSString *)data {
+    JSContext *context = [HeroAccount jsContext];
+    JSValue *value = [context[@"decrypt"] callWithArguments:@[[self privateString], @"eGsHOW9sZhFsMempB/AzdQR2KK+cdKWzZioSZFxj9Jw3hhYZypPI7FzJwb1lIKtn8U2EN4rT0GPK7jUPdTTEx5PhDZYQT9boLfYhRG9WUOG7Wi8znJEf4VXl2bS6uvWMWi4cGFVwMlviQBzYDmCqgPR4gViZRKaaLJtuRgeB8ltC"]];
+    return [value toString];
+}
+
+//利用CCRandomGenerateBytes实现随机字符串的生成
+- (NSString *)randomString:(NSInteger)length {
+    uint8_t randomBytes[length];
+    int result = SecRandomCopyBytes(kSecRandomDefault, length, randomBytes);
+    if(result == 0) {
+        NSMutableString *uuidStringReplacement = [[NSMutableString alloc] initWithCapacity:length*2];
+        for(NSInteger index = 0; index < length; index++)
+        {
+            [uuidStringReplacement appendFormat: @"%02x", randomBytes[index]];
+        }
+        NSLog(@"uuidStringReplacement is %@", uuidStringReplacement);
+        return uuidStringReplacement;
+    } else {
+        NSLog(@"SecRandomCopyBytes failed for some reason");
+    }
+    return nil;
 }
 
 @end

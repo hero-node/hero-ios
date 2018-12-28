@@ -5,6 +5,7 @@
 //  Created by Liu Guoping on 2018/10/26.
 //
 
+#import <JavaScriptCore/JavaScriptCore.h>
 #import "HeroSignature.h"
 #import "HeroAccount.h"
 #import "HeroWallet.h"
@@ -14,10 +15,11 @@
 
 @interface HeroSignature ()
 
+@property (nonatomic) HeroWebView *webView;
+
 @end
 
 @implementation HeroSignature {
-
 }
 
 -(void)on:(NSDictionary *)json{
@@ -82,6 +84,25 @@
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:list];
         list.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:(UIBarButtonSystemItemCancel) target:list action:@selector(exitWallet)];
         [APP.keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
+        
+        HeroAccount *acc = [[HeroWallet sharedInstance] defaultAccount];
+        NSLog(@"加密开始");
+        NSString *pub = [acc publicString];
+        NSLog(@"公钥: %@", pub);
+        NSString *data = @"hello";
+        NSString *enc = [acc encrypt:pub data:data];
+        NSLog(enc);
+        NSString *orig = [acc decrypt:enc];
+        NSLog(orig);
+    }
+    
+    if (json[@"encrypt"]) {
+        
+    }
+    
+    if (json[@"decrypt"]) {
+
+        
     }
 }
 
