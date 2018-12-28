@@ -106,9 +106,12 @@
     
     if (json[@"decrypt"]) {
         HeroAccount *acc = [[HeroWallet sharedInstance] defaultAccount];
-        NSString *data = json[@"decrypt"][@"text"];
+        NSString *data = json[@"decrypt"][@"payload"][@"text"];
         if (acc) {
             NSString *result = [acc decrypt:data];
+            if ([result isEqualToString:@"undefined"]) {
+                result = @"🔒";
+            }
             NSMutableDictionary *mutDic = json[@"decrypt"];
             mutDic[@"result"] = result;
             [self.controller on:@{@"decrypt": mutDic}];
