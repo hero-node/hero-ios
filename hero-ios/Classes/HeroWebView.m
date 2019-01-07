@@ -222,7 +222,7 @@
         }
         if (!modules[module]) {
             UIView *moduleObject = [[NSClassFromString(module) alloc]init];
-            if (!moduleObject) {
+        if (!moduleObject) {
                 NSString *js = [NSString stringWithFormat:@"window['%@callback']({npc:'fail'})",module];
                 [self stringByEvaluatingJavaScriptFromString:js];
             }

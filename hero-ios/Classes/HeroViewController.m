@@ -506,7 +506,7 @@ static bool customUserAgentHasSet = false;
     if (self.ui) {
         [self.navigationController setNavigationBarHidden:_isNavBarHidden animated:YES];
     }
-    [self.webview stringByEvaluatingJavaScriptFromString:@"document.readyState==='complete' && window.Hero && Hero.viewWillAppear())"];
+    [self.webview stringByEvaluatingJavaScriptFromString:@"document.readyState==='complete' && window.Hero && Hero.viewWillAppear()"];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
