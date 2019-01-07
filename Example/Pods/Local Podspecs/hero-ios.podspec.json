@@ -36,6 +36,9 @@
     ],
     "UICKeyChainStore": [
 
+    ],
+    "Objective-LevelDB": [
+
     ]
   },
   "ios": {

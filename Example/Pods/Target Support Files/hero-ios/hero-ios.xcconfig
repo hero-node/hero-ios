@@ -1,5 +1,5 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/hero-ios
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../hero-ios/Frameworks" "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh" "${PODS_CONFIGURATION_BUILD_DIR}/UICKeyChainStore"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../hero-ios/Frameworks" "${PODS_CONFIGURATION_BUILD_DIR}/MJRefresh" "${PODS_CONFIGURATION_BUILD_DIR}/Objective-LevelDB" "${PODS_CONFIGURATION_BUILD_DIR}/UICKeyChainStore" "${PODS_CONFIGURATION_BUILD_DIR}/leveldb-library"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 OTHER_LDFLAGS = -framework "AVFoundation" -framework "LocalAuthentication" -framework "ethers"
 PODS_BUILD_DIR = ${BUILD_DIR}

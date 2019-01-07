@@ -40,6 +40,7 @@ TODO: Add long description of the pod here.
   s.frameworks = 'LocalAuthentication', 'AVFoundation'
   s.dependency 'MJRefresh'
   s.dependency 'UICKeyChainStore'
+  s.dependency 'Objective-LevelDB'
   s.ios.vendored_frameworks = 'hero-ios/Frameworks/ethers.framework'
   #s.dependency 'web3swift'
 end
