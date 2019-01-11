@@ -28,6 +28,7 @@ static LevelDB *ldb;
 }
 
 -(void)on:(NSDictionary *)json{
+    [super on:json];
     NSString *key = json[@"key"];
     NSString *arrayKey = json[@"arrayKey"];
     NSString *start = json[@"start"];
@@ -95,13 +96,17 @@ static LevelDB *ldb;
 
 - (NSArray *)valueForArrayKey:(NSString *)arrayKey start:(NSUInteger)start count:(NSUInteger)count {
     NSArray *array = ldb[arrayKey];
-    if (start + count <= array.count) {
-        NSRange range = NSMakeRange(array.count - start - count, count);
-        NSArray *value = [array subarrayWithRange:range];
-        return value;
-    } else {
+    if (!array) {
         return @[];
     }
+    NSInteger c = count;
+    if (start + count > array.count) {
+        c = array.count - start;
+    }
+    
+    NSRange range = NSMakeRange(array.count - start - c, c);
+    NSArray *value = [array subarrayWithRange:range];
+    return value;
 }
 
 @end
