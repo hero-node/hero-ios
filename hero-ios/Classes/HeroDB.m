@@ -12,15 +12,21 @@
 
 @interface HeroDB ()
 
+
 @end
 
+static LevelDB *ldb;
+
 @implementation HeroDB {
-    LevelDB *ldb;
 }
+
 -(instancetype)init{
-    ldb = [LevelDB databaseInLibraryWithName:@"hero.ldb"];
+    if (!ldb) {
+        ldb = [LevelDB databaseInLibraryWithName:@"hero.ldb"];
+    }
     return [super init];
 }
+
 -(void)on:(NSDictionary *)json{
     NSString *key = json[@"key"];
     NSString *arrayKey = json[@"arrayKey"];
@@ -37,7 +43,7 @@
                 NSString *js = [NSString stringWithFormat:@"window['%@callback'](%@)",[self class], value];
                 [self.controller.webview stringByEvaluatingJavaScriptFromString:js];
             } else {
-                [self.controller on:@{@"result": value}];
+                [self.controller on:@{@"result": value, @"key": key}];
             }
         }
     }
@@ -54,7 +60,7 @@
                 NSString *js = [NSString stringWithFormat:@"window['%@callback'](%@)",[self class], jsonString];
                 [self.controller.webview stringByEvaluatingJavaScriptFromString:js];
             } else {
-                [self.controller on:@{@"result": value}];
+                [self.controller on:@{@"result": value, @"arrayKey": arrayKey}];
             }
         
         }
@@ -74,11 +80,16 @@
 - (void)addValue:(id)value forArrayKey:(NSString *)arrayKey {
     NSMutableArray *array = [ldb[arrayKey] mutableCopy];
     ldb.safe = YES;
-    if ([value isKindOfClass:[NSArray class]]) {
-        [array addObjectsFromArray:value];
+    if (array) {
+        if ([value isKindOfClass:[NSArray class]]) {
+            [array addObjectsFromArray:value];
+        } else {
+            [array addObject:value];
+        }
     } else {
-        [array addObject:value];
+        array = [@[value] mutableCopy];
     }
+    ldb[arrayKey] = array;
     ldb.safe = NO;
 }
 

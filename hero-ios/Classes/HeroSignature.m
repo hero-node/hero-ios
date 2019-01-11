@@ -12,6 +12,8 @@
 #import "HeroColdWallet/HeroWalletListViewController.h"
 #import "HeroColdWallet/HeroSignView.h"
 
+#import "HeroDB.h"
+
 
 @interface HeroSignature ()
 
@@ -44,7 +46,7 @@
             });
         }else{
             [self.controller on:result];
-        }
+        }        
     }
     
     if (json[@"message"]) {
