@@ -9,11 +9,13 @@
 #import "HeroAppDelegate.h"
 #import "HeroApp.h"
 #import "UIView+Hero.h"
+#import "MyHttpConnection.h"
 
 
 @interface HeroAppDelegate ()
 @property (nonatomic,strong) HeroApp *app;
 
+@property (nonatomic) HTTPServer *server;
 @end
 
 
@@ -24,8 +26,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.app = [[HeroApp alloc]init];
     self.app.window = self.window;
-    NSString *urlHost = @"http://127.0.0.1:3000";
-//    NSString *urlHost = @"http://hero.com:3000";
+//    NSString *urlHost = @"http://127.0.0.1:3000";
+    NSString *urlHost = @"http://hero.com:3000";
     NSString *home = @"__PATH";
     NSString *urlPath = [NSString stringWithFormat:@"%@%@",urlHost,[home hasPrefix:@"__"]?@"":home];
     [self.app on:@{
@@ -36,6 +38,26 @@
                         }]
                    }];
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
+    
+    self.server = [[HTTPServer alloc] init];
+//    [self.server setConnectionClass:[MyHttpConnection class]];
+    [self.server setType:@"_http._tcp."];
+    [self.server setPort:8088];
+    NSString * webLocalPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"hero-home/video"];
+    [self.server setDocumentRoot:webLocalPath];
+    
+    NSLog(@"Setting document root: %@", webLocalPath);
+    
+    NSError * error;
+    if([self.server start:&error]) {
+        NSLog(@"start server success in port %d %@",[self.server listeningPort],[self.server publishedName]);
+        
+    }
+    else {
+        NSLog(@"启动失败");
+    }
+    
     return YES;
 }
 
@@ -49,6 +71,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

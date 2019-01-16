@@ -169,6 +169,7 @@
 		4ADA6C7D21A52EE600CF7187 /* Expression_82@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6BE021A52EE500CF7187 /* Expression_82@2x.png */; };
 		4ADA6C7E21A52EE600CF7187 /* Expression_101@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6BE121A52EE500CF7187 /* Expression_101@2x.png */; };
 		4ADA6C7F21A52EE600CF7187 /* Expression_90@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4ADA6BE221A52EE500CF7187 /* Expression_90@2x.png */; };
+		4E7D9BA721EEE0A700DCC655 /* MyHttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7D9BA621EEE0A600DCC655 /* MyHttpConnection.m */; };
 		5B6CF44FBDB728985C936A26 /* Pods_hero_ios_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2496E07B9E191B24F6DE12A /* Pods_hero_ios_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -359,6 +360,8 @@
 		4ADA6BE021A52EE500CF7187 /* Expression_82@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_82@2x.png"; sourceTree = "<group>"; };
 		4ADA6BE121A52EE500CF7187 /* Expression_101@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_101@2x.png"; sourceTree = "<group>"; };
 		4ADA6BE221A52EE500CF7187 /* Expression_90@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expression_90@2x.png"; sourceTree = "<group>"; };
+		4E7D9BA521EEE0A600DCC655 /* MyHttpConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyHttpConnection.h; sourceTree = "<group>"; };
+		4E7D9BA621EEE0A600DCC655 /* MyHttpConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyHttpConnection.m; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* hero-ios_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hero-ios_Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -639,6 +642,8 @@
 				4ADA6A0121992B2600CF7187 /* hero-home */,
 				4ADA692E21798D5C00CF7187 /* Assets.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
+				4E7D9BA521EEE0A600DCC655 /* MyHttpConnection.h */,
+				4E7D9BA621EEE0A600DCC655 /* MyHttpConnection.m */,
 			);
 			name = "Example for hero-ios";
 			path = "hero-ios";
@@ -977,6 +982,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-hero-ios_Example/Pods-hero-ios_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
+				"${BUILT_PRODUCTS_DIR}/KTVCocoaHTTPServer/KTVCocoaHTTPServer.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework",
 				"${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework",
@@ -987,6 +994,8 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KTVCocoaHTTPServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Objective_LevelDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICKeyChainStore.framework",
@@ -1008,6 +1017,7 @@
 				6003F59E195388D20070C39A /* HeroAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* ViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				4E7D9BA721EEE0A700DCC655 /* MyHttpConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

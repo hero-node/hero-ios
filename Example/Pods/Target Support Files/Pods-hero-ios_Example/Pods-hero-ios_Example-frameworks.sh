@@ -143,6 +143,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KTVCocoaHTTPServer/KTVCocoaHTTPServer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework"
@@ -150,6 +152,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/KTVCocoaHTTPServer/KTVCocoaHTTPServer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework"
