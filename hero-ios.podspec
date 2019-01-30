@@ -41,6 +41,9 @@ TODO: Add long description of the pod here.
   s.dependency 'MJRefresh'
   s.dependency 'UICKeyChainStore'
   s.dependency 'Objective-LevelDB'
+  s.dependency 'KTVCocoaHTTPServer'
+  s.dependency 'SBJson', '~> 4.0.2'
   s.ios.vendored_frameworks = 'hero-ios/Frameworks/ethers.framework'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/openssl.framework'
   #s.dependency 'web3swift'
 end

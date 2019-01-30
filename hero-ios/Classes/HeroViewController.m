@@ -32,6 +32,7 @@
 //  Created by Liu Guoping on 15/8/19.
 //
 
+#import <KTVCocoaHTTPServer/KTVCocoaHTTPServer.h>
 #import "HeroViewController.h"
 #import "UIView+Hero.h"
 #import "UIImage+alpha.h"
@@ -45,6 +46,8 @@
 #import "HeroBarButtonItem.h"
 #import "UIAlertView+blockDelegate.h"
 #import "HeroScrollView.h"
+
+static HTTPServer *_server;
 
 static bool customUserAgentHasSet = false;
 @interface HeroViewController()<UINavigationBarDelegate>
@@ -66,6 +69,7 @@ static bool customUserAgentHasSet = false;
     BOOL _showLoading;
     BOOL _injectHero;
 }
+
 +(void)heroUseragent{
     if (customUserAgentHasSet) {
         return;
@@ -328,7 +332,12 @@ static bool customUserAgentHasSet = false;
                                     [[UIApplication sharedApplication]openURL:desUrl];
                                 }
                             } onCancel:nil];
-                        }else{
+                        } else if ([[desUrl scheme] isEqualToString:@"webrtc"]) {
+                            [self startServerIfNeeded];
+                            NSString *query = [desUrl query];
+                            NSString *room = [@"http://localhost:8088/index.html?" stringByAppendingString:query];
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:room]];
+                        } else {
                             [UIAlertView showAlertViewWithTitle:LS(@"外部链接") message:[NSString stringWithFormat:@"%@",desUrl] cancelButtonTitle:LS(@"取消") otherButtonTitles:@[LS(@"跳转")] onDismiss:^(NSInteger buttonIndex) {
                                 if (buttonIndex == 0) {
                                     [[UIApplication sharedApplication]openURL:desUrl];
@@ -681,6 +690,26 @@ static bool customUserAgentHasSet = false;
         _leftMenuView.frame = CGRectMake(- [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, 0, [UIScreen mainScreen].bounds.size.width * 2.0 / 3.0, [UIScreen mainScreen].bounds.size.height);
     } completion:nil];
 }
+
+- (void)startServerIfNeeded {
+    if (!_server) {
+        _server = [[HTTPServer alloc] init];
+        [_server setType:@"_http._tcp."];
+        [_server setPort:8088];
+        NSString * webLocalPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"hero-home/video"];
+        [_server setDocumentRoot:webLocalPath];
+        
+        NSLog(@"Setting document root: %@", webLocalPath);
+        
+        NSError *error;
+        if([_server start:&error]) {
+            NSLog(@"start server success in port %d %@",[_server listeningPort],[_server publishedName]);
+        } else {
+            NSLog(@"启动失败");
+        }
+    }
+}
+
 //dealloc
 -(void)dealloc{
     DLog(@"viewcontroller dealloc ");

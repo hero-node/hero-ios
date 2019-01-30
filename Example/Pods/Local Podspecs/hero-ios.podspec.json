@@ -39,9 +39,15 @@
     ],
     "Objective-LevelDB": [
 
+    ],
+    "KTVCocoaHTTPServer": [
+
+    ],
+    "SBJson": [
+      "~> 4.0.2"
     ]
   },
   "ios": {
-    "vendored_frameworks": "hero-ios/Frameworks/ethers.framework"
+    "vendored_frameworks": "hero-ios/Frameworks/openssl.framework"
   }
 }

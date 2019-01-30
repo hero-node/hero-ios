@@ -1,8 +1,10 @@
 PODS:
   - CocoaAsyncSocket (7.6.3)
   - hero-ios (1.1.50):
+    - KTVCocoaHTTPServer
     - MJRefresh
     - Objective-LevelDB
+    - SBJson (~> 4.0.2)
     - UICKeyChainStore
   - KTVCocoaHTTPServer (1.0.0):
     - CocoaAsyncSocket
@@ -10,11 +12,11 @@ PODS:
   - MJRefresh (3.1.15.7)
   - Objective-LevelDB (2.1.5):
     - leveldb-library (~> 1.18.2)
+  - SBJson (4.0.5)
   - UICKeyChainStore (2.1.2)
 
 DEPENDENCIES:
   - hero-ios (from `../`)
-  - KTVCocoaHTTPServer
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -23,6 +25,7 @@ SPEC REPOS:
     - leveldb-library
     - MJRefresh
     - Objective-LevelDB
+    - SBJson
     - UICKeyChainStore
 
 EXTERNAL SOURCES:
@@ -31,13 +34,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
-  hero-ios: 9c960df11e7a9b428a6c8a0c10028e28a2b5f182
+  hero-ios: bfc9ba6841eef65908cc8c9e9b6142d35f935857
   KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce
+  SBJson: af3137ccda22be3004487524da0a071c75d4251b
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
 
-PODFILE CHECKSUM: de9b0049711f6913f5122e36996ee45ea89a2079
+PODFILE CHECKSUM: 248b4393ceeffb447474bb6cb4773e7c5119d325
 
 COCOAPODS: 1.5.3

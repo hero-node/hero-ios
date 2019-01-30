@@ -491,6 +491,26 @@
         loc.layer.borderWidth = 0.99/SCALE;
         [loc addTarget:self action:@selector(onInputLoc:) forControlEvents:(UIControlEventTouchUpInside)];
         [_otherInputView addSubview:loc];
+        
+        UIButton *video = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_W-200)/5*3+100, 15, 50, 50)];
+        [video setImage:[UIImage imageNamed:@"sharemore_video"] forState:UIControlStateNormal];
+        video.layer.cornerRadius = 12;
+        video.backgroundColor = [UIColor whiteColor];
+        video.clipsToBounds = YES;
+        video.layer.borderColor = UIColorFromStr(@"aaaaaa").CGColor;
+        video.layer.borderWidth = 0.99/SCALE;
+        [video addTarget:self action:@selector(onVideo:) forControlEvents:(UIControlEventTouchUpInside)];
+        [_otherInputView addSubview:video];
+        
+        UIButton *trade = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_W-200)/5*4+150, 15, 50, 50)];
+        [trade setImage:[UIImage imageNamed:@"sharemore_trade"] forState:UIControlStateNormal];
+        trade.layer.cornerRadius = 12;
+        trade.backgroundColor = [UIColor whiteColor];
+        trade.clipsToBounds = YES;
+        trade.layer.borderColor = UIColorFromStr(@"aaaaaa").CGColor;
+        trade.layer.borderWidth = 0.99/SCALE;
+        [trade addTarget:self action:@selector(onTrade:) forControlEvents:(UIControlEventTouchUpInside)];
+        [_otherInputView addSubview:trade];
     }
     return _otherInputView;
 }
@@ -569,8 +589,15 @@
         _visableRect = self.frame;
         [self updateInputBarWithTime:0.25];
     }
-    
-
 }
+
+- (void)onVideo:(UIButton *)sender {
+    [self.controller on:@{@"click": @"clickVideo"}];
+}
+
+- (void)onTrade:(UIButton *)sender {
+    [self.controller on:@{@"click": @"clickTX"}];
+}
+
 @end
 
