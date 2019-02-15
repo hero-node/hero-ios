@@ -144,31 +144,21 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KTVCocoaHTTPServer/KTVCocoaHTTPServer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Resolver/Resolver.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SBJson/SBJson.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Yaml/Yaml.framework"
-  install_framework "${PODS_ROOT}/../../hero-ios/Frameworks/NEKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/hero-ios/hero_ios.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KTVCocoaHTTPServer/KTVCocoaHTTPServer.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Objective-LevelDB/Objective_LevelDB.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Resolver/Resolver.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SBJson/SBJson.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/UICKeyChainStore/UICKeyChainStore.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Yaml/Yaml.framework"
-  install_framework "${PODS_ROOT}/../../hero-ios/Frameworks/NEKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/hero-ios/hero_ios.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework"
 fi

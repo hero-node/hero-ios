@@ -45,24 +45,9 @@
     ],
     "SBJson": [
       "~> 4.0.2"
-    ],
-    "Yaml": [
-
-    ],
-    "CocoaAsyncSocket": [
-
-    ],
-    "CocoaLumberjack": [
-
-    ],
-    "Resolver": [
-
-    ],
-    "Sodium": [
-
     ]
   },
   "ios": {
-    "vendored_frameworks": "hero-ios/Frameworks/NEKit.framework"
+    "vendored_frameworks": "hero-ios/Frameworks/ethers.framework"
   }
 }
