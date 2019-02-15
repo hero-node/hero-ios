@@ -27,7 +27,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/hero-node/hero-ios', :tag => s.version.to_s }
   s.social_media_url = 'http://www.hero-mobile.com'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '9.3'
 
   s.source_files = 'hero-ios/Classes/**/*'
 
@@ -43,7 +43,16 @@ TODO: Add long description of the pod here.
   s.dependency 'Objective-LevelDB'
   s.dependency 'KTVCocoaHTTPServer'
   s.dependency 'SBJson', '~> 4.0.2'
+  s.dependency 'Yaml'
+  s.dependency 'CocoaAsyncSocket'
+  s.dependency 'CocoaLumberjack'
+  s.dependency 'Resolver'
+  s.dependency 'Sodium'
   s.ios.vendored_frameworks = 'hero-ios/Frameworks/ethers.framework'
-  s.ios.vendored_frameworks = 'hero-ios/Frameworks/openssl.framework'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/lwip.framework'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/tun2socks.framework'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/MMDB.framework'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/CocoaLumberjackSwift.framework'
+  s.ios.vendored_frameworks = 'hero-ios/Frameworks/NEKit.framework'
   #s.dependency 'web3swift'
 end

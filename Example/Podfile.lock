@@ -1,19 +1,33 @@
 PODS:
   - CocoaAsyncSocket (7.6.3)
+  - CocoaLumberjack (3.4.2):
+    - CocoaLumberjack/Default (= 3.4.2)
+    - CocoaLumberjack/Extensions (= 3.4.2)
+  - CocoaLumberjack/Default (3.4.2)
+  - CocoaLumberjack/Extensions (3.4.2):
+    - CocoaLumberjack/Default
   - hero-ios (1.1.50):
+    - CocoaAsyncSocket
+    - CocoaLumberjack
     - KTVCocoaHTTPServer
     - MJRefresh
     - Objective-LevelDB
+    - Resolver
     - SBJson (~> 4.0.2)
+    - Sodium
     - UICKeyChainStore
+    - Yaml
   - KTVCocoaHTTPServer (1.0.0):
     - CocoaAsyncSocket
   - leveldb-library (1.18.3)
   - MJRefresh (3.1.15.7)
   - Objective-LevelDB (2.1.5):
     - leveldb-library (~> 1.18.2)
+  - Resolver (1.0.5)
   - SBJson (4.0.5)
+  - Sodium (0.7.0)
   - UICKeyChainStore (2.1.2)
+  - Yaml (3.4.3)
 
 DEPENDENCIES:
   - hero-ios (from `../`)
@@ -21,12 +35,16 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CocoaAsyncSocket
+    - CocoaLumberjack
     - KTVCocoaHTTPServer
     - leveldb-library
     - MJRefresh
     - Objective-LevelDB
+    - Resolver
     - SBJson
+    - Sodium
     - UICKeyChainStore
+    - Yaml
 
 EXTERNAL SOURCES:
   hero-ios:
@@ -34,14 +52,18 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
-  hero-ios: bfc9ba6841eef65908cc8c9e9b6142d35f935857
+  CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
+  hero-ios: 6bb72ac4996ba943bdde43ed39fa06a49cc9b7ae
   KTVCocoaHTTPServer: df8d7b861e603ff8037e9b2138aca2563a6b768d
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   Objective-LevelDB: fa075efd9d0be645aee51847cc3ee70cdadb80ce
+  Resolver: dddd4db46402a7543b1a6ff6007b57bcf59083e9
   SBJson: af3137ccda22be3004487524da0a071c75d4251b
+  Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
+  Yaml: 9f32854890c54304772f02380c3899c8db739800
 
-PODFILE CHECKSUM: 248b4393ceeffb447474bb6cb4773e7c5119d325
+PODFILE CHECKSUM: 754b7d96526effc990f1f7092acfb2673b64ac3a
 
 COCOAPODS: 1.5.3

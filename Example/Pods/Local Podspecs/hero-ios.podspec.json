@@ -17,7 +17,7 @@
   },
   "social_media_url": "http://www.hero-mobile.com",
   "platforms": {
-    "ios": "9.0"
+    "ios": "9.3"
   },
   "source_files": "hero-ios/Classes/**/*",
   "resource_bundles": {
@@ -45,9 +45,24 @@
     ],
     "SBJson": [
       "~> 4.0.2"
+    ],
+    "Yaml": [
+
+    ],
+    "CocoaAsyncSocket": [
+
+    ],
+    "CocoaLumberjack": [
+
+    ],
+    "Resolver": [
+
+    ],
+    "Sodium": [
+
     ]
   },
   "ios": {
-    "vendored_frameworks": "hero-ios/Frameworks/openssl.framework"
+    "vendored_frameworks": "hero-ios/Frameworks/NEKit.framework"
   }
 }
