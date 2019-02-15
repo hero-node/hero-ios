@@ -12,9 +12,5 @@
 	<array>
 		<string>allow-vpn</string>
 	</array>
-	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>group.io.heronode.mobilee</string>
-	</array>
 </dict>
 </plist>

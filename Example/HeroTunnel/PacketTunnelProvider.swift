@@ -23,7 +23,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
     
     var started:Bool = false
 
-    func startTunnelWithOptions(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+    override func startTunnel(options: [String : NSObject]?, completionHandler: @escaping (Error?) -> Void) {
         DDLog.removeAllLoggers()
         DDLog.add(DDASLLogger.sharedInstance, with: DDLogLevel.info)
         ObserverFactory.currentFactory = DebugObserverFactory()
@@ -134,7 +134,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         let manager = RuleManager(fromRules: UserRules, appendDirect: true)
         
         RuleManager.currentManager = manager
-        proxyPort =  9090
+        proxyPort =  9092
         
         //        RawSocketFactory.TunnelProvider = self
         
@@ -226,12 +226,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         }
 	}
 
-    func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [NSObject: AnyObject]?, context: UnsafeMutablePointer<Void>) {
-
-		
-	}
-
-    func stopTunnelWithReason(reason: NEProviderStopReason, completionHandler: () -> Void) {
+    override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
         if enablePacketProcessing {
             interface.stop()
             interface = nil

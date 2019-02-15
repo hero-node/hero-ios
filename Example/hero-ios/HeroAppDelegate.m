@@ -24,7 +24,7 @@
     self.app = [[HeroApp alloc]init];
     self.app.window = self.window;
 //    NSString *urlHost = @"http://127.0.0.1:3000";
-    NSString *urlHost = @"http://192.168.0.4:3000";
+    NSString *urlHost = @"http://192.168.0.8:3000";
     NSString *home = @"__PATH";
     NSString *urlPath = [NSString stringWithFormat:@"%@%@",urlHost,[home hasPrefix:@"__"]?@"":home];
     [self.app on:@{
