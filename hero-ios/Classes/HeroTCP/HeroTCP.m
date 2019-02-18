@@ -33,6 +33,9 @@
                 }
                 
                 [self.manager saveToPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
+                    [self.manager loadFromPreferencesWithCompletionHandler:^(NSError * _Nullable error) {
+
+                    }];
                     
                 }];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vpnStausChanged) name:NEVPNStatusDidChangeNotification object:nil];
