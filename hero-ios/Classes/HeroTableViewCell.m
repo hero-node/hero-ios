@@ -79,7 +79,10 @@
     NSString *imageValue   = json[@"imageValue"];
     if (boolValue) {
         HeroSwitch *valueElement = [[HeroSwitch alloc]init];
-        [valueElement on:@{@"name":title,@"value":boolValue}];
+        valueElement.controller = self.controller;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:@{@"name":title,@"value":boolValue}];
+        [dic setObject:json forKey:@"click"];
+        [valueElement on:dic];
         self.accessoryView = valueElement;
     }
     else if (imageValue) {

@@ -138,7 +138,7 @@ static void *s_controller = &s_controller;
     return nil;
 }
 -(void)on:(NSDictionary *)json{
-    if (json[@"class"]) {   //一般适用于数据不太改变，table需要自己维护自己的datasource
+    if (json[@"class"] || (!self.json)) {   //一般适用于数据不太改变，table需要自己维护自己的datasource
         self.json = json;
     }
     if (json[@"animation"]) {
