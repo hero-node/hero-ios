@@ -1,13 +1,9 @@
 # hero-ios
 
-[![Version](https://img.shields.io/cocoapods/v/hero-ios.svg?style=flat)](http://cocoapods.org/pods/hero-ios)
-[![License](https://img.shields.io/cocoapods/l/hero-ios.svg?style=flat)](http://cocoapods.org/pods/hero-ios)
-[![Platform](https://img.shields.io/cocoapods/p/hero-ios.svg?style=flat)](http://cocoapods.org/pods/hero-ios)
-
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-Hero详细介绍见 https://github.com/hero-node/Hero
+refer to https://github.com/hero-node/Hero
 ## Requirements
 
 ## Installation
@@ -21,7 +17,7 @@ pod "hero-ios"
 
 ## Author
 
-刘国平, gpliu@heronode.io
+gpliu@heronode.io
 
 ## License
 
